@@ -2,11 +2,12 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
-export const HouseholdSchema = new Schema(
+export const GameNightSchema = new Schema(
   {
-    ownerAccountId: { type: ObjectId, ref: 'Account', required: true },
+    householdId: { type: ObjectId, ref: 'Household', required: true },
     name: { type: String, required: true },
-    accessKey: { type: String, required: true }
+    startDate: { type: Date, required: true },
+    activeProfiles: { type: Array }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
