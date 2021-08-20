@@ -44,6 +44,14 @@ function sanitizeBody(body) {
 }
 
 class AccountService {
+  async getProfileById(id) {
+    const profile = await dbContext.Account.findById(id)
+    if (!profile) {
+      throw new BadRequest('Not a profile id')
+    }
+    return profile
+  }
+
   /**
     * Returns a list user profiles from a query search of name or email likeness
     * limits to first 20 without offset
