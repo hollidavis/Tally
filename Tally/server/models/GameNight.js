@@ -6,7 +6,7 @@ export const GameNightSchema = new Schema(
   {
     householdId: { type: ObjectId, ref: 'Household', required: true },
     name: { type: String, required: true },
-    startDate: { type: Date, required: true },
+    startDate: { type: String, required: true },
     activeProfiles: { type: Array }
   },
   { timestamps: true, toJSON: { virtuals: true } }

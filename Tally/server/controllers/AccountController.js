@@ -9,7 +9,17 @@ export class AccountController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
       .get('/:id', this.getProfileById)
+      .get('/:id/results', this.getResultsByProfileId)
       .put('/:id', this.edit)
+  }
+
+  async getUserAccount(req, res, next) {
+    try {
+      const account = await accountService.getAccount(req.userInfo)
+      res.send(account)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getProfileById(req, res, next) {
@@ -21,19 +31,19 @@ export class AccountController extends BaseController {
     }
   }
 
-  async edit(req, res, next) {
+  async getResultsByProfileId(req, res, next) {
     try {
-      req.body.accountId = req.userInfo.id
-      const account = await accountService.edit(req.body)
-      res.send(account)
+      const results = await accountService.getResultsByProfileId(req.params.id)
+      res.send(results)
     } catch (error) {
       next(error)
     }
   }
 
-  async getUserAccount(req, res, next) {
+  async edit(req, res, next) {
     try {
-      const account = await accountService.getAccount(req.userInfo)
+      req.body.accountId = req.userInfo.id
+      const account = await accountService.edit(req.body)
       res.send(account)
     } catch (error) {
       next(error)

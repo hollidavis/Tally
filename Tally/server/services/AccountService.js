@@ -44,6 +44,14 @@ function sanitizeBody(body) {
 }
 
 class AccountService {
+  async getResultsByProfileId(id) {
+    const results = await dbContext.Results.find({ profileId: id })
+    if (!results) {
+      throw new BadRequest('Invalid Id')
+    }
+    return results
+  }
+
   async getProfileById(id) {
     const profile = await dbContext.Account.findById(id)
     if (!profile) {
