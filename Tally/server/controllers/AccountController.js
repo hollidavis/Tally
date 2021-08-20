@@ -9,6 +9,7 @@ export class AccountController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
       .get('/:id', this.getProfileById)
+      .get('/:id/results', this.getResultsByAccountId)
       .put('/:id', this.edit)
   }
 

@@ -7,14 +7,14 @@ export class GameNightsController extends BaseController {
     super('api/gamenights')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('/:id', this.getById)
+      .get('/:id', this.getGameNightById)
       .post('', this.createGameNight)
       .delete('/:id', this.removeGameNight)
   }
 
-  async getById(req, res, next) {
+  async getGameNightById(req, res, next) {
     try {
-      const gameNight = await gameNightsService.getById(req.params.id)
+      const gameNight = await gameNightsService.getGameNightById(req.params.id)
       res.send(gameNight)
     } catch (error) {
       next(error)

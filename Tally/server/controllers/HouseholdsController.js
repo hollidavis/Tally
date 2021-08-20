@@ -7,7 +7,7 @@ export class HouseholdsController extends BaseController {
     super('api/households')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('/:id', this.getById)
+      .get('/:id', this.getHouseholdById)
       .get('/:id/games', this.getGamesByHouseholdId)
       .get('/:id/gamenights', this.getGameNightByHouseholdId)
       .get('/:id/results', this.getResultsByHouseholdId)
@@ -15,9 +15,9 @@ export class HouseholdsController extends BaseController {
       .post('', this.createHousehold)
   }
 
-  async getById(req, res, next) {
+  async getHouseholdById(req, res, next) {
     try {
-      const household = await householdsService.getById(req.params.id)
+      const household = await householdsService.getHouseholdById(req.params.id)
       res.send(household)
     } catch (error) {
       next(error)

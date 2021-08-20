@@ -2,7 +2,7 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class HouseholdsService {
-  async getById(id) {
+  async getHouseholdById(id) {
     const household = await dbContext.Households.findById(id)
     if (!household) {
       throw new BadRequest('Invalid Id')
@@ -35,7 +35,7 @@ class HouseholdsService {
   }
 
   async editHousehold(id, body) {
-    const household = await this.getById(id)
+    const household = await this.getHouseholdById(id)
     if (!household) {
       throw new BadRequest('Invalid Id')
     }

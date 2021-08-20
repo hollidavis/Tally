@@ -1,7 +1,7 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 class GamesService {
-  async getById(id) {
+  async getGameById(id) {
     const game = await dbContext.Games.findById(id)
     if (!game) {
       throw new BadRequest('Invalid Id')

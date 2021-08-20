@@ -7,14 +7,14 @@ export class GamesController extends BaseController {
     super('api/games')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('/:id', this.getById)
+      .get('/:id', this.getGameById)
       .post('', this.createGame)
       .delete('/:id', this.removeGame)
   }
 
-  async getById(req, res, next) {
+  async getGameById(req, res, next) {
     try {
-      const game = await gamesService.getById(req.params.id)
+      const game = await gamesService.getGameById(req.params.id)
       res.send(game)
     } catch (error) {
       next(error)
