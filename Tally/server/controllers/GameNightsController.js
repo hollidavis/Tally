@@ -9,6 +9,7 @@ export class GameNightsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id', this.getGameNightById)
       .post('', this.createGameNight)
+      .put('/:id', this.joinGameNight)
       .delete('/:id', this.removeGameNight)
   }
 
@@ -25,6 +26,14 @@ export class GameNightsController extends BaseController {
     try {
       const gameNight = await gameNightsService.createGameNight(req.body)
       res.send(gameNight)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async joinGameNight(req, res, next) {
+    try {
+      await gameNightsService.joinGameNight(req.params.id, req.body)
     } catch (error) {
       next(error)
     }
