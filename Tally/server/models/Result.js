@@ -6,8 +6,8 @@ export const ResultSchema = new Schema(
   {
     householdId: { type: ObjectId, ref: 'Household', required: true },
     gameApiId: { type: String, required: true },
-    profileId: {type: ObjectId, ref: 'Account', required: true },
-    win: { type: Boolean, required: true },
+    profileId: { type: ObjectId, ref: 'Account', required: true },
+    win: { type: Boolean, required: true }
     // NOTE If you wish to add additional public properties for Results do so here
   },
   { timestamps: true, toJSON: { virtuals: true } }
