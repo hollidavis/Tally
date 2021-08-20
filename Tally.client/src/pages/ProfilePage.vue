@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
         <ProfileCard/>
