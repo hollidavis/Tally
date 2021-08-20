@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg transparentColor">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img
@@ -23,13 +23,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
+          <router-link :to="{ name: 'Home' }" class="nav-link ">
+            Household
           </router-link>
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'About' }" class="nav-link">
-            About
+            Profile
           </router-link>
         </li>
       </ul>
@@ -121,6 +121,16 @@ a:hover {
   text-transform: uppercase;
 }
 .nav-item .nav-link.router-link-exact-active{
-  color: var(--primary);
+  color: var(--light);
+}
+.transparentColor {
+  background-color: rgba(255, 255, 255, 0);
+}
+.navbar {
+  color: rgba(255, 255, 255, 0);
+}
+
+.navbar-expand-lg {
+  color: rgba(255, 255, 255, 0);
 }
 </style>
