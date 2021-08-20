@@ -11,3 +11,4 @@ export const GameNightSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
+// test
