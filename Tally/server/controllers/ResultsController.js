@@ -1,9 +1,8 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
-import { dbContext } from '../db/DbContext'
-import { resultsService } from '../services/ResultService'
+import { resultsService } from '../services/ResultsService'
 import BaseController from '../utils/BaseController'
 
-export class ResultController extends BaseController {
+export class ResultsController extends BaseController {
   constructor() {
     super('api/results')
     this.router

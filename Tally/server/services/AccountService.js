@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { BadRequest } from '../utils/Errors'
 
 // Private Methods
 
@@ -101,6 +102,14 @@ class AccountService {
       { $set: update },
       { runValidators: true, setDefaultsOnInsert: true, new: true }
     )
+    return account
+  }
+
+  async edit(body) {
+    const account = await dbContext.Account.findByIdAndUpdate(body.accountId, body, { new: true, runValidators: true })
+    if (!account) {
+      throw new BadRequest('Invalid Id')
+    }
     return account
   }
 }
