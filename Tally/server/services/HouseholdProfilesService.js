@@ -16,6 +16,11 @@ class HouseholdProfilesService {
     }
     return households
   }
+
+  async createHouseholdProfile(body) {
+    const householdProfile = await dbContext.HouseholdProfiles.create(body)
+    return await dbContext.HouseholdProfiles.findById(householdProfile.id)
+  }
 }
 
 export const householdProfilesService = new HouseholdProfilesService()

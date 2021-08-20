@@ -9,6 +9,7 @@ export class HouseholdProfilesController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id/householdaccounts', this.getAccountByHouseholdId)
       .get('/:id/accounthouseholds', this.getHouseholdsByAccountId)
+      .post('', this.createHouseholdProfile)
   }
 
   async getAccountByHouseholdId(req, res, next) {
@@ -24,6 +25,15 @@ export class HouseholdProfilesController extends BaseController {
     try {
       const households = await householdProfilesService.getHouseholdsByAccountId(req.params.id)
       res.send(households)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async createHouseholdProfile(req, res, next) {
+    try {
+      const householdProfile = await householdProfilesService.createHouseholdProfile(req.body)
+      res.send(householdProfile)
     } catch (error) {
       next(error)
     }
