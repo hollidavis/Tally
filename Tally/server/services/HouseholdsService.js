@@ -47,8 +47,22 @@ class HouseholdsService {
   }
 
   async createHousehold(body) {
+    const accessKey = await this.createAccessKey()
+    body.accessKey = accessKey
     const household = await dbContext.Households.create(body)
     return await dbContext.Households.findById(household.id)
+  }
+
+  async createAccessKey() {
+    const length = 5
+    let result = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+ charactersLength))
+    }
+    return result
   }
 }
 
