@@ -1,19 +1,17 @@
 <template>
   <div class="col-11 bg-primary mt-3 shadow">
     <h1>Personal Leaderboard</h1>
-
   </div>
-
 </template>
 
 <script>
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
-import { useRoute} from 'vue-router'
-import { gamesService} from '../services/GamesService'
+import { useRoute } from 'vue-router'
+import { gamesService } from '../services/gamesService'
+
 export default {
-  name: 'Personal Leaderboard Card',
   setup() {
     const route = useRoute()
     onMounted(async() => {
