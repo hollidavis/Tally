@@ -5,10 +5,13 @@ const ObjectId = Schema.Types.ObjectId
 export const GameSchema = new Schema(
   {
     name: { type: String, required: true },
-    maxPlayer: { type: Number, required: true },
-    minPlayer: { type: Number, required: true },
-    gameImg: { type: String, required: true },
-    playTime: { type: Number, required: true },
+    description: { type: String, required: true },
+    minPlayers: { type: Number, required: true },
+    maxPlayers: { type: Number, required: true },
+    smallImg: { type: String, required: true },
+    largeImg: { type: String, required: true },
+    minPlayTime: { type: Number, required: true },
+    maxPlayTime: { type: Number, required: true },
     playerAge: { type: Number, required: true },
     websiteLink: { type: String, required: true },
     householdId: { type: ObjectId, ref: 'Household', required: true },
