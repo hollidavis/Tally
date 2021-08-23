@@ -14,7 +14,7 @@ export class HouseholdProfilesController extends BaseController {
   async createHouseholdProfile(req, res, next) {
     try {
       req.body.accountId = req.userInfo.id
-      const householdProfile = await householdProfilesService.createHouseholdProfile(req.body)
+      const householdProfile = await householdProfilesService.createHouseholdProfile(req.body.accountId)
       res.send(householdProfile)
     } catch (error) {
       next(error)
