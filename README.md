@@ -23,6 +23,9 @@ Check out our original plan here: [Tally Original Figma](https://github.com/holl
 - Show login form directly on the landing page instead of having a pop-up
 - Give users levels based on the total number of plays (novice to master)
 
+## API Used
+[Board Game Atlas](https://www.boardgameatlas.com/api/docs)
+
 ## Collaborators
 [Veronica Blake](https://github.com/VeronicaBlake)
 
