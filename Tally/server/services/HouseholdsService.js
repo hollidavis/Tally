@@ -2,6 +2,14 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class HouseholdsService {
+  async getHouseholdsByProfileId(query = {}) {
+    const households = await dbContext.Households.find(query)
+    if (!households) {
+      throw new BadRequest('Invalid Id')
+    }
+    return households
+  }
+
   async getHouseholdById(id) {
     const household = await dbContext.Households.findById(id)
     if (!household) {

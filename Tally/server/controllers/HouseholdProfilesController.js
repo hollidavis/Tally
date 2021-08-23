@@ -7,28 +7,36 @@ export class HouseholdProfilesController extends BaseController {
     super('api/householdprofiles')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('/:id/householdaccounts', this.getAccountByHouseholdId)
-      .get('/:id/accounthouseholds', this.getHouseholdsByAccountId)
+      .get('/:id/householdprofiles', this.getProfilesByHouseholdId)
       .post('', this.createHouseholdProfile)
   }
 
-  async getAccountByHouseholdId(req, res, next) {
+  async getProfilesByHouseholdId(req, res, next) {
     try {
-      const accounts = await householdProfilesService.getAccountByHouseholdId(req.params.id)
-      res.send(accounts)
+      const householdProfiles = await householdProfilesService.getProfilesByHouseHoldId(req.query)
+      res.send(householdProfiles)
     } catch (error) {
       next(error)
     }
   }
 
-  async getHouseholdsByAccountId(req, res, next) {
-    try {
-      const households = await householdProfilesService.getHouseholdsByAccountId(req.params.id)
-      res.send(households)
-    } catch (error) {
-      next(error)
-    }
-  }
+  // async getAccountByHouseholdId(req, res, next) {
+  //   try {
+  //     const accounts = await householdProfilesService.getAccountByHouseholdId(req.params.id)
+  //     res.send(accounts)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
+
+  // async getHouseholdsByAccountId(req, res, next) {
+  //   try {
+  //     const households = await householdProfilesService.getHouseholdsByAccountId(req.params.id)
+  //     res.send(households)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   async createHouseholdProfile(req, res, next) {
     try {
