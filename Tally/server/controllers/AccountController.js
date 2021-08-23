@@ -10,8 +10,8 @@ export class AccountController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
       .get('/:id', this.getProfileById)
-      .get('/:id/results', this.getResultsByProfileId)
-      .get('/:id/households', this.getHouseholdsByProfileId)
+      .get('/results', this.getResultsByProfileId)
+      .get('/households', this.getHouseholdsByProfileId)
       .put('/:id', this.edit)
   }
 
@@ -26,7 +26,7 @@ export class AccountController extends BaseController {
 
   async getProfileById(req, res, next) {
     try {
-      const profile = await accountService.getProfileById(req.params.id)
+      const profile = await accountService.getProfileById(req.userInfo.id)
       res.send(profile)
     } catch (error) {
       next(error)
@@ -35,16 +35,17 @@ export class AccountController extends BaseController {
 
   async getResultsByProfileId(req, res, next) {
     try {
-      const results = await accountService.getResultsByProfileId(req.params.id)
+      const results = await accountService.getResultsByProfileId(req.userInfo.id)
       res.send(results)
     } catch (error) {
       next(error)
     }
   }
 
+  // NOTE maybe remove?
   async getHouseholdsByProfileId(req, res, next) {
     try {
-      const profileHouseholds = await householdsService.getHouseholdsByProfileId({ creatorId: req.params.id })
+      const profileHouseholds = await householdsService.getHouseholdsByProfileId({ ownerAccountId: req.userInfo.id })
       res.send(profileHouseholds)
     } catch (error) {
       next(error)

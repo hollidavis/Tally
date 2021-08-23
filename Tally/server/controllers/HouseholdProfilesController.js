@@ -13,7 +13,7 @@ export class HouseholdProfilesController extends BaseController {
 
   async createHouseholdProfile(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
+      req.body.accountId = req.userInfo.id
       const householdProfile = await householdProfilesService.createHouseholdProfile(req.body)
       res.send(householdProfile)
     } catch (error) {

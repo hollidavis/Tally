@@ -4,8 +4,10 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 class HouseholdsService {
   async getHouseholdsByProfileId(query = {}) {
     const households = await dbContext.Households.find(query)
-    if (!households) {
+    if (!households.length) {
+      // TODO check for this error handling on other functions and add .length
       throw new BadRequest('Invalid Id')
+      // NOTE add function to createHouseholdIfNeeded
     }
     return households
   }
