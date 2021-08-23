@@ -6,6 +6,6 @@ export const tallyApi = Axios.create({
 })
 
 export const gameApi = Axios.create({
-  baseURL,
+  baseURL: 'https://api.boardgameatlas.com/api',
   timeout: 8000
 })
