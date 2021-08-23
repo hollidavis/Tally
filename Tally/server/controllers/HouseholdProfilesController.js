@@ -7,41 +7,24 @@ export class HouseholdProfilesController extends BaseController {
     super('api/householdprofiles')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('/:id/householdprofiles', this.getProfilesByHouseholdId)
       .post('', this.createHouseholdProfile)
+      .delete('/:id', this.destroyHouseholdProfile)
   }
 
-  async getProfilesByHouseholdId(req, res, next) {
+  async createHouseholdProfile(req, res, next) {
     try {
-      const householdProfiles = await householdProfilesService.getProfilesByHouseHoldId(req.query)
-      res.send(householdProfiles)
+      req.body.creatorId = req.userInfo.id
+      const householdProfile = await householdProfilesService.createHouseholdProfile(req.body)
+      res.send(householdProfile)
     } catch (error) {
       next(error)
     }
   }
 
-  // async getAccountByHouseholdId(req, res, next) {
-  //   try {
-  //     const accounts = await householdProfilesService.getAccountByHouseholdId(req.params.id)
-  //     res.send(accounts)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
-
-  // async getHouseholdsByAccountId(req, res, next) {
-  //   try {
-  //     const households = await householdProfilesService.getHouseholdsByAccountId(req.params.id)
-  //     res.send(households)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
-
-  async createHouseholdProfile(req, res, next) {
+  async destroyHouseholdProfile(req, res, next) {
     try {
-      const householdProfile = await householdProfilesService.createHouseholdProfile(req.body)
-      res.send(householdProfile)
+      const deleted = await householdProfilesService.destroyHouseholdProfile(req.params.id, req.userInfo.id)
+      res.send(deleted, 'successfully deleted')
     } catch (error) {
       next(error)
     }

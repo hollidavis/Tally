@@ -1,5 +1,6 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { householdsService } from '../services/HouseholdsService'
+import { accountService } from '../services/AccountService'
 import BaseController from '../utils/BaseController'
 
 export class HouseholdsController extends BaseController {
@@ -11,6 +12,7 @@ export class HouseholdsController extends BaseController {
       .get('/:id/games', this.getGamesByHouseholdId)
       .get('/:id/gamenights', this.getGameNightByHouseholdId)
       .get('/:id/results', this.getResultsByHouseholdId)
+      .get('/:id/profiles', this.getProfilesByHouseholdId)
       .put('/:id', this.editHousehold)
       .post('', this.createHousehold)
   }
@@ -46,6 +48,15 @@ export class HouseholdsController extends BaseController {
     try {
       const results = await householdsService.getResultsByHouseholdId(req.params.id)
       res.send(results)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getProfilesByHouseholdId(req, res, next) {
+    try {
+      const householdProfiles = await accountService.getProfilesByHouseholdId({ creatorId: req.params.id })
+      res.send(householdProfiles)
     } catch (error) {
       next(error)
     }
