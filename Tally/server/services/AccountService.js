@@ -45,7 +45,7 @@ function sanitizeBody(body) {
 
 class AccountService {
   async getResultsByProfileId(id) {
-    const results = await dbContext.Results.find({ profileId: id })
+    const results = await dbContext.Results.find({ profileId: id }).populate('game', 'name')
     if (!results) {
       throw new BadRequest('Invalid Id')
     }
