@@ -128,5 +128,13 @@ class AccountService {
     }
     return account
   }
+
+  async getProfilesByHouseholdId(query = {}) {
+    const profiles = await dbContext.Account.find(query)
+    if (!profiles) {
+      throw new BadRequest('Invalid Id')
+    }
+    return profiles
+  }
 }
 export const accountService = new AccountService()
