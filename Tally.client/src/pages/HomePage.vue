@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-0 home flex-grow-1 d-flex flex-column justify-content-center align-items-center flex-column  desktopBack">
+  <div class="row m-0 home flex-grow-1 d-flex flex-column justify-content-center align-items-center flex-column desktopBack">
     <div class="col-md-6 p-0 modalGradient">
       <div class="row m-0 d-flex justify-content-center w-100">
         <div class="col-md-12 p-0 my-5">

@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
+    component: loadPage('LandingPage')
   },
   {
     path: '/about',
@@ -17,15 +17,21 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
-    path: '/account',
-    name: 'Account',
-    component: loadPage('AccountPage'),
-    beforeEnter: authGuard
-  },
-  {
     path: '/profile/:id',
     name: 'Profile',
     component: loadPage('ProfilePage'),
+    beforeEnter: authGuard
+  },
+  {
+    path: '/household/:id',
+    name: 'Household',
+    component: loadPage('HouseholdPage'),
+    beforeEnter: authGuard
+  },
+  {
+    path: '/gamenight/:id',
+    name: 'GameNight',
+    component: loadPage('GameNightPage'),
     beforeEnter: authGuard
   }
 ]

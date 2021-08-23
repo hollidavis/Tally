@@ -21,7 +21,7 @@ export default {
     const route = useRoute()
     onMounted(async() => {
       try {
-        await gamesService.getGamesByProfileId(route.params.id)
+        await gamesService.getResultsByProfileId(route.params.id)
       } catch (error) {
         Pop.toast(error)
       }

@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <Navbar />
     <div class="row">
       <div class="col-md-6">
         <ProfileCard />
