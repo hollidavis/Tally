@@ -3,7 +3,7 @@ import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../env'
 import { router } from '../router'
 import { accountService } from './AccountService'
-import { api } from './AxiosService'
+import { tallyApi } from './AxiosService'
 import { socketService } from './SocketService'
 
 export const AuthService = initialize({
@@ -21,8 +21,8 @@ export const AuthService = initialize({
 })
 
 AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
-  api.defaults.headers.authorization = AuthService.bearer
-  api.interceptors.request.use(refreshAuthToken)
+  tallyApi.defaults.headers.authorization = AuthService.bearer
+  tallyApi.interceptors.request.use(refreshAuthToken)
   AppState.user = AuthService.user
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
@@ -41,7 +41,7 @@ async function refreshAuthToken(config) {
     await AuthService.loginWithPopup()
   } else if (needsRefresh) {
     await AuthService.getTokenSilently()
-    api.defaults.headers.authorization = AuthService.bearer
+    tallyApi.defaults.headers.authorization = AuthService.bearer
     socketService.authenticate(AuthService.bearer)
   }
   return config

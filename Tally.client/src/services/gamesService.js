@@ -1,4 +1,5 @@
 import { AppState } from '../AppState'
+import { gameApi } from './AxiosService'
 
 class GamesService {
   async getResultsByProfileId(id) {
@@ -16,7 +17,13 @@ class GamesService {
       }
     })
     AppState.gameScores = scores
-    console.log(scores)
+  }
+
+  async searchGame(search) {
+    const res = await gameApi.get('/search?name=' + search + '&client_id=wNZWnIWFMG')
+    AppState.activeSearchGames = res.data.games
+    console.log(res.data)
+    console.log(AppState.activeSearchGames)
   }
 }
 
