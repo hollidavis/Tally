@@ -1,18 +1,16 @@
 <template>
-  <div class="row m-0 home flex-grow-1 d-flex flex-column justify-content-center align-items-center flex-column desktopBack">
+  <div class="row m-0 home flex-grow-1 d-flex flex-column justify-content-center align-items-center flex-column  desktopBack">
     <div class="col-md-6 p-0 modalGradient">
-      <div class="row m-0 d-flex justify-content-center w-100">
-        <div class="col-md-12 p-0 my-5">
-          <h1 class=" rounded d-flex justify-content-center">
-            <span class="">Welcome To Tally!</span>
-          </h1>
+      <div class="row m-0 d-flex justify-content-center">
+        <div class="col-md-12 p-0">
+          <img class="tally-logo" src="../assets/img/tally-logo.png" alt="Tally Logo">
         </div>
-        <div class="col-md-12 p-5 my-3">
-          <h3>Tally exists to provide a space which fosters friendly competition by making hosting & scoring game nights a breeze</h3>
+        <div class="col-md-12 px-5 text-wrap text-break">
+          <h3>Login to start tracking your wins!</h3>
         </div>
         <!-- NOTE Login for Account -->
-        <div class="col-md-12 p-0 my-5 d-flex justify-content-around">
-          <button @click="logout" class="btn btn-danger">
+        <div class="col-md-12 py-5">
+          <button v-if="user.name" @click="logout" class="btn btn-danger text-uppercase">
             logout
           </button>
           <button
@@ -67,6 +65,9 @@ export default {
 }
 .modalGradient {
   border-radius: 10px;
- background: rgb(253, 241, 241);
+  background: rgb(253, 241, 241);
+}
+.tally-logo{
+  height:30vh;
 }
 </style>
