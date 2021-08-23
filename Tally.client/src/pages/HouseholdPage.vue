@@ -1,11 +1,17 @@
 <template>
   <div class="container-fluid">
-    <h1>This is the about page</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'About'
+  name: 'Household',
+  setup() {
+    return {}
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

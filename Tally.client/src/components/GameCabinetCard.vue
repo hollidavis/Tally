@@ -1,18 +1,19 @@
 <template>
   <div class="col-11 shadow bg-primary">
-    <h1 class=" text-center">Game Cabinet</h1>
+    <h1 class=" text-center">
+      Game Cabinet
+    </h1>
     <div class="bg-light">
     </div>
   </div>
-
 </template>
 
 <script>
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
-import { useRoute} from 'vue-router'
-import { profilesService} from '../services/ProfilesService'
+import { useRoute } from 'vue-router'
+import { profilesService } from '../services/ProfilesService'
 export default {
   name: 'ProfileCard',
   setup() {

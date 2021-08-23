@@ -1,11 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-lg transparentColor">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+  <nav class="navbar navbar-expand-lg bg-white row text-dark">
+    <router-link class="navbar-brand d-flex" :to="{ name: 'Household', params: {id: account.myHouseholdId} }">
       <div class="d-flex flex-column align-items-center">
         <img
           alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
+          src="../assets/img/tally-logo.png"
+          height="75"
         />
       </div>
     </router-link>
@@ -23,13 +23,18 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link ">
-            Household
+          <router-link :to="{ name: 'About' }" class="nav-link">
+            About Us
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
+          <router-link :to="{ name: 'Profile' , params: {id: account.id}}" class="nav-link">
             Profile
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link :to="{ name: 'Household', params: {id: account.myHouseholdId} }" class="nav-link ">
+            Household
           </router-link>
         </li>
       </ul>
@@ -60,16 +65,11 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
             >
-              logout
+              Logout
             </div>
           </div>
         </div>
@@ -90,6 +90,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
@@ -121,10 +122,7 @@ a:hover {
   text-transform: uppercase;
 }
 .nav-item .nav-link.router-link-exact-active{
-  color: var(--light);
-}
-.transparentColor {
-  background-color: rgba(255, 255, 255, 0);
+  color: var(--dark);
 }
 .navbar {
   color: rgba(255, 255, 255, 0);

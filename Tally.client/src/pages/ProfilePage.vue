@@ -1,13 +1,14 @@
 <template>
   <div class="container-fluid">
+    <Navbar />
     <div class="row">
       <div class="col-md-6">
-        <ProfileCard/>
+        <ProfileCard />
       </div>
       <div class="col-md-6">
         <div class="row">
-          <GameCabinetCard/>
-          <PersonalLeaderboardCard/>
+          <GameCabinetCard />
+          <PersonalLeaderboardCard />
         </div>
       </div>
     </div>
@@ -27,7 +28,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 img {
   max-width: 100px;
 }
