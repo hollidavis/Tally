@@ -1,44 +1,50 @@
 <template>
-  <div class="row m-0 home flex-grow-1 d-flex flex-column justify-content-center align-items-center flex-column  desktopBack">
-    <div class="col-md-6 p-0 modalGradient">
-      <div class="row m-0 d-flex justify-content-center">
-        <div class="col-md-12 p-0">
-          <img class="tally-logo" src="../assets/img/tally-logo.png" alt="Tally Logo">
-        </div>
-        <div class="col-md-12 px-5 text-wrap text-break">
-          <h3>Login to start tracking your wins!</h3>
-        </div>
-        <!-- NOTE Login for Account -->
-        <div class="col-md-12 py-5">
-          <button v-if="user.name" @click="logout" class="btn btn-danger text-uppercase">
-            logout
-          </button>
-          <button
+  <div class="container-fluid home flex-grow-1 desktopBack d-flex flex-column justify-content-center align-items-center flex-column">
+    <div class="row m-0 justify-content-center align-items-center">
+      <div class="col-11 col-md-6 p-0 modalGradient">
+        <div class="row m-0 d-flex justify-content-center">
+          <div class="col-md-12 p-0">
+            <img class="tally-logo" src="../assets/img/tally-logo.png" alt="Tally Logo">
+          </div>
+          <div class="col-md-12 px-5 text-wrap text-break">
+            <h3>Login to start tracking your wins!</h3>
+          </div>
+          <!-- NOTE Login for Account -->
+          <div class="col-md-12 py-5">
+            <button v-if="user.name" @click="logout" class="btn btn-danger text-uppercase">
+              logout
+            </button>
+            <button
             class="btn btn-secondary text-uppercase"
             @click="login"
             v-if="!user.isAuthenticated"
-          >
+            >
             Login
           </button>
         </div>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
 export default {
   name: 'Home',
   setup() {
+    const router = useRouter()
     const state = reactive({
       dropOpen: false
     })
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
