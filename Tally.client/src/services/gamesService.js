@@ -16,7 +16,6 @@ class GamesService {
       }
     })
     AppState.gameScores = scores
-    console.log(scores)
   }
 }
 
