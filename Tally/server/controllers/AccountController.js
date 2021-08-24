@@ -13,7 +13,7 @@ export class AccountController extends BaseController {
       .get('/:id', this.getProfileById)
       .get('/:id/results', this.getResultsByProfileId)
       .get('/:id/households', this.getHouseholdsByProfileId)
-      .get('/myhousehold', this.getMyHousehold)
+      .get('/:id/myhousehold', this.getMyHousehold)
       .put('/:id', this.editProfile)
   }
 
@@ -56,6 +56,7 @@ export class AccountController extends BaseController {
     }
   }
 
+  /** Gets the household the logged in user owns. If they don't have a household it will create a new one. */
   async getMyHousehold(req, res, next) {
     try {
       const myHousehold = await householdsService.getMyHousehold(req.userInfo.id)

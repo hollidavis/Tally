@@ -1,9 +1,7 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
-import { householdsService } from '../services/HouseholdsService'
 import BaseController from '../utils/BaseController'
 
-// this will call out to the same service as account controller. Needs refactoring to work
 export class ProfileController extends BaseController {
   constructor() {
     super('profile')

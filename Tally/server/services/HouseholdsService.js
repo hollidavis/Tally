@@ -1,6 +1,10 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 class HouseholdsService {
+  /** Gets the household the logged in user owns. If they don't have a household it will create a new one.
+   * @param {String} id - the logged in users id
+   * @returns the household object the logged in owner uses
+  */
   async getMyHousehold(id) {
     let myHousehold = await dbContext.Households.find({ ownerAccountId: id })
     if (!myHousehold.length) {
@@ -11,7 +15,7 @@ class HouseholdsService {
 
   async getHouseholdById(id) {
     const household = await dbContext.Households.findById(id)
-    if (!household) {
+    if (!household.length) {
       throw new BadRequest('Invalid Id')
     }
     return household
@@ -19,7 +23,7 @@ class HouseholdsService {
 
   async getGamesByHouseholdId(id) {
     const games = await dbContext.Games.find({ householdId: id })
-    if (!games) {
+    if (!games.length) {
       throw new BadRequest('Invalid Id')
     }
     return games
@@ -27,7 +31,7 @@ class HouseholdsService {
 
   async getGameNightsByHouseholdId(id) {
     const gameNights = await dbContext.GameNights.find({ householdId: id })
-    if (!gameNights) {
+    if (!gameNights.length) {
       throw new BadRequest('Invalid Id')
     }
     return gameNights
@@ -35,7 +39,7 @@ class HouseholdsService {
 
   async getResultsByHouseholdId(id) {
     const results = await dbContext.Results.find({ householdId: id })
-    if (!results) {
+    if (!results.length) {
       throw new BadRequest('Invalid Id')
     }
     return results
@@ -43,7 +47,7 @@ class HouseholdsService {
 
   async editHousehold(id, body) {
     const household = await this.getHouseholdById(id)
-    if (!household) {
+    if (!household.length) {
       throw new BadRequest('Invalid Id')
     }
     if (household.ownerAccountId.toString() !== body.ownerAccountId) {
