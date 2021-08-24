@@ -1,15 +1,12 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
-
 class HouseholdsService {
-  async getHouseholdsByProfileId(query = {}) {
-    const households = await dbContext.Households.find(query)
-    if (!households.length) {
-      // TODO check for this error handling on other functions and add .length
-      await this.createHouseholdIfNeeded(query)
-      // NOTE add function to createHouseholdIfNeeded
+  async getMyHousehold(id) {
+    let myHousehold = await dbContext.Households.find({ ownerAccountId: id })
+    if (!myHousehold.length) {
+      myHousehold = await this.createHouseholdIfNeeded({ ownerAccountId: id })
     }
-    return households
+    return myHousehold
   }
 
   async getHouseholdById(id) {
