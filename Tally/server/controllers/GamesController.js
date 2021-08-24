@@ -31,23 +31,24 @@ export class GamesController extends BaseController {
   async searchApi(req, res, next) {
     try {
       // This drills down to the game api res.data
-      const data = await gameApi.get('/search?name=' + req.params.term + '&client_id=' + process.env.API_KEY)
+      const returnedGames = await gameApi.get('/search?name=' + req.params.term + '&client_id=' + process.env.API_KEY)
       // Line 36 runs the game api results through the Game Model to clean up the model
-      // TO DO fix map function
-      const results = data.map(rawGame => this.createGameModel(rawGame))
+      // NOTE returnedGames returns a large object. In order to .map, we need to drill down to an array in the data, (data.games) and .map over the array
+      const results = returnedGames.data.games.map(rawGame => new GameModel(rawGame))
+      // NOTE for each rawgame returned, a new GameModel is created
       res.send(results)
     } catch (error) {
       next(error)
     }
   }
 
-  async createGameModel(rawGame) {
-    const game = new GameModel(rawGame)
-    return game
-  }
-
   async createGame(req, res, next) {
-    // TODO This needs to add the game to the household game cabinet. Maybe rename to addGame?
+    try {
+      const newGame = await gamesService.createGame(req.body)
+      res.send(newGame)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async removeGame(req, res, next) {

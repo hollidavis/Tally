@@ -10,8 +10,9 @@ class GamesService {
   }
 
   async createGame(body) {
+    // REVIEW maybe change name of this function to addgame
     const game = await dbContext.Games.create(body)
-    return await dbContext.Games.findById(game.id)
+    return await dbContext.Games.findById(game.gameApiId)
   }
 
   async removeGame(id) {
