@@ -1,19 +1,22 @@
 <template>
   <div class="p-3 bg-light rounded shadow my-3 d-flex align-items-center">
     <img class="thumb-url"
-         :src="searchGame.thumb_url"
+         :src="searchGame.smallImg"
          :alt="searchGame.name"
     >
     <h3 class="ml-3 mr-auto m-0">
       {{ searchGame.name }}
     </h3>
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" @click="addGame()">
       Add
     </button>
   </div>
 </template>
 
 <script>
+import Pop from '../utils/Notifier'
+import { gamesService } from '../services/GamesService'
+import { reactive } from '@vue/reactivity'
 export default {
   props: {
     searchGame: {
@@ -21,8 +24,34 @@ export default {
       required: true
     }
   },
-  setup() {
-    return {}
+  setup(props) {
+    const state = reactive({
+      newGame: {
+        name: props.searchGame.name,
+        description: props.searchGame.description,
+        minPlayers: props.searchGame.minPlayers,
+        maxPlayers: props.searchGame.maxPlayers,
+        smallImg: props.searchGame.smallImg,
+        largeImg: props.searchGame.largeImg,
+        minPlayTime: props.searchGame.minPlayTime,
+        maxPlayTime: props.searchGame.maxPlayTime,
+        playerAge: props.searchGame.playerAge,
+        websiteLink: props.searchGame.websiteLink,
+        gameApiId: props.searchGame.gameApiId,
+        householdId: '6123c8533d312c21a006ff8d'
+
+      }
+    })
+    return {
+      state,
+      async addGame() {
+        try {
+          await gamesService.addGame(state.newGame)
+        } catch (error) {
+          Pop.toast(error)
+        }
+      }
+    }
   }
 }
 </script>

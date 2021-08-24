@@ -1,5 +1,5 @@
 import { AppState } from '../AppState'
-import { gameApi, tallyApi } from './AxiosService'
+import { tallyApi } from './AxiosService'
 
 class GamesService {
   // async getResultsByProfileId(id) {
@@ -18,11 +18,15 @@ class GamesService {
   //   })
   //   AppState.gameScores = scores
   // }
-
-  // NOTE Not sure if the get request route is correct. Maybe test tomorrow
   async searchGame(search) {
     const res = await tallyApi.get('/api/games/search/' + search)
-    console.log(res.data)
+    AppState.activeSearchGames = res.data
+  }
+
+  async addGame(newGame) {
+    const res = await tallyApi.post('/api/games', newGame)
+    AppState.games.push(res.data)
+    console.log(AppState.games)
   }
 }
 
