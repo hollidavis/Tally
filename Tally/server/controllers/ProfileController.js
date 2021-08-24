@@ -15,7 +15,7 @@ export class ProfileController extends BaseController {
 
   async getProfileById(req, res, next) {
     try {
-      const profile = await accountService.getProfileById(req.userInfo.id)
+      const profile = await accountService.getProfileById(req.params.id)
       res.send(profile)
     } catch (error) {
       next(error)
@@ -24,11 +24,10 @@ export class ProfileController extends BaseController {
 
   async getResultsByProfileId(req, res, next) {
     try {
-      const results = await accountService.getResultsByProfileId(req.userInfo.id)
+      const results = await accountService.getResultsByProfileId(req.params.id)
       res.send(results)
     } catch (error) {
       next(error)
     }
   }
-// NOTE Add get games by profile Id
 }
