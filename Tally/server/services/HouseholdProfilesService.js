@@ -1,5 +1,5 @@
 import { dbContext } from '../db/DbContext'
-import { BadRequest } from '../utils/Errors'
+import { BadRequest, Forbidden } from '../utils/Errors'
 class HouseholdProfilesService {
   async createHouseholdProfile(body) {
     // NOTE line 7 not needed unless using populate
@@ -8,8 +8,13 @@ class HouseholdProfilesService {
     return await dbContext.HouseholdProfiles.findById(householdProfile.id)
   }
 
-  async destroyHouseholdProfile(id) {
-    await dbContext.HouseholdProfiles.findByIdAndDelete(id)
+  async destroyHouseholdProfile(body, userId) {
+    const household = await dbContext.Households.findById(body.householdId)
+    if (household.ownerAccountId === userId) {
+      await dbContext.HouseholdProfiles.findByIdAndDelete(body.id)
+    } else {
+      throw new Forbidden('This is not your household')
+    }
     return 'Successfully Deleted'
   }
 

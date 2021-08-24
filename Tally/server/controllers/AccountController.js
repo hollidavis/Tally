@@ -12,7 +12,7 @@ export class AccountController extends BaseController {
       .get('/:id', this.getProfileById)
       .get('/:id/results', this.getResultsByProfileId)
       .get('/:id/households', this.getHouseholdsByProfileId)
-      .put('/:id', this.edit)
+      .put('/:id', this.editProfile)
   }
 
   async getUserAccount(req, res, next) {
@@ -24,6 +24,7 @@ export class AccountController extends BaseController {
     }
   }
 
+  /** Gets the profile of the user who is logged in */
   async getProfileById(req, res, next) {
     try {
       const profile = await accountService.getProfileById(req.userInfo.id)
@@ -33,6 +34,7 @@ export class AccountController extends BaseController {
     }
   }
 
+  /** Gets the results of the user who is logged in */
   async getResultsByProfileId(req, res, next) {
     try {
       const results = await accountService.getResultsByProfileId(req.userInfo.id)
@@ -42,7 +44,7 @@ export class AccountController extends BaseController {
     }
   }
 
-  // NOTE maybe remove?
+  /** Gets all households the logged in user belongs to */
   async getHouseholdsByProfileId(req, res, next) {
     try {
       const profileHouseholds = await householdProfilesService.getHouseholdsByProfileId(req.userInfo.id)
@@ -52,10 +54,11 @@ export class AccountController extends BaseController {
     }
   }
 
-  async edit(req, res, next) {
+  /** Edits the profile of the user who is logged in */
+  async editProfile(req, res, next) {
     try {
       req.body.accountId = req.userInfo.id
-      const account = await accountService.edit(req.body)
+      const account = await accountService.editProfile(req.body)
       res.send(account)
     } catch (error) {
       next(error)

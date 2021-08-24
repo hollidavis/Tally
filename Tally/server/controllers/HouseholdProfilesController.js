@@ -23,8 +23,8 @@ export class HouseholdProfilesController extends BaseController {
 
   async destroyHouseholdProfile(req, res, next) {
     try {
-      const deleted = await householdProfilesService.destroyHouseholdProfile(req.params.id, req.userInfo.id)
-      res.send(deleted, 'successfully deleted')
+      await householdProfilesService.destroyHouseholdProfile(req.body, req.userInfo.id)
+      res.send({ message: 'Successfully Deleted' })
     } catch (error) {
       next(error)
     }
