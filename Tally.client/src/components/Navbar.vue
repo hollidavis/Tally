@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-white row p-0 px-2 navbar-light mb-3">
+  <nav class="navbar navbar-expand-lg bg-white row p-0 px-2 navbar-light mb-3 shadow">
     <router-link class="navbar-brand d-flex p-0" :to="{ name: 'Household', params: {id: account.myHouseholdId} }">
       <div class="d-flex justify-content-center">
         <img
