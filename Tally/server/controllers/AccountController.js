@@ -45,7 +45,7 @@ export class AccountController extends BaseController {
   // NOTE maybe remove?
   async getHouseholdsByProfileId(req, res, next) {
     try {
-      const profileHouseholds = await householdProfilesService.getHouseholdsByProfileId(req.params.id)
+      const profileHouseholds = await householdProfilesService.getHouseholdsByProfileId(req.userInfo.id)
       res.send(profileHouseholds)
     } catch (error) {
       next(error)
