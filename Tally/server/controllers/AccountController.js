@@ -1,6 +1,7 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
+import { householdsService } from '../services/HouseholdsService'
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -12,6 +13,7 @@ export class AccountController extends BaseController {
       .get('/:id', this.getProfileById)
       .get('/:id/results', this.getResultsByProfileId)
       .get('/:id/households', this.getHouseholdsByProfileId)
+      .get('/myhousehold', this.getMyHousehold)
       .put('/:id', this.editProfile)
   }
 
@@ -49,6 +51,15 @@ export class AccountController extends BaseController {
     try {
       const profileHouseholds = await householdProfilesService.getHouseholdsByProfileId(req.userInfo.id)
       res.send(profileHouseholds)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getMyHousehold(req, res, next) {
+    try {
+      const myHousehold = await householdsService.getMyHousehold(req.userInfo.id)
+      res.send(myHousehold)
     } catch (error) {
       next(error)
     }

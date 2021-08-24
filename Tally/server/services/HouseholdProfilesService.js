@@ -1,11 +1,10 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 class HouseholdProfilesService {
-  async createHouseholdProfile(body) {
+  async createHouseholdProfile(body, accessKey) {
     // NOTE line 7 not needed unless using populate
     // NOTE validate the code is the correct code for the household
-    const householdProfile = await dbContext.HouseholdProfiles.create(body)
-    return await dbContext.HouseholdProfiles.findById(householdProfile.id)
+    return await dbContext.HouseholdProfiles.create(body)
   }
 
   async destroyHouseholdProfile(body, userId) {
