@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-white row text-dark">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Household', params: {id: account.myHouseholdId} }">
-      <div class="d-flex flex-column align-items-center">
+  <nav class="navbar navbar-expand-lg bg-white row p-0 px-2 navbar-light">
+    <router-link class="navbar-brand d-flex p-0" :to="{ name: 'Household', params: {id: account.myHouseholdId} }">
+      <div class="d-flex justify-content-center">
         <img
           alt="logo"
           src="../assets/img/tally-logo.png"
@@ -10,7 +10,7 @@
       </div>
     </router-link>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler "
       type="button"
       data-toggle="collapse"
       data-target="#navbarText"
