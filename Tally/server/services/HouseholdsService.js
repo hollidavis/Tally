@@ -56,7 +56,7 @@ class HouseholdsService {
     return updatedHousehold
   }
 
-  async createHousehold(body) {
+  async createHouseholdIfNeeded(body) {
     const accessKey = await this.createAccessKey()
     body.accessKey = accessKey
     const household = await dbContext.Households.create(body)
