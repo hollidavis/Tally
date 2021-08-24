@@ -15,7 +15,7 @@ export class GamesController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id', this.getGameById)
       .get('/search/:term', this.searchApi)
-      .post('', this.createGame)
+      .post('', this.addGame)
       .delete('/:id', this.removeGame)
   }
 
@@ -42,9 +42,9 @@ export class GamesController extends BaseController {
     }
   }
 
-  async createGame(req, res, next) {
+  async addGame(req, res, next) {
     try {
-      const newGame = await gamesService.createGame(req.body)
+      const newGame = await gamesService.addGame(req.body)
       res.send(newGame)
     } catch (error) {
       next(error)

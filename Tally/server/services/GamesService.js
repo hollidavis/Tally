@@ -9,10 +9,10 @@ class GamesService {
     return game
   }
 
-  async createGame(body) {
-    // REVIEW maybe change name of this function to addgame
+  async addGame(body) {
     const game = await dbContext.Games.create(body)
-    return await dbContext.Games.findById(game.gameApiId)
+    // NOTE finding a specific game by mongo ID, hence findById(game.id)
+    return await dbContext.Games.findById(game.id)
   }
 
   async removeGame(id) {
