@@ -8,7 +8,7 @@ export const AccountSchema = new Schema(
     name: { type: String, required: true },
     picture: { type: String },
     coverImg: { type: String },
-    myHouseholdId: { type: String }
+    householdId: { type: String }
     // NOTE If you wish to add additional public properties for Accounts do so here
   },
   { timestamps: true, toJSON: { virtuals: true } }

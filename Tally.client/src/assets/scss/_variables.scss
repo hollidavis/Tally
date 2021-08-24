@@ -1,16 +1,20 @@
-
-$body-bg: #e5e5e5;
 $primary: #302B6D;
 $secondary: #7758A4;
-$danger: #eb5757;
-$success: #88FEF0;
-$warning: #F48D6C;
-$info: #FED885;
-$dark: #313130;
+$danger: #EB5757;
+$success: #27AE60;
+$warning: #FF7F50;
+$info: #88FEF0;
+$dark: #272727;
 $grey: #cbcbcb00;
 $dark-grey: #696969;
-$white: rgba(255, 255, 255, 0.75);
+$white: rgba(255, 255, 255, 0.85);
 $light: #f8f9fa;
+$dark-pink: #FF7EA4;
+$light-pink: #FEABB3;
+$light-purple: #A97CD7;
+$yellow: #FED885;
+$dark-orange: #F48D6C;
+$light-orange: #FFAB96;
 
 $colors: (
   "primary": $primary,
@@ -23,7 +27,13 @@ $colors: (
   "grey": $grey,
   "dark-grey": $dark-grey,
   "white": $white,
-  "light": $light
+  "light": $light,
+  "dark-pink": $dark-pink,
+  "light-pink": $light-pink,
+  "light-purple": $light-purple,
+  "yellow": $yellow,
+  "dark-orange": $dark-orange,
+  "light-orange": $light-orange,
 );
 
 $color-ranges: (
