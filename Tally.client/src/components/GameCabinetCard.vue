@@ -3,8 +3,11 @@
     <h1 class=" text-center">
       Game Cabinet
     </h1>
-    <div class="bg-light">
-    </div>
+  </div>
+  <div class="bg-light col-11 shadow">
+    <ul v-for="g in games" :key="g.id">
+      <GameCabinetItem :game="g" />
+    </ul>
   </div>
 </template>
 
@@ -12,21 +15,21 @@
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
-import { useRoute } from 'vue-router'
-import { profilesService } from '../services/ProfilesService'
+import { gamesService } from '../services/GamesService'
+
 export default {
-  name: 'ProfileCard',
+  name: 'GameCabinetCard',
   setup() {
-    const route = useRoute()
-    // onMounted(async() => {
-    //   try {
-    //     await gamesService.getGamesById(route.params.id)
-    //   } catch (error) {
-    //     Pop.toast(error)
-    //   }
-    // })
+    onMounted(async() => {
+      try {
+        await gamesService.getGamesById('6123c8533d312c21a006ff8d')
+      } catch (error) {
+        Pop.toast(error)
+      }
+    })
     return {
-      profile: computed(() => AppState.activeProfile)
+      profile: computed(() => AppState.activeProfile),
+      game: computed(() => AppState.games)
     }
   }
 }
