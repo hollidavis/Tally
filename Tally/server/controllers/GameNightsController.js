@@ -13,6 +13,7 @@ export class GameNightsController extends BaseController {
       .delete('/:id', this.removeGameNight)
   }
 
+  /** Gets game night object by provided id */
   async getGameNightById(req, res, next) {
     try {
       const gameNight = await gameNightsService.getGameNightById(req.params.id)
@@ -22,6 +23,7 @@ export class GameNightsController extends BaseController {
     }
   }
 
+  /** Creates game night with provided body */
   async createGameNight(req, res, next) {
     try {
       const gameNight = await gameNightsService.createGameNight(req.body)
@@ -31,6 +33,7 @@ export class GameNightsController extends BaseController {
     }
   }
 
+  /** Adds a profile id to the game nights activeProfiles array */
   async joinGameNight(req, res, next) {
     try {
       await gameNightsService.joinGameNight(req.params.id, req.body)
@@ -39,6 +42,7 @@ export class GameNightsController extends BaseController {
     }
   }
 
+  /** Deletes game night by provided id */
   async removeGameNight(req, res, next) {
     try {
       await gameNightsService.removeGameNight(req.params.id)
