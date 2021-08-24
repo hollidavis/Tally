@@ -19,6 +19,7 @@
         </p>
       </div>
       <!-- The Team -->
+      <!-- TODO Add Team Member photos -->
       <div class="col-md-6 mb-3">
         <h1 class="text-center bg-dark-pink rounded-top m-0 shadow">
           The Team:
