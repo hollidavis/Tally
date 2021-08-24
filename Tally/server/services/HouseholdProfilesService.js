@@ -8,9 +8,25 @@ class HouseholdProfilesService {
     return await dbContext.HouseholdProfiles.findById(householdProfile.id)
   }
 
-  async destroyHouseholdProfile(id, userId) {
-    const profile = await dbContext.HouseholdProfiles.findOneAndDelete({ accountId: userId, _id: id })
-    return profile
+  async destroyHouseholdProfile(id) {
+    await dbContext.HouseholdProfiles.findByIdAndDelete(id)
+    return 'Successfully Deleted'
+  }
+
+  async getProfilesByHouseholdId(householdId) {
+    const profiles = await dbContext.HouseholdProfiles.find({ householdId: householdId }).populate('creator', 'name picture')
+    if (!profiles) {
+      throw new BadRequest('Invalid Id')
+    }
+    return profiles
+  }
+
+  async getHouseholdsByProfileId(accountId) {
+    const households = await dbContext.HouseholdProfiles.find({ accountId: accountId }).populate('household', 'name id')
+    if (!households) {
+      throw new BadRequest('Invalid Id')
+    }
+    return households
   }
 }
 

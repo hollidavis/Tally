@@ -10,3 +10,16 @@ export const HouseholdProfileSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
+// NOTE Virtual for the name
+HouseholdProfileSchema.virtual('creator', {
+  localField: 'accountId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
+HouseholdProfileSchema.virtual('household', {
+  localField: 'householdId',
+  ref: 'Household',
+  foreignField: '_id',
+  justOne: true
+})

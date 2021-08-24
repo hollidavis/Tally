@@ -1,6 +1,8 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import BaseController from '../utils/BaseController'
+import { BadRequest } from '../utils/Errors'
+import { dbContext } from '../db/DbContext'
 
 export class HouseholdProfilesController extends BaseController {
   constructor() {
@@ -23,8 +25,8 @@ export class HouseholdProfilesController extends BaseController {
 
   async destroyHouseholdProfile(req, res, next) {
     try {
-      const deleted = await householdProfilesService.destroyHouseholdProfile(req.params.id, req.userInfo.id)
-      res.send(deleted, 'successfully deleted')
+      const deleted = await householdProfilesService.destroyHouseholdProfile(req.params.id)
+      res.send('successfully deleted')
     } catch (error) {
       next(error)
     }

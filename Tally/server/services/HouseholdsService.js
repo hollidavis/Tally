@@ -56,10 +56,9 @@ class HouseholdsService {
     return updatedHousehold
   }
 
-  async createHousehold(body) {
+  async createHouseholdIfNeeded(user) {
     const accessKey = await this.createAccessKey()
-    body.accessKey = accessKey
-    const household = await dbContext.Households.create(body)
+    const household = await dbContext.Households.create({ accessKey: accessKey, ownerAccountId: user.id, name: user.name })
     return await dbContext.Households.findById(household.id)
   }
 
