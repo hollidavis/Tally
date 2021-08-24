@@ -11,10 +11,11 @@ export class HouseholdProfilesController extends BaseController {
       .delete('/:id', this.destroyHouseholdProfile)
   }
 
+  /** creates new household profile object when a user joins a household */
   async createHouseholdProfile(req, res, next) {
     try {
       req.body.accountId = req.userInfo.id
-      const householdProfile = await householdProfilesService.createHouseholdProfile(req.body.accountId)
+      const householdProfile = await householdProfilesService.createHouseholdProfile(req.body, req.body.accessKey)
       res.send(householdProfile)
     } catch (error) {
       next(error)
@@ -23,8 +24,8 @@ export class HouseholdProfilesController extends BaseController {
 
   async destroyHouseholdProfile(req, res, next) {
     try {
-      const deleted = await householdProfilesService.destroyHouseholdProfile(req.params.id, req.userInfo.id)
-      res.send(deleted, 'successfully deleted')
+      await householdProfilesService.destroyHouseholdProfile(req.body, req.userInfo.id)
+      res.send({ message: 'Successfully Deleted' })
     } catch (error) {
       next(error)
     }

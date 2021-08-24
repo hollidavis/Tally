@@ -1,5 +1,5 @@
 import { dbContext } from '../db/DbContext'
-import { BadRequest } from '../utils/Errors'
+import { BadRequest, Forbidden } from '../utils/Errors'
 
 // Private Methods
 
@@ -44,14 +44,22 @@ function sanitizeBody(body) {
 }
 
 class AccountService {
+  /** Finds results that matches the provided profileId
+   * @param {String} id - The id of the profile
+   * @returns Returns array of result objects
+   */
   async getResultsByProfileId(id) {
     const results = await dbContext.Results.find({ profileId: id }).populate('game', 'name')
-    if (!results) {
+    if (!results.length) {
       throw new BadRequest('Invalid Id')
     }
     return results
   }
 
+  /** Finds profile that matches the provided profileId
+   * @param {String} id - The id of the profile
+   * @returns Returns matching profile object
+   */
   async getProfileById(id) {
     const profile = await dbContext.Account.findById(id)
     if (!profile) {
@@ -121,20 +129,20 @@ class AccountService {
     return account
   }
 
-  async edit(body) {
-    const account = await dbContext.Account.findByIdAndUpdate(body.accountId, body, { new: true, runValidators: true })
-    if (!account) {
+  /** Edits profile that matches the provided accountId. Users can only edit their own profiles.
+   * @param {Object} body - The changes that will be made
+   * @returns  - Returns edited profile object
+   */
+  async editProfile(body) {
+    const account = await dbContext.Account.findById(body.accountId)
+    if (!account.length) {
       throw new BadRequest('Invalid Id')
     }
-    return account
-  }
-
-  async getProfilesByHouseholdId(query = {}) {
-    const profiles = await dbContext.Account.find(query)
-    if (!profiles) {
-      throw new BadRequest('Invalid Id')
+    if (body.accountId !== account.id) {
+      throw new Forbidden('This is not your account')
     }
-    return profiles
+    const editedAccount = await dbContext.Account.findByIdAndUpdate(body.accountId, body)
+    return editedAccount
   }
 }
 export const accountService = new AccountService()
