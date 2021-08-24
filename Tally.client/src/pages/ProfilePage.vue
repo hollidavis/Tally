@@ -16,11 +16,26 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { AppState } from '../AppState'
+import Pop from '../utils/Notifier'
+import {computed, onMounted, reactive} from '@vue/runtime-core'
+import {AppState} from '../AppState'
+import {householdsService} from '../services/HouseholdsService'
+import {useRoute} from 'vue-router'
+import $ from 'jquery'
+import {AuthService} from '../services/AuthService'
+
 export default {
   name: 'Profile',
   setup() {
+    const route = useRoute()
+    onMounted(async()=>{
+      try {
+        const id = route.params.id
+        await householdsService.getHouseholdById(id)
+      } catch (error) {
+        
+      }
+    })
     return {
       account: computed(() => AppState.account)
     }
