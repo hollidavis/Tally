@@ -6,7 +6,7 @@ class HouseholdsService {
     const households = await dbContext.Households.find(query)
     if (!households.length) {
       // TODO check for this error handling on other functions and add .length
-      throw new BadRequest('Invalid Id')
+      await this.createHouseholdIfNeeded(query)
       // NOTE add function to createHouseholdIfNeeded
     }
     return households
