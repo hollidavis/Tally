@@ -66,9 +66,6 @@ export default {
   }
 }
 
-.desktopBack {
-  background-image: url('../assets/img/DesktopTally.png');
-}
 .modalGradient {
   border-radius: 10px;
   background: rgb(253, 241, 241);
