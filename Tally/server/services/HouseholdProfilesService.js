@@ -31,6 +31,9 @@ class HouseholdProfilesService {
     return 'Successfully Deleted'
   }
 
+  /** Gets all the profiles in a household using provided household id
+   * @param {String} householdId - the id of the household who's profiles are being requested
+  */
   async getProfilesByHouseholdId(householdId) {
     const profiles = await dbContext.HouseholdProfiles.find({ householdId: householdId }).populate('profile', 'name picture').populate('household', 'name')
     if (!profiles.length) {

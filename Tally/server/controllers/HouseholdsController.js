@@ -57,6 +57,7 @@ export class HouseholdsController extends BaseController {
     }
   }
 
+  /** Gets all the profiles in a household using provided household id */
   async getProfilesByHouseholdId(req, res, next) {
     try {
       const householdProfiles = await householdProfilesService.getProfilesByHouseholdId(req.params.id)

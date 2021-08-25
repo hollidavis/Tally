@@ -1,5 +1,6 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
+import { accountService } from './AccountService'
 class HouseholdsService {
   /** Gets the household the logged in user owns. If they don't have a household it will create a new one.
    * @param {String} id - the logged in users id
@@ -77,6 +78,8 @@ class HouseholdsService {
     const accessKey = await this.createAccessKey()
     body.accessKey = accessKey
     const household = await dbContext.Households.create(body)
+    const profileBody = { householdId: household.id, id: household.ownerAccountId }
+    await accountService.editProfile(profileBody)
     return await dbContext.Households.findById(household.id)
   }
 

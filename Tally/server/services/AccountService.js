@@ -134,14 +134,14 @@ class AccountService {
    * @returns  - Returns edited profile object
    */
   async editProfile(body) {
-    const account = await dbContext.Account.findById(body.accountId)
+    const account = await dbContext.Account.findById(body.id)
     if (!account.length) {
       throw new BadRequest('Invalid Id')
     }
-    if (body.accountId !== account.id) {
+    if (body.id !== account.id) {
       throw new Forbidden('This is not your account')
     }
-    const editedAccount = await dbContext.Account.findByIdAndUpdate(body.accountId, body)
+    const editedAccount = await dbContext.Account.findByIdAndUpdate(body.id, body)
     return editedAccount
   }
 }
