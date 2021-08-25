@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "mongoose": "^5.12.10",
+    "pretty-checkbox": "^3.0.3",
     "socket.io": "4.1.2"
   },
   "engines": {
