@@ -13,6 +13,10 @@ class HouseholdsService {
     return myHousehold
   }
 
+  /** Gets household object using provided id
+   * @param {String} id - the id of the household to be retrieved
+   * @returns found household object
+  */
   async getHouseholdById(id) {
     const household = await dbContext.Households.findById(id)
     if (!household.length) {
@@ -21,6 +25,10 @@ class HouseholdsService {
     return household
   }
 
+  /** Gets array of game objects that belong to a specific household
+   * @param {String} id - id of the household who's games you're trying to find
+   * @returns array of game objects
+  */
   async getGamesByHouseholdId(id) {
     const games = await dbContext.Games.find({ householdId: id })
     if (!games.length) {
@@ -29,6 +37,10 @@ class HouseholdsService {
     return games
   }
 
+  /** Gets array of game night objects that belong to a specific household
+   * @param {String} id - id of the household who's game nights you're trying to find
+   * @returns array of game night objects
+  */
   async getGameNightsByHouseholdId(id) {
     const gameNights = await dbContext.GameNights.find({ householdId: id })
     if (!gameNights.length) {
@@ -37,6 +49,10 @@ class HouseholdsService {
     return gameNights
   }
 
+  /** Gets array of result objects that belong to a specific household
+   * @param {String} id - id of the household who's results you're trying to find
+   * @returns array of result objects
+  */
   async getResultsByHouseholdId(id) {
     const results = await dbContext.Results.find({ householdId: id })
     if (!results.length) {

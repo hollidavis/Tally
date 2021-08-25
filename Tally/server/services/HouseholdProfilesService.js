@@ -9,7 +9,8 @@ class HouseholdProfilesService {
   async createHouseholdProfile(body, accessKey) {
     const household = await dbContext.Households.find(body.householdId)
     if (household.accessKey === accessKey) {
-      return await dbContext.HouseholdProfiles.create(body)
+      const householdProfile = await dbContext.HouseholdProfiles.create(body)
+      return await dbContext.HouseholdProfiles.find(householdProfile.id).populate('profile', 'name picture').populate('household', 'name')
     }
     throw new BadRequest('Failed to join household')
   }
@@ -31,16 +32,16 @@ class HouseholdProfilesService {
   }
 
   async getProfilesByHouseholdId(householdId) {
-    const profiles = await dbContext.HouseholdProfiles.find({ householdId: householdId }).populate('creator', 'name picture')
-    if (!profiles) {
+    const profiles = await dbContext.HouseholdProfiles.find({ householdId: householdId }).populate('profile', 'name picture').populate('household', 'name')
+    if (!profiles.length) {
       throw new BadRequest('Invalid Id')
     }
     return profiles
   }
 
   async getHouseholdsByProfileId(accountId) {
-    const households = await dbContext.HouseholdProfiles.find({ accountId: accountId }).populate('household', 'name id')
-    if (!households) {
+    const households = await dbContext.HouseholdProfiles.find({ accountId: accountId }).populate('profile', 'name picture').populate('household', 'name')
+    if (!households.length) {
       throw new BadRequest('Invalid Id')
     }
     return households
