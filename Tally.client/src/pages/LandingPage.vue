@@ -12,32 +12,32 @@
           <!-- NOTE Login for Account -->
           <div class="col-md-12 py-5">
             <button v-if="user.name" @click="logout" class="btn btn-danger text-uppercase">
-              logout
+              Logout
             </button>
             <button
-            class="btn btn-secondary text-uppercase"
-            @click="login"
-            v-if="!user.isAuthenticated"
+              class="btn btn-secondary text-uppercase"
+              @click="login"
+              v-if="!user.isAuthenticated"
             >
-            Login
-          </button>
+              Login
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import { router } from '../router'
+import { accountService } from '../services/AccountService'
 
 export default {
   name: 'Home',
   setup() {
-    const router = useRouter()
     const state = reactive({
       dropOpen: false
     })
@@ -46,7 +46,11 @@ export default {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async login() {
-        AuthService.loginWithPopup()
+        await AuthService.loginWithPopup()
+        await accountService.getAccount()
+        if (this.account) {
+          router.push({ name: 'Profile', params: { id: this.account.id } })
+        }
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
