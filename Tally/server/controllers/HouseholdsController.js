@@ -17,6 +17,7 @@ export class HouseholdsController extends BaseController {
       .post('', this.createHousehold)
   }
 
+  /** Gets household object using provided id */
   async getHouseholdById(req, res, next) {
     try {
       const household = await householdsService.getHouseholdById(req.params.id)
@@ -26,6 +27,7 @@ export class HouseholdsController extends BaseController {
     }
   }
 
+  /** Gets array of game objects that belong to a specific household */
   async getGamesByHouseholdId(req, res, next) {
     try {
       const games = await householdsService.getGamesByHouseholdId(req.params.id)
@@ -35,6 +37,7 @@ export class HouseholdsController extends BaseController {
     }
   }
 
+  /** Gets array of game night objects that belong to a specific household */
   async getGameNightByHouseholdId(req, res, next) {
     try {
       const gameNights = await householdsService.getGameNightsByHouseholdId(req.params.id)
@@ -44,6 +47,7 @@ export class HouseholdsController extends BaseController {
     }
   }
 
+  /** Gets array of result objects that belong to a specific household */
   async getResultsByHouseholdId(req, res, next) {
     try {
       const results = await householdsService.getResultsByHouseholdId(req.params.id)
@@ -53,6 +57,7 @@ export class HouseholdsController extends BaseController {
     }
   }
 
+  /** Gets all the profiles in a household using provided household id */
   async getProfilesByHouseholdId(req, res, next) {
     try {
       const householdProfiles = await householdProfilesService.getProfilesByHouseholdId(req.params.id)

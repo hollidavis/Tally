@@ -69,7 +69,7 @@ export class AccountController extends BaseController {
   /** Edits the profile of the user who is logged in */
   async editProfile(req, res, next) {
     try {
-      req.body.accountId = req.userInfo.id
+      req.body.id = req.userInfo.id
       const account = await accountService.editProfile(req.body)
       res.send(account)
     } catch (error) {

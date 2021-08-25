@@ -22,6 +22,7 @@ export class HouseholdProfilesController extends BaseController {
     }
   }
 
+  /** deletes a household profile object. Used to "kick" a user out of a household */
   async destroyHouseholdProfile(req, res, next) {
     try {
       await householdProfilesService.destroyHouseholdProfile(req.body, req.userInfo.id)
