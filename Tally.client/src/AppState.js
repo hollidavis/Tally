@@ -7,5 +7,6 @@ export const AppState = reactive({
   activeProfile: {},
   games: [],
   gameScores: {},
-  activeSearchGames: []
+  activeSearchGames: [],
+  myHousehold: {}
 })

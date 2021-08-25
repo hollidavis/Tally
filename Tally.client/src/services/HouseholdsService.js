@@ -5,7 +5,6 @@ import { tallyApi } from './AxiosService'
 class HouseholdsService {
   async getHouseholdById(id) {
     const res = await tallyApi.get('account/' + id + '/households')
-    console.log(res)
     // AppState.activeProfile = res.data
   }
 }
