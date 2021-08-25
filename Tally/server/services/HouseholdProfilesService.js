@@ -43,6 +43,10 @@ class HouseholdProfilesService {
     return profiles
   }
 
+  /** Gets all households the belonging to the user with provided account id
+   * @param {String} accountId - the id of the person who's results you're trying to get
+   * @returns array of household profile objects
+   */
   async getHouseholdsByProfileId(accountId) {
     const households = await dbContext.HouseholdProfiles.find({ accountId: accountId }).populate('profile', 'name picture').populate('household', 'name')
     if (!households.length) {

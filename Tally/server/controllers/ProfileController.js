@@ -11,6 +11,7 @@ export class ProfileController extends BaseController {
       .get('/:id/results', this.getResultsByProfileId)
   }
 
+  /** Gets profile object using provided profile/account id */
   async getProfileById(req, res, next) {
     try {
       const profile = await accountService.getProfileById(req.params.id)
@@ -20,6 +21,7 @@ export class ProfileController extends BaseController {
     }
   }
 
+  /** Gets a users results using provided profile/account id */
   async getResultsByProfileId(req, res, next) {
     try {
       const results = await accountService.getResultsByProfileId(req.params.id)

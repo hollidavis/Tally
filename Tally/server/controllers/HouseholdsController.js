@@ -14,7 +14,7 @@ export class HouseholdsController extends BaseController {
       .get('/:id/results', this.getResultsByHouseholdId)
       .get('/:id/profiles', this.getProfilesByHouseholdId)
       .put('/:id', this.editHousehold)
-      .post('', this.createHousehold)
+      // .post('', this.createHousehold)
   }
 
   /** Gets household object using provided id */
@@ -67,6 +67,7 @@ export class HouseholdsController extends BaseController {
     }
   }
 
+  /** Edits the specified household object. Users can only edit the household they own */
   async editHousehold(req, res, next) {
     try {
       req.body.ownerAccountId = req.userInfo.id
@@ -77,12 +78,13 @@ export class HouseholdsController extends BaseController {
     }
   }
 
-  async createHousehold(req, res, next) {
-    try {
-      const household = await householdsService.createHouseholdIfNeeded(req.userInfo)
-      res.send(household)
-    } catch (error) {
-      next(error)
-    }
-  }
+  // NOTE commenting out because potential duplicate function
+  // async createHousehold(req, res, next) {
+  //   try {
+  //     const household = await householdsService.createHouseholdIfNeeded(req.userInfo)
+  //     res.send(household)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 }

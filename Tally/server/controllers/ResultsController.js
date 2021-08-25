@@ -8,18 +8,20 @@ export class ResultsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAllResults)
-      .post('', this.create)
+      .post('', this.createResult)
   }
 
-  async create(req, res, next) {
+  /** creates new result object using provided body */
+  async createResult(req, res, next) {
     try {
-      const result = await resultsService.create(req.body)
+      const result = await resultsService.createResult(req.body)
       res.send(result)
     } catch (error) {
       next(error)
     }
   }
 
+  /** Gets all result objects in data base. Not currently used but keeping for potential future use */
   async getAllResults(req, res, next) {
     try {
       const results = await resultsService.getAllResults()

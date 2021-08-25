@@ -62,6 +62,11 @@ class HouseholdsService {
     return results
   }
 
+  /** Edits the specified household object. Users can only edit the household they own
+    * @param {String} id - the id of the household to be edited
+    * @param {Object} body - the changes to be made
+    * @returns updated household object
+   */
   async editHousehold(id, body) {
     const household = await this.getHouseholdById(id)
     if (!household.length) {
@@ -74,6 +79,10 @@ class HouseholdsService {
     return updatedHousehold
   }
 
+  /** Creates new household object & updates corresponding profile
+ * @param {Object} body - properties used to create household
+ * @returns new household object
+ */
   async createHouseholdIfNeeded(body) {
     const accessKey = await this.createAccessKey()
     body.accessKey = accessKey
@@ -83,6 +92,9 @@ class HouseholdsService {
     return await dbContext.Households.findById(household.id)
   }
 
+  /** Creates a 5 digit alphanumeric key
+   * @returns 5 digit alphanumeric string
+   */
   async createAccessKey() {
     const length = 5
     let result = ''
