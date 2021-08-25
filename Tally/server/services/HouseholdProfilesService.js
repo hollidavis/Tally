@@ -37,7 +37,7 @@ class HouseholdProfilesService {
   */
   async getProfilesByHouseholdId(householdId) {
     const profiles = await dbContext.HouseholdProfiles.find({ householdId: householdId }).populate('profile', 'name picture').populate('household', 'name')
-    if (!profiles.length) {
+    if (!profiles) {
       throw new BadRequest('Invalid Id')
     }
     return profiles
@@ -49,7 +49,7 @@ class HouseholdProfilesService {
    */
   async getHouseholdsByProfileId(accountId) {
     const households = await dbContext.HouseholdProfiles.find({ accountId: accountId }).populate('profile', 'name picture').populate('household', 'name')
-    if (!households.length) {
+    if (!households) {
       throw new BadRequest('Invalid Id')
     }
     return households
