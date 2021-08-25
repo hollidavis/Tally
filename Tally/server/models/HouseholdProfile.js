@@ -9,3 +9,17 @@ export const HouseholdProfileSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
+
+HouseholdProfileSchema.virtual('profile', {
+  localField: 'accountId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
+
+HouseholdProfileSchema.virtual('household', {
+  localField: 'householdId',
+  ref: 'Household',
+  foreignField: '_id',
+  justOne: true
+})
