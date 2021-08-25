@@ -8,7 +8,7 @@ class GameNightsService {
    */
   async getGameNightById(id) {
     const gameNight = await dbContext.GameNights.findById(id)
-    if (!gameNight.length) {
+    if (!gameNight) {
       throw new BadRequest('Invalid Id')
     }
     return gameNight
@@ -32,7 +32,7 @@ class GameNightsService {
     // Finds a game night with the provide id of the game night the player is trying to join
     const gameNight = await dbContext.GameNights.findById(id)
     // If no game night is found function throws error
-    if (!gameNight.length) {
+    if (!gameNight) {
       throw new BadRequest('Invalid Id')
     }
     // Finds all household profiles that include the profileId of the person trying to join the game night
@@ -55,7 +55,7 @@ class GameNightsService {
    */
   async removeGameNight(id) {
     const gameNight = await dbContext.GameNights.findByIdAndDelete(id)
-    if (!gameNight.length) {
+    if (!gameNight) {
       throw new BadRequest('Invalid Id')
     }
     return gameNight
