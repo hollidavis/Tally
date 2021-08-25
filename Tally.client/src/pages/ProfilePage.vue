@@ -37,7 +37,8 @@ export default {
       }
     })
     return {
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      myHousehold: computed(()=> AppState.myHousehold)
     }
   }
 }

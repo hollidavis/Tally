@@ -7,6 +7,7 @@ class AccountService {
     try {
       const res = await tallyApi.get('/account')
       AppState.account = res.data
+      console.log(AppState.account, 'appstate account in service')
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }

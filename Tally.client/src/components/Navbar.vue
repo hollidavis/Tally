@@ -33,7 +33,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Household', params: {id: account.myHouseholdId} }" class="nav-link ">
+          <router-link :to="{ name: 'Household', params: {id: account.householdId} }" class="nav-link ">
             Household
           </router-link>
         </li>

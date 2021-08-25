@@ -8,7 +8,7 @@ class HouseholdsService {
   */
   async getMyHousehold(id) {
     let myHousehold = await dbContext.Households.find({ ownerAccountId: id })
-    if (!myHousehold.length) {
+    if (!myHousehold) {
       myHousehold = await this.createHouseholdIfNeeded({ ownerAccountId: id })
     }
     return myHousehold
