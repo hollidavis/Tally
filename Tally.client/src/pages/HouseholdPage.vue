@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <Navbar />
     <div class="row d-flex justify-content-around m-0 my-5 w-100">
-      <div id="dropdownGuy" class="col-md-3 p-0  d-flex justify-content-center" title="select Household">
+      <div id="dropdownGuy" class="col-md-3 p-0 my-3 d-flex justify-content-center" title="select Household">
         <div class="dropdown">
           <button class="btn btn-lg btn-light dropdown-toggle"
                   type="button"
@@ -14,19 +14,17 @@
             <b>Select Household</b>
           </button>
           <!-- TODO write a v-for for each household the profile is associated with -->
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-for="household in households" :key="household.householdId">
+            <ProfileHouseHoldsCard :household="household" />
           </div>
         </div>
       </div>
-      <div class="col-md-3 p-0 d-flex justify-content-center">
+      <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
         <button type="button" class="btn btn-light btn-lg" title="Join Household">
           <i class="fas fa-plus text-secondary"></i> <b>Join Household</b>
         </button>
       </div>
-      <div class="col-md-3 p-0 d-flex justify-content-center">
+      <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
         <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
           <i class="fas fa-plus text-secondary"></i>
           <b> New Game Night</b>
@@ -45,8 +43,7 @@
       </div>
     </div>
     <div class="row m-0 my-3 w-100 d-flex justify-content-around mt-4">
-      <GameCabinetCard :games="games" />
-      <div class="col-md-5 p-0 ">
+      <div class="col-md-5 p-0 my-5">
         <div class="row m-0 w-100 bg-dark-pink py-3">
           <div class="col-md-12 p-0 text-center ">
             <h1>Leaderboard</h1>
@@ -54,6 +51,12 @@
         </div>
         <div class="row m-0 w-100 bg-white rowHeight">
           <!-- <GameDetailsCard /> -->
+        </div>
+      </div>
+
+      <div class="col-md-5 p-0 my-5">
+        <div class="row m-0">
+          <GameCabinetCard :games="games" />
         </div>
       </div>
     </div>
