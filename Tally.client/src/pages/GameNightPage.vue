@@ -32,6 +32,7 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
+      AppState.activeGameNightProfiles = []
       await gameNightsService.getGameNightById(route.params.id)
     })
     return {
