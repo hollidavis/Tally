@@ -11,10 +11,18 @@
             Start Date:
             {{ new Intl.DateTimeFormat('en-US').format(new Date(activeGameNight.startDate)) }}
           </p>
-          <div class="my-2 mx-4">
-            <button type="button" class="btn btn-block btn-light" data-toggle="modal" data-target="#resultsModal">
-              <b><p class="m-0">Score Game</p></b>
-            </button>
+          <div class="row justify-content-around">
+            <div class="col-md-5 m-2">
+              <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#resultsModal">
+                <b><p class="m-0"><span class="far fa-star"></span> Score Game <span class="far fa-star"></span></p></b>
+              </button>
+            </div>
+            <div class="col-md-5 m-2">
+              <button type="button" class="btn btn-light btn-block">
+                <!-- TODO Finish end game night function -->
+                <b><p class="m-0">End Game Night</p></b>
+              </button>
+            </div>
           </div>
         </div>
       </div>
