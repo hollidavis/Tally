@@ -2,13 +2,19 @@
   <div class="container-fluid">
     <Navbar />
     <div class="row">
-      <div class="col-md-6">
-        <ProfileCard />
+      <div class="col-md-6 my-2">
+        <div class="row justify-content-center">
+          <ProfileCard />
+        </div>
       </div>
-      <div class="col-md-6">
-        <div class="row">
-          <GameCabinetCard />
-          <PersonalLeaderboardCard />
+      <div class="col-md-6 my-2">
+        <div class="row justify-content-center">
+          <div class="col-11 p-0">
+            <GameCabinetCard />
+          </div>
+          <div class="col-11 p-0">
+            <PersonalLeaderboardCard />
+          </div>
         </div>
       </div>
     </div>
@@ -20,6 +26,7 @@ import Pop from '../utils/Notifier'
 import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { householdsService } from '../services/HouseholdsService'
+import { resultsService } from '../services/ResultsService'
 import { useRoute } from 'vue-router'
 import $ from 'jquery'
 import { AuthService } from '../services/AuthService'
@@ -32,6 +39,7 @@ export default {
       try {
         const id = route.params.id
         await householdsService.getMyHouseholdById(id)
+        await resultsService.getResultsByProfileId(id)
       } catch (error) {
 
       }
