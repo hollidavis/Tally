@@ -33,6 +33,12 @@ const routes = [
     name: 'GameNight',
     component: loadPage('GameNightPage'),
     beforeEnter: authGuard
+  },
+  {
+    path: '/manageHousehold/:id',
+    name: 'ManageHousehold',
+    component: loadPage('ManageHouseholdPage'),
+    beforeEnter: authGuard
   }
 ]
 

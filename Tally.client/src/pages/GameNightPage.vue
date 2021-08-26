@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <ResultsModal />
+  <ResultsModal :household="gameNightHouseholdId" />
 </template>
 
 <script>
@@ -38,7 +38,8 @@ export default {
     return {
       route,
       activeGameNight: computed(() => AppState.activeGameNight),
-      activeGameNightProfiles: computed(() => AppState.activeGameNightProfiles)
+      activeGameNightProfiles: computed(() => AppState.activeGameNightProfiles),
+      gameNightHouseholdId: computed(() => AppState.gameNightHouseholdId)
     }
   }
 }

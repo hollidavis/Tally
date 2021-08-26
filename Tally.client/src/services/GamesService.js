@@ -1,6 +1,5 @@
 import { AppState } from '../AppState'
 import { tallyApi } from './AxiosService'
-import { useRoute } from 'vue-router'
 
 class GamesService {
   async searchGame(search) {
@@ -9,14 +8,13 @@ class GamesService {
   }
 
   async addGame(newGame) {
-    // const route = useRoute()
     const res = await tallyApi.post('/api/games', newGame)
     AppState.games.push(res.data)
   }
 
-  async getGamesById(id) {
+  async getGamesByHouseholdId(id) {
     const res = await tallyApi.get('/api/households/' + id + '/games')
-    return res.data
+    AppState.games = res.data
   }
 }
 
