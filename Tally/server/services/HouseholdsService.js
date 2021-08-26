@@ -20,7 +20,7 @@ class HouseholdsService {
   */
   async getHouseholdById(id) {
     const household = await dbContext.Households.findById(id)
-    if (!household.length) {
+    if (!household) {
       throw new BadRequest('Invalid Id')
     }
     return household
@@ -32,7 +32,7 @@ class HouseholdsService {
   */
   async getGamesByHouseholdId(id) {
     const games = await dbContext.Games.find({ householdId: id })
-    if (!games.length) {
+    if (!games) {
       throw new BadRequest('Invalid Id')
     }
     return games
@@ -44,7 +44,7 @@ class HouseholdsService {
   */
   async getGameNightsByHouseholdId(id) {
     const gameNights = await dbContext.GameNights.find({ householdId: id })
-    if (!gameNights.length) {
+    if (!gameNights) {
       throw new BadRequest('Invalid Id')
     }
     return gameNights
@@ -56,7 +56,7 @@ class HouseholdsService {
   */
   async getResultsByHouseholdId(id) {
     const results = await dbContext.Results.find({ householdId: id })
-    if (!results.length) {
+    if (!results) {
       throw new BadRequest('Invalid Id')
     }
     return results
@@ -69,7 +69,7 @@ class HouseholdsService {
    */
   async editHousehold(id, body) {
     const household = await this.getHouseholdById(id)
-    if (!household.length) {
+    if (!household) {
       throw new BadRequest('Invalid Id')
     }
     if (household.ownerAccountId.toString() !== body.ownerAccountId) {

@@ -41,7 +41,7 @@ export default {
         playerAge: props.searchGame.playerAge,
         websiteLink: props.searchGame.websiteLink,
         gameApiId: props.searchGame.gameApiId,
-        householdId: route.params.householdId
+        householdId: route.params.id
 
       }
     })
