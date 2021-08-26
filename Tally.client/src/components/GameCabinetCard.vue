@@ -33,32 +33,31 @@ import { useRoute } from 'vue-router'
 
 export default {
   name: 'GameCabinetCard',
-  // props: {
-  //   games: {
-  //     type: Array,
-  //     required: true
-  //   }
-  // },
+  props: {
+    games: {
+      type: Object,
+      required: true
+    }
+  },
   components: {
     GameCabinetItem
   },
   setup() {
     const route = useRoute()
 
-    onMounted(async() => {
-      try {
-        await gamesService.getGamesByHouseholdId(route.params.id)
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-    })
+    // onMounted(async() => {
+    //   try {
+    //     await gamesService.getGamesByHouseholdId(route.params.id)
+    //   } catch (error) {
+    //     Pop.toast(error, 'error')
+    //   }
+    // })
 
     return {
-      async getGamesById() {
-        await gamesService.getGamesByHouseholdId(route.params.id)
-      },
-      profile: computed(() => AppState.activeProfile),
-      games: computed(() => AppState.games)
+      // async getGamesById() {
+      //   await gamesService.getGamesByHouseholdId(route.params.id)
+      // },
+      profile: computed(() => AppState.activeProfile)
     }
   }
 }
@@ -69,5 +68,8 @@ export default {
   }
   .rowHeight{
   min-height: 40vh;
+}
+h1 {
+  font-size: 32px;
 }
 </style>
