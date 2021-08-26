@@ -1,55 +1,78 @@
 <template>
-  <div class="row m-0 w-100">
-    <div class="col-md-12 p-0">
-      <div class="row m-0 w-100">
-        <div class="col-md-12 p-0">
-          <h1>What Game Did You Play?</h1>
-        </div>
-        <div class="col-md-12 p-0 dropdown">
-          <button class="btn btn-light dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-          >
-            Choose Your Game
+  <div class="modal fade"
+       id="resultsModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modelTitleId"
+       aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            Score Your Game!
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
-          <!-- NOTE This will need to populate the games from the household -->
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
         </div>
-        <div class="col-md-12 p-0">
-          <h1>Who Played?</h1>
+        <div class="modal-body text-center">
+          <form @submit.prevent="scoreGame">
+            <h5>What Game Did You Play?</h5>
+            <select v-model="state.result.gameApiId" placeholder="Select Game">
+              <option v-for="g in games" :key="g.gameApiId" :value="g.gameApiId">
+                {{ g.name }}
+              </option>
+            </select>
+            <div class="dropdown w-100 mb-2">
+              <button class="btn w-100 dropdown-toggle border-dark"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+              >
+                Choose Your Game
+              </button>
+              <!-- TODO This will need to populate the games from the household -->
+              <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+            <h5>Who Played?</h5>
+            <div class="dropdown w-100 mb-2">
+              <button class="btn w-100 dropdown-toggle border-dark"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+              >
+                Who Played?
+              </button>
+              <!-- TODO This will need to populate the Profiles from the household -->
+              <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item">Action</a>
+                <a class="dropdown-item">Another action</a>
+                <a class="dropdown-item">Something else here</a>
+              </div>
+            </div>
+            <h5>Who Won?</h5>
+            <div class="row m-0">
+              <!-- NOTE This is going to be where we do a v-for over the players in the Household. We just need the data before we can do it.  -->
+              <!-- <PlayerCard v-for="p in players" :key="p.id" :player="p" /> -->
+            </div>
+          </form>
         </div>
-        <div class="col-md-12 p-0 dropdown">
-          <button class="btn btn-light dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-          >
-            Who Played?
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Close
           </button>
-          <!-- NOTE This will need to populate the Profiles from the household -->
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
-        <div class="col-md-12 p-0">
-          <h1>Who Won?</h1>
-        </div>
-        <div class="col-md-12 p-0">
-          <div class="row m-0">
-            <!-- NOTE This is going to be where we do a v-for over the players in the Household. We just need the data before we can do it.  -->
-            <!-- <PlayerCard v-for="p in players" :key="p.id" :player="p" /> -->
-          </div>
+          <button type="submit" class="btn btn-success">
+            Submit
+          </button>
         </div>
       </div>
     </div>
@@ -57,22 +80,22 @@
 </template>
 
 <script>
-import PlayerCard from './PlayerCard.vue'
+import { reactive } from '@vue/reactivity'
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
-  name: 'Component',
   setup() {
-    return {}
+    const state = reactive({
+      result: {}
+    })
+    return {
+      state,
+      games: computed(() => AppState.games)
+    }
   },
   components: {}
 }
 </script>
 
-    PlayerCard<style lang="scss" scoped>
-h1 {
-  font-size: 30px;
-}
-h2 {
-  font-size: 15px;
-  font-style: italic;
-}
+<style lang="scss" scoped>
 </style>

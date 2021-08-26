@@ -3,17 +3,23 @@
     <Navbar />
     <div class="row">
       <div class="col-md-12">
-        <h2 class="text-center bg-dark-pink rounded-top shadow m-0 py-2">
+        <button type="button" class="btn btn-block btn-light shadow my-2" data-toggle="modal" data-target="#resultsModal">
+          <b><p class="m-0">Score Game</p></b>
+        </button>
+      </div>
+      <div class="col-md-12">
+        <h2 class="text-center bg-dark-pink rounded shadow m-0 py-2">
           Players
         </h2>
-        <div class="bg-white rounded-bottom shadow m-0 py-2">
-          <div v-for="p in activeGameNight.activeProfiles" :key="p">
-            <PlayerCard :profile="p" />
+        <div>
+          <div class="d-flex flex-column align-items-center" v-for="p in activeGameNightProfiles" :key="p.id">
+            <PlayerCard :player="p" />
           </div>
         </div>
       </div>
     </div>
   </div>
+  <ResultsModal />
 </template>
 
 <script>
@@ -26,11 +32,13 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
-      await gameNightsService.getGameNightsById(route.params.id)
+      AppState.activeGameNightProfiles = []
+      await gameNightsService.getGameNightById(route.params.id)
     })
     return {
       route,
-      activeGameNight: computed(() => AppState.activeGameNight)
+      activeGameNight: computed(() => AppState.activeGameNight),
+      activeGameNightProfiles: computed(() => AppState.activeGameNightProfiles)
     }
   }
 }
