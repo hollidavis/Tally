@@ -24,11 +24,12 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
 import GameCabinetItem from '../components/GameCabinetItem.vue'
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'GameCabinetCard',
@@ -42,7 +43,20 @@ export default {
     GameCabinetItem
   },
   setup() {
+    const route = useRoute()
+
+    onMounted(async() => {
+      try {
+        await gamesService.getGamesById(route.params.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
+    })
+
     return {
+      async getGamesById() {
+        await gamesService.getGamesById(route.params.id)
+      },
       profile: computed(() => AppState.activeProfile),
       games: computed(() => AppState.games)
     }

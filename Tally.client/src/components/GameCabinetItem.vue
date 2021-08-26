@@ -1,5 +1,5 @@
 <template>
-  <li>{{ game }}</li>
+  <li>{{ game.name }}</li>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-<!-- Modal -->
+  <!-- Modal -->
   <div class="modal fade"
        id="createGameNightModal"
        tabindex="-1"
@@ -29,8 +29,8 @@
                      maxlength="25"
               >
             </div>
-             <div class="form-group w-75 mr-auto">
-                 <label for="startDate">Pick a date for your Game Night</label>
+            <div class="form-group w-75 mr-auto">
+              <label for="startDate">Pick a date for your Game Night</label>
               <input type="date"
                      name="startDate"
                      v-model="state.newGameNight.startDate"
@@ -38,7 +38,7 @@
                      aria-describedby="gameNightHelpId"
                      maxlength="25"
               >
-              <small id="gameNightHelpId" class="text-dark">Is it really a game <em>night<em/> if the sun is still up?</small>
+              <small id="gameNightHelpId" class="text-dark">Is it really a game <em>night<em /> if the sun is still up?</em></small>
             </div>
             <button type="submit" class="btn btn-primary">
               Create Game Night
@@ -55,37 +55,37 @@
   </div>
 </template>
 
-
 <script>
 import Pop from '../utils/Notifier'
 import { reactive } from '@vue/reactivity'
 import { gameNightsService } from '../services/GameNightsService'
+import { useRoute } from 'vue-router'
 
 export default {
-    setup(){
-        const state = reactive({
-            newGameNight: {
-                householdId: route.params.id
-            }
-        })
-        return {
-            state,
-            async createGameNight(){
-                try {
-                    await gameNightsService.createGameNight(state.newGameNight)
-                    state.newGameNight = {
-                        householdId: route.params.id
-                    }
-                } catch (error) {
-                    Pop.toast(error)
-                }
-            }
+  setup() {
+    const route = useRoute()
+    const state = reactive({
+      newGameNight: {
+        householdId: route.params.id
+      }
+    })
+    return {
+      state,
+      async createGameNight() {
+        try {
+          await gameNightsService.createGameNight(state.newGameNight)
+          state.newGameNight = {
+            householdId: route.params.id
+          }
+        } catch (error) {
+          Pop.toast(error)
         }
-    },
-    components:{}
+      }
+    }
+  },
+  components: {}
 }
 </script>
-
 
 <style lang="scss" scoped>
 
