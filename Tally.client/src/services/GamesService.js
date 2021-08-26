@@ -8,11 +8,10 @@ class GamesService {
     AppState.activeSearchGames = res.data
   }
 
-  async addGame(newGame, id) {
+  async addGame(newGame) {
     // const route = useRoute()
     const res = await tallyApi.post('/api/games', newGame)
     AppState.games.push(res.data)
-    this.getGamesById(id)
   }
 
   async getGamesById(id) {

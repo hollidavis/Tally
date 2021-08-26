@@ -49,8 +49,7 @@ export default {
       state,
       async addGame() {
         try {
-          const route = useRoute()
-          await gamesService.addGame(state.newGame, route.params.id)
+          await gamesService.addGame(state.newGame)
         } catch (error) {
           Pop.toast(error)
         }
