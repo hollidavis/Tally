@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="row m-0 w-100 bg-white rowHeight">
-      <div v-for="game in games.games" :key="game.gameApiId">
+      <div v-for="game in games" :key="game.gameApiId">
         <!-- TODO style game cabinet item? Of we want it to be more than a name. Find out who is doing this -->
         <GameCabinetItem :game="game" />
       </div>
