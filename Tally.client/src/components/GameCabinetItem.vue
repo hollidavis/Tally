@@ -1,10 +1,11 @@
 <template>
-  <li>{{ game.name }}</li>
+  <li>{{ game }}</li>
 </template>
 
 <script>
 
 export default {
+  name: 'GameCabinetItem',
   props: {
     game: {
       type: Object,
