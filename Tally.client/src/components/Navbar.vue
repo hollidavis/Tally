@@ -37,6 +37,11 @@
             Household
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link :to="{ name: 'ManageHousehold' , params: {id: account.householdId}}" class="nav-link">
+            Manage Household
+          </router-link>
+        </li>
       </ul>
       <span class="navbar-text">
         <button
