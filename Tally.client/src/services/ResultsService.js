@@ -2,6 +2,11 @@ import { AppState } from '../AppState'
 import { tallyApi } from './AxiosService'
 
 class ResultsService {
+  async createResult(result) {
+    const res = await tallyApi.post('api/results', result)
+    console.log(res.data)
+  }
+
   async getResultsByProfileId(id) {
   // NOTE this will need to be changed to call out to the Tally Api to get results by profile Id
   // This is fake data!!! Will need to do a get games by profile id
