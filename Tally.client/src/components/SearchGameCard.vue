@@ -41,7 +41,7 @@ export default {
         playerAge: props.searchGame.playerAge,
         websiteLink: props.searchGame.websiteLink,
         gameApiId: props.searchGame.gameApiId,
-        householdId: route.params.householdId
+        householdId: route.params.id
 
       }
     })
@@ -49,7 +49,8 @@ export default {
       state,
       async addGame() {
         try {
-          await gamesService.addGame(state.newGame)
+          const route = useRoute()
+          await gamesService.addGame(state.newGame, route.params.id)
         } catch (error) {
           Pop.toast(error)
         }
