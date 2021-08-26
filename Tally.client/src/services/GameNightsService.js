@@ -15,6 +15,7 @@ class GameNightsService {
     AppState.activeGameNightProfiles.push(res.data)
     console.log(res.data)
   }
+
 }
 
 export const gameNightsService = new GameNightsService()
