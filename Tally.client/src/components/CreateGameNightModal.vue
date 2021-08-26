@@ -11,15 +11,15 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            Give us the details of your game night.
+            Give us the details of your game night
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="createGameNight" class="d-flex align-items-start flex-row">
-            <div class="form-group w-75 mr-auto">
+          <form @submit.prevent="createGameNight" class="d-flex align-items-center flex-row">
+            <div class="form-group w-75 mr-auto m-0">
               <input type="text"
                      name="name"
                      v-model="state.newGameNight.name"
@@ -29,19 +29,19 @@
                      maxlength="25"
               >
             </div>
-            <div class="form-group w-75 mr-auto">
-              <label for="startDate">Pick a date for your Game Night</label>
+            <div class="form-group w-75 mr-auto m-0">
+              <label for="startDate" class="m-0">Pick a date for your Game Night</label>
               <input type="date"
                      name="startDate"
                      v-model="state.newGameNight.startDate"
-                     class="form-control"
+                     class="form-control m-0"
                      aria-describedby="gameNightHelpId"
                      maxlength="25"
               >
-              <small id="gameNightHelpId" class="text-dark">Is it really a game <em>night<em /> if the sun is still up?</em></small>
+              <small id="gameNightHelpId" class="text-dark"><em>Is it really a game night if the sun is still up?</em></small>
             </div>
             <button type="submit" class="btn btn-primary">
-              Create Game Night
+              Create
             </button>
           </form>
         </div>

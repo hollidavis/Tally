@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-5 p-0">
+  <div class="col-md-12 p-0">
     <div class="row m-0 w-100 bg-dark-pink py-3">
       <div class="col-md-10 p-0 text-center ">
         <h1>
@@ -47,7 +47,7 @@ export default {
 
     onMounted(async() => {
       try {
-        await gamesService.getGamesById(route.params.id)
+        await gamesService.getGamesByHouseholdId(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
@@ -55,7 +55,7 @@ export default {
 
     return {
       async getGamesById() {
-        await gamesService.getGamesById(route.params.id)
+        await gamesService.getGamesByHouseholdId(route.params.id)
       },
       profile: computed(() => AppState.activeProfile),
       games: computed(() => AppState.games)

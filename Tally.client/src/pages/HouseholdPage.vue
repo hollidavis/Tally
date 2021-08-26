@@ -27,7 +27,7 @@
         </button>
       </div>
       <div class="col-md-3 p-0 d-flex justify-content-center">
-        <button type="button" class="btn btn-light btn-lg" title="New Game Night">
+        <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
           <i class="fas fa-plus text-secondary"></i>
           <b> New Game Night</b>
         </button>
@@ -59,6 +59,7 @@
     </div>
     <SearchGameModal />
   </div>
+  <CreateGameNightModal />
 </template>
 
 <script>
@@ -75,9 +76,9 @@ export default {
     onMounted(async() => {
       try {
         const id = route.params.id
-        await gamesService.getGamesById(id)
+        await gamesService.getGamesByHouseholdId(id)
       } catch (error) {
-
+        Pop.toast(error, 'error')
       }
     })
     return {
