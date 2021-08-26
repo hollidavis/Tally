@@ -17,28 +17,28 @@
 
 <script>
 import Pop from '../utils/Notifier'
-import {computed, onMounted, reactive} from '@vue/runtime-core'
-import {AppState} from '../AppState'
-import {householdsService} from '../services/HouseholdsService'
-import {useRoute} from 'vue-router'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
+import { AppState } from '../AppState'
+import { householdsService } from '../services/HouseholdsService'
+import { useRoute } from 'vue-router'
 import $ from 'jquery'
-import {AuthService} from '../services/AuthService'
+import { AuthService } from '../services/AuthService'
 
 export default {
   name: 'Profile',
   setup() {
     const route = useRoute()
-    onMounted(async()=>{
+    onMounted(async() => {
       try {
         const id = route.params.id
         await householdsService.getHouseholdById(id)
       } catch (error) {
-        
+
       }
     })
     return {
       account: computed(() => AppState.account),
-      myHousehold: computed(()=> AppState.myHousehold)
+      myHousehold: computed(() => AppState.myHousehold)
     }
   }
 }

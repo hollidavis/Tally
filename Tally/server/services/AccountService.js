@@ -141,9 +141,18 @@ class AccountService {
     if (body.accountId !== account.id) {
       throw new Forbidden('This is not your account')
     }
-    const editedAccount = await dbContext.Account.findByIdAndUpdate(body.accountId, body)
-    // { new: true }
+    const editedAccount = await dbContext.Account.findByIdAndUpdate(body.accountId, body, { new: true })
     return editedAccount
   }
+
+  async addHouse(body) {
+    const account = await dbContext.Account.findById(body.id)
+    if (!account) {
+      throw new BadRequest('Invalid Id')
+    }
+    account.householdId = body.householdId
+    await account.update({ _id: body.id, householdId: body.householdId })
+  }
 }
+
 export const accountService = new AccountService()
