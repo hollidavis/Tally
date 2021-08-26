@@ -135,7 +135,7 @@ class AccountService {
    */
   async editProfile(body) {
     const account = await dbContext.Account.findById(body.accountId)
-    if (!account.length) {
+    if (!account) {
       throw new BadRequest('Invalid Id')
     }
     if (body.accountId !== account.id) {

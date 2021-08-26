@@ -31,7 +31,7 @@ export default {
     onMounted(async() => {
       try {
         const id = route.params.id
-        await householdsService.getHouseholdById(id)
+        await householdsService.getMyHouseholdById(id)
       } catch (error) {
 
       }
@@ -45,7 +45,4 @@ export default {
 </script>
 
 <style>
-img {
-  max-width: 100px;
-}
 </style>
