@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid p-0">
+  <div class="container-fluid">
     <Navbar />
     <div class="row d-flex justify-content-around m-0 my-5 w-100">
       <div id="dropdownGuy" class="col-md-3 p-0  d-flex justify-content-center" title="select Household">
