@@ -6,8 +6,8 @@
         <h5 class="card-title">
           {{ profile.name }}
         </h5><img class="rounded-pill" :src="profile.picture" alt="">
-        <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#edit-profile" title="Edit Profile">
-          <i class="">Edit your Profile</i>
+        <button class="btn btn-large btn-primary ml-4" data-toggle="modal" data-target="#edit-profile" title="Edit Profile">
+          <i class="fas fa-edit fa-2x"></i>
         </button>
       </div>
     </div>
