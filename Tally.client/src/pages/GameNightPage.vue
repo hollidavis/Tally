@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <ResultsModal />
+  <ResultsModal :household-id="activeGameNight.householdId" />
 </template>
 
 <script>

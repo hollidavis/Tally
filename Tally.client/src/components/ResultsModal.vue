@@ -17,7 +17,7 @@
           </button>
         </div>
         <div class="modal-body text-center">
-          <form @submit.prevent="scoreGame">
+          <form @submit.prevent="createResult">
             <h5>What Game Did You Play?</h5>
             <select v-model="state.result.gameApiId" placeholder="Select Game">
               <option v-for="g in games" :key="g.gameApiId" :value="g.gameApiId">
@@ -83,14 +83,28 @@
 import { reactive } from '@vue/reactivity'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { resultsService } from '../services/ResultsService'
 export default {
-  setup() {
+  props: {
+    householdId: {
+      type: String,
+      required: true
+    }
+  },
+  setup(props) {
     const state = reactive({
-      result: {}
+      result: {
+        householdId: props.householdId,
+        players: []
+      }
     })
     return {
       state,
-      games: computed(() => AppState.games)
+      games: computed(() => AppState.games),
+      async createResult() {
+        await resultsService.createResult(state.result)
+        state.result = { householdId: props.householdId }
+      }
     }
   },
   components: {}
