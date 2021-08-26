@@ -17,48 +17,25 @@
           </button>
         </div>
         <div class="modal-body text-center">
-          <form @submit.prevent="scoreGame">
+          <form @submit.prevent="createResult">
             <h5>What Game Did You Play?</h5>
-            <select v-model="state.result.gameApiId" placeholder="Select Game">
+            <select v-model="state.result.gameApiId" class="w-100">
+              <option value="">
+                --Select Game--
+              </option>
               <option v-for="g in games" :key="g.gameApiId" :value="g.gameApiId">
                 {{ g.name }}
               </option>
             </select>
-            <div class="dropdown w-100 mb-2">
-              <button class="btn w-100 dropdown-toggle border-dark"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-              >
-                Choose Your Game
-              </button>
-              <!-- TODO This will need to populate the games from the household -->
-              <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
             <h5>Who Played?</h5>
-            <div class="dropdown w-100 mb-2">
-              <button class="btn w-100 dropdown-toggle border-dark"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-              >
-                Who Played?
-              </button>
-              <!-- TODO This will need to populate the Profiles from the household -->
-              <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">Action</a>
-                <a class="dropdown-item">Another action</a>
-                <a class="dropdown-item">Something else here</a>
-              </div>
-            </div>
+            <select v-model="state.result.profileId" class="w-100">
+              <option value="">
+                --Select Player--
+              </option>
+              <option v-for="p in householdProfiles" :key="p.id" :value="p.profile.id">
+                {{ p.profile.name }}
+              </option>
+            </select>
             <h5>Who Won?</h5>
             <div class="row m-0">
               <!-- NOTE This is going to be where we do a v-for over the players in the Household. We just need the data before we can do it.  -->
@@ -81,19 +58,41 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { resultsService } from '../services/ResultsService'
+import { householdProfilesService } from '../services/HouseholdProfilesService'
+import { gamesService } from '../services/GamesService'
 export default {
-  setup() {
+  props: {
+    household: {
+      type: String,
+      required: true
+    }
+  },
+  setup(props) {
     const state = reactive({
-      result: {}
+      result: {
+        householdId: props.household,
+        players: []
+      }
+    })
+    watchEffect(async() => {
+      if (props.household) {
+        await gamesService.getGamesByHouseholdId(props.household)
+        await householdProfilesService.getProfilesByHouseholdId(props.household)
+      }
     })
     return {
       state,
-      games: computed(() => AppState.games)
+      games: computed(() => AppState.games),
+      householdProfiles: computed(() => AppState.householdProfiles),
+      async createResult() {
+        await resultsService.createResult(state.result)
+        state.result = { householdId: props.householdId }
+      }
     }
-  },
-  components: {}
+  }
 }
 </script>
 
