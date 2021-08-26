@@ -17,6 +17,8 @@
 import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
 import { reactive } from '@vue/reactivity'
+import { useRoute } from 'vue-router'
+
 export default {
   props: {
     searchGame: {
@@ -25,6 +27,7 @@ export default {
     }
   },
   setup(props) {
+    const route = useRoute()
     const state = reactive({
       newGame: {
         name: props.searchGame.name,
@@ -38,7 +41,7 @@ export default {
         playerAge: props.searchGame.playerAge,
         websiteLink: props.searchGame.websiteLink,
         gameApiId: props.searchGame.gameApiId,
-        householdId: '6123c8533d312c21a006ff8d'
+        householdId: route.params.householdId
 
       }
     })
