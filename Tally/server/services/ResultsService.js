@@ -7,7 +7,7 @@ class ResultsService {
   */
   async createResult(body) {
     const result = await dbContext.Results.create(body)
-    return await dbContext.Results.find(result.id).populate('profile', 'name picture').populate('game', 'name')
+    return await dbContext.Results.findById(result.id).populate('profile', 'name picture').populate('game', 'name')
   }
 
   /** Gets all result objects in data base. Not currently used but keeping for potential future use

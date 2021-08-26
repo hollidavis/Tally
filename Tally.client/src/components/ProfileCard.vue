@@ -4,14 +4,14 @@
       <img class="w-100 cover-img" :src="profile.coverImg" alt="Card image cap">
     </div>
     
-      <div class="profile-card">
-        <h5 class="">
-          {{ profile.name }}
-        </h5>
+      <div class="profile-card d-flex flex-column align-items-center">
         <img class="profile-pic" :src="profile.picture" alt="">
         <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#update-account" title="Edit Account">
           <i class="fas fa-edit fa-2x"></i>
         </button>
+        <h5 class="text-center">
+          {{ profile.name }}
+        </h5>
     </div>
   </div>
   <UpdateAccountModal/>
@@ -46,10 +46,12 @@ export default {
     width: 200px;
     object-fit: cover;
     border-radius: 60%;
+    object-position: center;
   }
 .cover-img{
   height: 30vh;
   object-fit: cover;
+  object-position: center;
 }
 .profile-card{
   height: 30vh;
