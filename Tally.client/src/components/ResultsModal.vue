@@ -58,11 +58,12 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed, onMounted, watchEffect } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { resultsService } from '../services/ResultsService'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { gamesService } from '../services/GamesService'
+import Pop from '../utils/Notifier'
 export default {
   props: {
     household: {
@@ -78,9 +79,13 @@ export default {
       }
     })
     watchEffect(async() => {
-      if (props.household) {
-        await gamesService.getGamesByHouseholdId(props.household)
-        await householdProfilesService.getProfilesByHouseholdId(props.household)
+      try {
+        if (props.household) {
+          await gamesService.getGamesByHouseholdId(props.household)
+          await householdProfilesService.getProfilesByHouseholdId(props.household)
+        }
+      } catch (error) {
+        Pop.toast(error, 'error')
       }
     })
     return {
