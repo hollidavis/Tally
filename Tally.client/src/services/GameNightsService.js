@@ -20,7 +20,6 @@ class GameNightsService {
     const res = await tallyApi.get('profile/' + id)
     AppState.activeGameNightProfiles.push(res.data)
   }
-
 }
 
 export const gameNightsService = new GameNightsService()
