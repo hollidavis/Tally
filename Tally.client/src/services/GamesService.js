@@ -1,6 +1,5 @@
 import { AppState } from '../AppState'
 import { tallyApi } from './AxiosService'
-import { useRoute } from 'vue-router'
 
 class GamesService {
   async searchGame(search) {

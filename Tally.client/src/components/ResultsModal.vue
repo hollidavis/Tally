@@ -79,8 +79,8 @@ export default {
     })
     watchEffect(async() => {
       if (props.household) {
-        await householdProfilesService.getProfilesByHouseholdId(props.household)
         await gamesService.getGamesByHouseholdId(props.household)
+        await householdProfilesService.getProfilesByHouseholdId(props.household)
       }
     })
     return {
