@@ -6,8 +6,16 @@
         <GameCabinetCard :games="games" />
       </div>
     </div>
+    <SearchGameModal />
   </div>
 </template>
+// TODO move add game button from card to household game cabinet
+// TODO add remove game button only visible from Management page
+// TODO add code respinner
+// TODO add a list of HH members
+// TODO add way to remove HH members
+// TODO display HH name
+// TODO edit HH name
 
 <script>
 import { computed, onMounted } from '@vue/runtime-core'
