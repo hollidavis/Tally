@@ -58,71 +58,6 @@
                      v-model="state.updatedAccount.coverImg"
               >
             </div>
-            <div class="form-group">
-              <label class="pr-2" for="bio">Bio</label>
-              <textarea
-                    rows="5" 
-                    cols="30"
-                     id="bio"
-                     class="form-control"
-                     placeholder="Bio..."
-                     maxlength= "1000"
-                     v-model="state.updatedAccount.bio"
-              />
-            </div>
-             <div class="form-group">
-              <label class="pr-2" for="github">GitHub</label>
-              <input type="text"
-                     id="github"
-                     class="form-control"
-                     placeholder="GitHub..."
-                     maxlength= "25"
-                     v-model="state.updatedAccount.github"
-              >
-            </div>
-             <div class="form-group">
-              <label class="pr-2" for="linkedin">LinkedIn</label>
-              <input type="text"
-                     id="linkedin"
-                     class="form-control"
-                     placeholder="LinkedIn..."
-                     maxlength= "25"
-                     v-model="state.updatedAccount.linkedin"
-              >
-            </div>
-             <div class="form-group">
-              <label class="pr-2" for="resume">Resume</label>
-              <textarea
-                    rows="5" 
-                    cols="30"
-                     id="resume"
-                     class="form-control"
-                     placeholder="Resume..."
-                     maxlength= "5000"
-                     v-model="state.updatedAccount.resume"
-              />
-            </div>
-             <div class="form-group">
-              <label class="pr-2" for="class">Class</label>
-              <input type="text"
-                     id="class"
-                     class="form-control"
-                     placeholder="Class..."
-                     maxlength= "25"
-                     v-model="state.updatedAccount.class"
-              >
-            </div>
-            <div class="form-group">
-              <label class="pr-2" for="class">Graduated?</label>
-              <select name="Graduated" 
-                     id="graduated" 
-                     class="form-control"
-                     placeholder="Graduated?"
-                     v-model="state.updatedAccount.graduated">
-                <option value="true">True</option>
-                <option value="false">False </option>
-              </select>
-            </div>
             <div>
               <button v-if="state.updatedAccount" type="submit" class="btn btn-primary mr-3">
                 Save
@@ -144,7 +79,7 @@ import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
 import Pop from '../utils/Notifier'
 import $ from 'jquery'
-import {usersService} from '../services/UsersService'
+import {accountService} from '../services/AccountService'
 
 export default {
   setup() {
@@ -161,7 +96,7 @@ export default {
       },
       async updateAccount(){
         try {
-          await usersService.updateAccount(state.updatedAccount)
+          await accountService.updateAccount(state.updatedAccount, this.account.id)
           state.updatedAccount = {}
           $('#update-account').modal('hide')
           Pop.toast('Updated Account!', 'success')
