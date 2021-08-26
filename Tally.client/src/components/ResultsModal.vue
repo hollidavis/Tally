@@ -62,6 +62,7 @@ import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { resultsService } from '../services/ResultsService'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
+import { gamesService } from '../services/GamesService'
 export default {
   props: {
     household: {
@@ -79,6 +80,7 @@ export default {
     watchEffect(async() => {
       if (props.household) {
         await householdProfilesService.getProfilesByHouseholdId(props.household)
+        await gamesService.getGamesByHouseholdId(props.household)
       }
     })
     return {

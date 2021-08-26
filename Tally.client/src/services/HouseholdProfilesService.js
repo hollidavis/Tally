@@ -6,6 +6,7 @@ class HouseholdProfilesService {
     const res = await tallyApi.get('api/households/' + id + '/profiles')
     console.log(res.data)
     AppState.householdProfiles = res.data
+    console.log(AppState.games)
   }
 }
 

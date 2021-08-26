@@ -11,7 +11,6 @@ class HouseholdsService {
 
   async getHouseholdById(id) {
     const res = await tallyApi.get('api/households/' + id)
-    console.log(res.data)
     AppState.activeHousehold = res.data
   }
 }
