@@ -18,8 +18,7 @@
               </button>
             </div>
             <div class="col-md-5 m-2">
-              <button type="button" class="btn btn-light btn-block">
-                <!-- TODO Finish end game night function -->
+              <button type="button" class="btn btn-light btn-block" @click="endGameNight">
                 <b><p class="m-0">End Game Night</p></b>
               </button>
             </div>
@@ -47,6 +46,7 @@ import { AppState } from '../AppState'
 import { gameNightsService } from '../services/GameNightsService'
 import { useRoute } from 'vue-router'
 import Pop from '../utils/Notifier'
+import { router } from '../router'
 export default {
   name: 'GameNight',
   setup() {
@@ -66,7 +66,17 @@ export default {
       state,
       activeGameNight: computed(() => AppState.activeGameNight),
       activeGameNightProfiles: computed(() => AppState.activeGameNightProfiles),
-      gameNightHouseholdId: computed(() => AppState.gameNightHouseholdId)
+      gameNightHouseholdId: computed(() => AppState.gameNightHouseholdId),
+      async endGameNight() {
+        try {
+          if (await Pop.confirm()) {
+            await gameNightsService.endGameNight(this.activeGameNight)
+            router.push({ name: 'Household', params: { id: this.activeGameNight.householdId } })
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }
