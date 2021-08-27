@@ -8,22 +8,42 @@ class ResultsService {
   }
 
   async getResultsByProfileId(id) {
-  // NOTE this will need to be changed to call out to the Tally Api to get results by profile Id
-  // This is fake data!!! Will need to do a get games by profile id
-  // We will take the res and run the forEach on it to create the scores object
-    const results = await tallyApi.get('profile/' + id + '/results')
-    console.log(results, 'get results')
-    const scores = []
+    const res = await tallyApi.get('profile/' + id + '/results')
+    const results = res.data
+    console.log(results)
+    const scores = {}
     results.forEach(r => {
       if (!scores[r.gameApiId]) {
-        scores[r.gameApiId] = 0
+        scores[r.gameApiId] = {}
+        scores[r.gameApiId].score = 0
+        scores[r.gameApiId].name = r.game.name
       }
       if (r.win) {
-        scores[r.gameApiId]++
+        scores[r.gameApiId].score++
       }
     })
-    console.log(scores, 'scores')
-    // AppState.gameScores = scores
+    console.log(scores)
+    AppState.scores = scores
+    // console.log(AppState.gameScores)
+  }
+
+  async getResultsByHouseholdId(id) {
+    const res = await tallyApi.get('api/households/' + id + '/results')
+    const results = res.data
+    console.log(results)
+    const scores = {}
+    // results.forEach(r => {
+    //   if (!scores[r.gameApiId]) {
+    //     scores[r.gameApiId] = {}
+    //     scores[r.gameApiId].score = 0
+    //     scores[r.gameApiId].name = r.game.name
+    //   }
+    //   if (r.win) {
+    //     scores[r.gameApiId].score++
+    //   }
+    // })
+    console.log(scores)
+    AppState.scores = scores
     // console.log(AppState.gameScores)
   }
 }
