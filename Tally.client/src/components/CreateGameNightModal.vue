@@ -7,7 +7,7 @@
        aria-labelledby="modelTitleId"
        aria-hidden="true"
   >
-    <div class="modal-dialog bg-warning modal-lg" role="document">
+    <div class="modal-dialog modal-lg " role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
@@ -18,25 +18,23 @@
           </button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="createGameNight" class="d-flex align-items-center flex-row">
-            <div class="form-group w-75 mr-auto m-0">
+          <form @submit.prevent="createGameNight" class=" ">
+            <div class="form-group w-75 mr-auto m-0 my-4">
               <input type="text"
                      name="name"
                      v-model="state.newGameNight.name"
                      class="form-control"
                      placeholder="Name your Game Night..."
                      aria-describedby="gameNightHelpId"
-                     maxlength="25"
               >
             </div>
-            <div class="form-group w-75 mr-auto m-0">
+            <div class="form-group w-75 mr-auto m-0 my-4">
               <label for="startDate" class="m-0">Pick a date for your Game Night</label>
               <input type="date"
                      name="startDate"
                      v-model="state.newGameNight.startDate"
                      class="form-control m-0"
                      aria-describedby="gameNightHelpId"
-                     maxlength="25"
               >
               <small id="gameNightHelpId" class="text-dark"><em>Is it really a game night if the sun is still up?</em></small>
             </div>
