@@ -4,10 +4,8 @@
       <img class="w-100 p-3" :src="game.smallImg" alt="">
     </div>
     <div class="col-md-6 col-6 p-0 d-flex align-items-center">
-      <h6 class="m-0 p-3">
-        <button @click="showGameLeaderboard" class="btn">
-          {{ game.name }}
-        </button>
+      <h6 class="m-0 p-3" type="button" data-toggle="modal" :data-target="'#gameDetails'+game.id" title="showGameDetails">
+        {{ game.name }}
       </h6>
     </div>
     <div class="col-md-3 p-0 col-3 d-flex align-items-center justify-content-center text-break">
