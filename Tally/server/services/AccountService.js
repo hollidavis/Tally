@@ -50,7 +50,7 @@ class AccountService {
    */
   async getResultsByProfileId(id) {
     const results = await dbContext.Results.find({ profileId: id }).populate('game', 'name')
-    if (!results.length) {
+    if (!results) {
       throw new BadRequest('Invalid Id')
     }
     return results
