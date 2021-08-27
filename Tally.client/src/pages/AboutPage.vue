@@ -24,41 +24,111 @@
         <h1 class="text-center bg-dark-pink rounded-top m-0 shadow">
           The Team:
         </h1>
-        <ul class="list-group">
+        <ul class="rounded-bottom p-0">
           <!-- Aaron -->
-          <li class="list-group-item d-flex align-items-center p-2">
-            <img src="http://placehold.it/100x100/" alt="Aaron Peet Picture">
-            <h3 class="m-0 ml-4">
-              Aaron Peet
-            </h3>
+          <li class="list-group-item d-flex p-2">
+            <!-- Photo -->
+            <div>
+              <img class="rounded profile-img" src="../assets/img/teamphotos/Aaron.jpeg" alt="Aaron Peet Picture">
+            </div>
+            <!-- About -->
+            <div class="ml-3">
+              <!-- Name -->
+              <h3>
+                Aaron Peet
+              </h3>
+              <!-- Links-->
+              <a class="pointer text-dark" href="https://github.com/aaronpeet"><p>
+                <span class="fab fa-lg fa-github mr-2"></span>GitHub
+              </p></a>
+              <a class="pointer text-dark" href="https://www.linkedin.com/in/aaron-peet/"><p class="m-0">
+                <span class="fab fa-lg fa-linkedin mr-2"></span>LinkedIn
+              </p></a>
+            </div>
           </li>
           <!-- Amanda -->
-          <li class="list-group-item d-flex align-items-center p-2">
-            <img src="http://placehold.it/100x100/" alt="Amanda Rice Picture">
-            <h3 class="m-0 ml-4">
-              Amanda Rice
-            </h3>
+          <li class="list-group-item d-flex p-2">
+            <!-- Photo -->
+            <div>
+              <img class="rounded profile-img" src="../assets/img/teamphotos/Amanda.jpg" alt="Amanda Rice Picture">
+            </div>
+            <!-- About -->
+            <div class="ml-3">
+              <!-- Name -->
+              <h3>
+                Amanda Rice
+              </h3>
+              <!-- Links-->
+              <a class="pointer text-dark" href="https://github.com/amanda-rice"><p>
+                <span class="fab fa-lg fa-github mr-2"></span>GitHub
+              </p></a>
+              <a class="pointer text-dark" href="https://www.linkedin.com/in/amanda--rice/"><p class="m-0">
+                <span class="fab fa-lg fa-linkedin mr-2"></span>LinkedIn
+              </p></a>
+            </div>
           </li>
           <!-- Holli -->
-          <li class="list-group-item d-flex align-items-center p-2">
-            <img src="http://placehold.it/100x100/" alt="Holli Davis Picture">
-            <h3 class="m-0 ml-4">
-              Holli Davis
-            </h3>
+          <li class="list-group-item d-flex p-2">
+            <!-- Photo -->
+            <div>
+              <img class="rounded profile-img" src="../assets/img/teamphotos/Holli.jpg" alt="Veronica Blake Picture">
+            </div>
+            <!-- About -->
+            <div class="ml-3">
+              <!-- Name -->
+              <h3>
+                Veronica Blake
+              </h3>
+              <!-- Links-->
+              <a class="pointer text-dark" href="https://github.com/hollidavis"><p>
+                <span class="fab fa-lg fa-github mr-2"></span>GitHub
+              </p></a>
+              <a class="pointer text-dark" href="https://www.linkedin.com/in/holli-davis/"><p class="m-0">
+                <span class="fab fa-lg fa-linkedin mr-2"></span>LinkedIn
+              </p></a>
+            </div>
           </li>
-          <!-- Tim -->
-          <li class="list-group-item d-flex align-items-center p-2">
-            <img src="http://placehold.it/100x100/" alt="Timothy Kimble Picture">
-            <h3 class="m-0 ml-4">
-              Timothy Kimble
-            </h3>
+          <!-- Timothy -->
+          <li class="list-group-item d-flex p-2">
+            <!-- Photo -->
+            <div>
+              <img class="rounded profile-img" src="../assets/img/teamphotos/Timothy.png" alt="Timothy Kimble Picture">
+            </div>
+            <!-- About -->
+            <div class="ml-3">
+              <!-- Name -->
+              <h3>
+                Timothy Kimble
+              </h3>
+              <!-- Links-->
+              <a class="pointer text-dark" href="https://github.com/TimothyKimble"><p>
+                <span class="fab fa-lg fa-github mr-2"></span>GitHub
+              </p></a>
+              <a class="pointer text-dark" href="https://www.linkedin.com/in/timothykimble/"><p class="m-0">
+                <span class="fab fa-lg fa-linkedin mr-2"></span>LinkedIn
+              </p></a>
+            </div>
           </li>
           <!-- Veronica -->
-          <li class="list-group-item d-flex align-items-center p-2">
-            <img src="http://placehold.it/100x100/" alt="Veronica Blake Picture">
-            <h3 class="m-0 ml-4">
-              Veronica Blake
-            </h3>
+          <li class="list-group-item d-flex p-2">
+            <!-- Photo -->
+            <div>
+              <img class="rounded profile-img" src="../assets/img/teamphotos/Veronica.jpg" alt="Veronica Blake Picture">
+            </div>
+            <!-- About -->
+            <div class="ml-3">
+              <!-- Name -->
+              <h3>
+                Veronica Blake
+              </h3>
+              <!-- Links-->
+              <a class="pointer text-dark" href="https://github.com/VeronicaBlake"><p>
+                <span class="fab fa-lg fa-github mr-2"></span>GitHub
+              </p></a>
+              <a class="pointer text-dark" href="https://www.linkedin.com/in/veronica-blake-noyce/"><p class="m-0">
+                <span class="fab fa-lg fa-linkedin mr-2"></span>LinkedIn
+              </p></a>
+            </div>
           </li>
         </ul>
       </div>
@@ -76,4 +146,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.profile-img{
+  height: 15vh;
+  width: 15vh;
+  object-fit: cover;
+  object-position: center;
+}
 </style>
