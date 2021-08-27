@@ -14,5 +14,6 @@ export const AppState = reactive({
   activeGameNight: {},
   activeGameNightProfiles: [],
   gameNightHouseholdId: '',
-  householdProfiles: []
+  householdProfiles: [],
+  scores: {}
 })
