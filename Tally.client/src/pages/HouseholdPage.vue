@@ -53,7 +53,7 @@
           <div class="col-md-12 p-0 text-center ">
             <h1>Leaderboard</h1>
           </div>
-          <div class="col-md-10 p-0 text-center ">
+          <div class="col-md-12 p-0 d-flex align-items-center justify-content-center flex-column">
             <select name="" id="">
               <option value="">
                 Select Game
@@ -62,8 +62,6 @@
                 {{ g.name }}
               </option>
             </select>
-          </div>
-          <div class="col-md-2 p-0 text-center my-1">
             <button class="btn btn-light">
               Find
             </button>
