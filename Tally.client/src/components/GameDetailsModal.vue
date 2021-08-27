@@ -1,7 +1,8 @@
 <template>
   <!-- Modal -->
   <div class="modal fade"
-       id="gameDetails"
+       :id="'gameDetails'
+         +game.id"
        tabindex="-1"
        role="dialog"
        aria-labelledby="modelTitleId"
@@ -19,13 +20,12 @@
         </div>
         <div class="modal-body">
           <div class="p-3 bg-light rounded shadow my-3 d-flex align-items-center">
-            <img class="thumb-url"
+            <img class="w-100"
                  :src="game.largeImg"
                  :alt="game.name"
             >
-            <h3 class="ml-3 mr-auto m-0">
-              {{ game.description }}
-            </h3>
+            <div :id="'description' + game.id">
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { onMounted } from '@vue/runtime-core'
 
 export default {
   props: {
@@ -47,7 +48,8 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    onMounted(() => { document.getElementById('description' + props.game.id).innerHTML = props.game.description })
     return {}
   },
   components: {}
@@ -55,5 +57,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.modalImg{
+  max-height: 300px;
+  max-width: 300px;
+}
 </style>

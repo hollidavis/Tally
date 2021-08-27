@@ -1,11 +1,18 @@
 <template>
-  <div class="col-11 rounded-top bg-primary mt-3 shadow">
+  <div class="col-12 rounded-top bg-primary mt-3 shadow">
     <h1>Personal Leaderboard</h1>
   </div>
-  <div class="col-11 bg-light shadow">
-    <ul v-for="g in gameScores" :key="g.id">
-      <LeaderboardItem :score="g" />
-    </ul>
+  <div class="col-12 bg-light shadow p-4">
+      <div class="d-flex justify-content-between ">
+        <h3>Game</h3>
+        <h3>Wins</h3>
+      </div>
+    <div class="ml-0" v-for="g in gameScores">
+      <div class="d-flex justify-content-between ">
+        <h5>{{g.name}}</h5>
+        <h5>{{g.score}}</h5>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,7 +35,7 @@ export default {
     })
     return {
       profile: computed(() => AppState.activeProfile),
-      gameScores: computed(() => AppState.gameScores)
+      gameScores: computed(() => AppState.scores)
     }
   }
 }

@@ -18,35 +18,41 @@
           </button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="createGameNight" class=" ">
-            <div class="form-group w-75 mr-auto m-0 my-4">
+          <form @submit.prevent="createGameNight">
+            <div class="form-group w-100">
+              <label for="name"><b>Name</b></label>
               <input type="text"
                      name="name"
+                     id="name"
                      v-model="state.newGameNight.name"
                      class="form-control"
                      placeholder="Name your Game Night..."
-                     aria-describedby="gameNightHelpId"
+                     aria-describedby="nameHelpText"
+                     required
               >
+              <small id="nameHelpText" class="text-muted">Input Game Night Name</small>
             </div>
-            <div class="form-group w-75 mr-auto m-0 my-4">
-              <label for="startDate" class="m-0">Pick a date for your Game Night</label>
+            <div class="form-group w-100">
+              <label for="startDate"><b>Start Date</b></label>
               <input type="date"
                      name="startDate"
+                     id="startDate"
                      v-model="state.newGameNight.startDate"
-                     class="form-control m-0"
-                     aria-describedby="gameNightHelpId"
+                     class="form-control"
+                     aria-describedby="startDateHelpText"
+                     required
               >
-              <small id="gameNightHelpId" class="text-dark"><em>Is it really a game night if the sun is still up?</em></small>
+              <small id="startDateHelpText" class="text-muted">Input Game Night Start Date</small>
             </div>
-            <button type="submit" class="btn btn-primary">
-              Create
-            </button>
+            <div class="modal-footer p-0 pt-3">
+              <button type="submit" class="btn btn-success">
+                Submit
+              </button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+            </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
         </div>
       </div>
     </div>
@@ -58,7 +64,7 @@ import Pop from '../utils/Notifier'
 import { reactive } from '@vue/reactivity'
 import { gameNightsService } from '../services/GameNightsService'
 import { useRoute } from 'vue-router'
-
+import $ from 'jquery'
 export default {
   setup() {
     const route = useRoute()
@@ -75,6 +81,7 @@ export default {
           state.newGameNight = {
             householdId: route.params.id
           }
+          $('#createGameNightModal').modal('hide')
         } catch (error) {
           Pop.toast(error)
         }
