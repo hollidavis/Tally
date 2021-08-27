@@ -49,13 +49,27 @@
     </div>
     <div class="row m-0 my-3 w-100 d-flex justify-content-around mt-4">
       <div class="col-md-5 p-0 my-5">
-        <div class="row m-0 w-100 bg-dark-pink py-3">
+        <div class="row m-0 w-100 bg-dark-pink py-3 d-flex justify-content-around">
           <div class="col-md-12 p-0 text-center ">
             <h1>Leaderboard</h1>
           </div>
+          <div class="col-md-10 p-0 text-center ">
+            <select name="" id="">
+              <option value="">
+                Select Game
+              </option>
+              <option v-for="g in games" :key="g.gameApiId" :value="g.gameApiId">
+                {{ g.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2 p-0 text-center my-1">
+            <button class="btn btn-light">
+              Find
+            </button>
+          </div>
         </div>
         <div class="row m-0 w-100 bg-white rowHeight">
-          <!-- <GameDetailsCard /> -->
         </div>
       </div>
 
