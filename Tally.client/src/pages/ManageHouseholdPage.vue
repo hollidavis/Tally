@@ -17,11 +17,25 @@
     <div id="game-cabinet" class="row m-0 d-flex justify-content-between">
       <div class="col-md-6">
         <div class="row m-0 w-100 bg-dark-pink d-flex justify-content-center mb-3 py-3">
-          <h2>
-            Members
-          </h2>
-          <div class="col-md-10 bg-light rounded p-0 text-center ">
-            <h3>Access Code Here</h3><i class="fas fa-redo-alt hoverSpin text-primary"></i>
+          <div class="col-md-12 d-flex justify-content-center">
+            <h2>
+              Access Code
+            </h2>
+          </div>
+          <div class="col-12">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-8 bg-light rounded p-0 pt-2 text-center ">
+                <h3>Access Code Here</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-10 p-0 text-center mt-2">
+            <button class="btn btn-primary">
+              <p class="m-0 p-0">
+                Respin Access Code
+                <i class="fas fa-redo-alt hoverSpin text-light"></i>
+              </p>
+            </button>
           </div>
         </div>
         <div class="row m-0 w-100 bg-dark-pink d-flex justify-content-center py-3">
@@ -31,17 +45,22 @@
             </h2>
           </div>
         </div>
-        <div class="row m-0 w-100 bg-white rowHeight">
+        <div class="row m-0 w-100 bg-white rowHeight mb-3">
           <!-- <div v-for="game in games" :key="game.gameApiId">
           TODO style a profile card component/get one, v-for over for members in the household
          </div> -->
         </div>
       </div>
       <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-12"></div>
-        </div>
-        <div class="row">
+        <div class="row m-0 w-100">
+          <div class="col-md-12">
+            <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#searchGameModal" title="Add Game to Cabinet">
+              <p class="m-0 p-0">
+                <i class="fas fa-plus fa-md"></i>
+                Add Game
+              </p>
+            </button>
+          </div>
           <div class="col-md-12 mt-3">
             <GameCabinetCard :games="games" />
           </div>
@@ -80,7 +99,12 @@ export default {
     })
     return {
       account: computed(() => AppState.account),
-      myHousehold: computed(() => AppState.myHousehold)
+      myHousehold: computed(() => AppState.myHousehold),
+      async getGamesById() {
+        await gamesService.getGamesByHouseholdId(route.params.id)
+      },
+      profile: computed(() => AppState.activeProfile),
+      games: computed(() => AppState.games)
     }
   }
 }
