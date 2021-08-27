@@ -28,8 +28,7 @@ export default {
     const route = useRoute()
     onMounted(async() => {
       try {
-        // await resultsService.getResultsByProfileId(route.params.id)
-        await resultsService.getResultsByHouseholdId('6126f12ee6eb456384a83a15', '4bhIO7ErEG')
+        await resultsService.getResultsByProfileId(route.params.id)
       } catch (error) {
         Pop.toast(error)
       }

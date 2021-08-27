@@ -7,25 +7,25 @@ class ResultsService {
     console.log(res.data)
   }
 
-  // async getResultsByProfileId(id) {
-  //   const res = await tallyApi.get('profile/' + id + '/results')
-  //   const results = res.data
-  //   console.log(results)
-  //   const scores = {}
-  //   results.forEach(r => {
-  //     if (!scores[r.gameApiId]) {
-  //       scores[r.gameApiId] = {}
-  //       scores[r.gameApiId].score = 0
-  //       scores[r.gameApiId].name = r.game.name
-  //     }
-  //     if (r.win) {
-  //       scores[r.gameApiId].score++
-  //     }
-  //   })
-  //   console.log(scores)
-  //   AppState.scores = scores
-  //   // console.log(AppState.gameScores)
-  // }
+  async getResultsByProfileId(id) {
+    const res = await tallyApi.get('profile/' + id + '/results')
+    const results = res.data
+    console.log(results)
+    const scores = {}
+    results.forEach(r => {
+      if (!scores[r.gameApiId]) {
+        scores[r.gameApiId] = {}
+        scores[r.gameApiId].score = 0
+        scores[r.gameApiId].name = r.game.name
+      }
+      if (r.win) {
+        scores[r.gameApiId].score++
+      }
+    })
+    console.log(scores)
+    AppState.scores = scores
+    // console.log(AppState.gameScores)
+  }
 
   async getResultsByHouseholdId(householdId, gameId) {
     const res = await tallyApi.get('api/households/' + householdId + '/results')
