@@ -38,17 +38,13 @@
             </button>
           </div>
         </div>
-        <div class="row m-0 w-100 bg-dark-pink d-flex justify-content-center py-3">
-          <div class="col-md-10 p-0 text-center ">
-            <h2>
-              Members
-            </h2>
+        <div class="row m-0 p-0">
+          <div class="col-md-12 m-0 p-0"
+               v-for="m in members"
+               :key="m.id"
+          >
+            <HouseholdMembersCard :member="m" />
           </div>
-        </div>
-        <div class="row m-0 w-100 bg-white rowHeight mb-3">
-          <!-- <div v-for="game in games" :key="game.gameApiId">
-          TODO style a profile card component/get one, v-for over for members in the household
-         </div> -->
         </div>
       </div>
       <div class="col-md-6">
@@ -83,7 +79,10 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { householdsService } from '../services/HouseholdsService'
 import { gamesService } from '../services/GamesService'
+import Pop from '../utils/Notifier'
 import { useRoute } from 'vue-router'
+// import { profilesService } from '../services/ProfilesService'
+import { householdProfilesService } from '../services/HouseholdProfilesService'
 export default {
   name: 'ManageHouseholdPage',
   setup() {
@@ -93,18 +92,25 @@ export default {
         const id = route.params.id
         await householdsService.getHouseholdById(id)
         await gamesService.getGamesById(id)
+        await householdProfilesService.getProfilesByHouseholdId(id)
       } catch (error) {
 
+      }
+      try {
+        await gamesService.getGamesByHouseholdId(route.params.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
       }
     })
     return {
       account: computed(() => AppState.account),
       myHousehold: computed(() => AppState.myHousehold),
+      profile: computed(() => AppState.activeProfile),
+      games: computed(() => AppState.games),
+      members: computed(() => AppState.householdProfiles),
       async getGamesById() {
         await gamesService.getGamesByHouseholdId(route.params.id)
-      },
-      profile: computed(() => AppState.activeProfile),
-      games: computed(() => AppState.games)
+      }
     }
   }
 }
