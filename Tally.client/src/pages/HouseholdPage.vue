@@ -20,7 +20,12 @@
         </div>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button type="button" class="btn btn-light btn-lg" title="Join Household">
+        <button type="button"
+                class="btn btn-light btn-lg"
+                data-toggle="modal"
+                title="joinHouseHold"
+                data-target="#joinHouseHoldModal"
+        >
           <i class="fas fa-plus text-secondary"></i> <b>Join Household</b>
         </button>
       </div>
@@ -60,9 +65,10 @@
         </div>
       </div>
     </div>
-    <SearchGameModal />
   </div>
+  <SearchGameModal />
   <CreateGameNightModal />
+  <JoinHouseholdModal />
 </template>
 
 <script>

@@ -6,6 +6,12 @@ class HouseholdProfilesService {
     const res = await tallyApi.get('api/households/' + id + '/profiles')
     AppState.householdProfiles = res.data
   }
+
+  async joinHousehold(newHousehold, id) {
+    debugger
+    const res = await tallyApi.post('api/householdprofiles', newHousehold, id)
+    AppState.householdProfiles = res.data
+  }
 }
 
 export const householdProfilesService = new HouseholdProfilesService()
