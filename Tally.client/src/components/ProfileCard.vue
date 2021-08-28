@@ -4,16 +4,20 @@
       <img class="w-100 cover-img" :src="profile.coverImg" alt="Card image cap">
     </div>
     
-      <div class="profile-card d-flex flex-column align-items-center">
-        <img class="profile-pic" :src="profile.picture" alt="">
-        <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#update-account" title="Edit Account">
-          <i class="fas fa-edit fa-2x"></i>
-        </button>
-        <h5 class="text-center">
-          {{ profile.name }}
-        </h5>
+      <div class="profile-card d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <img class="profile-pic mx-3" :src="profile.picture" alt="">
+            <h5 class="text-center text-break text-wrap">
+              {{ profile.name }}
+            </h5>
+          </div>
+          <div class="d-flex align-items-end mx-3">
+            <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#update-account" title="Edit Account">
+              <i class="fas fa-edit fa"></i>
+            </button>
+          </div>
+      </div>
     </div>
-  </div>
   <UpdateAccountModal/>
 </template>
 
@@ -29,7 +33,7 @@ export default {
     const route = useRoute()
     onMounted(async() => {
       try {
-        await profilesService.getProfileById(route.params.id)
+        AppState.activeProfile = await profilesService.getProfileById(route.params.id)
       } catch (error) {
         Pop.toast(error)
       }
@@ -42,18 +46,18 @@ export default {
 </script>
 <style>
 .profile-pic{
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
     object-fit: cover;
     border-radius: 60%;
     object-position: center;
   }
 .cover-img{
-  height: 30vh;
+  height: 20vh;
   object-fit: cover;
   object-position: center;
 }
 .profile-card{
-  height: 30vh;
+  height: 20vh;
 }
 </style>
