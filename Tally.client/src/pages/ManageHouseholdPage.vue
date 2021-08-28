@@ -100,18 +100,20 @@ export default {
       } catch (error) {
         Pop.toast(error, 'error')
       }
-      try {
-        await householdsService.respinAccessKey(route.params.id)
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
     })
     return {
       account: computed(() => AppState.account),
       household: computed(() => AppState.activeHousehold),
       profile: computed(() => AppState.activeProfile),
       games: computed(() => AppState.games),
-      members: computed(() => AppState.householdProfiles)
+      members: computed(() => AppState.householdProfiles),
+      async respinAccessKey() {
+        try {
+          await householdsService.respinAccessKey(route.params.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }
