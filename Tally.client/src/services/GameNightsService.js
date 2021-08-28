@@ -30,6 +30,13 @@ class GameNightsService {
     const res = await tallyApi.get('profile/' + id)
     AppState.activeGameNightProfiles.push(res.data)
   }
+
+  async joinGameNight(gameNightId, player) {
+    const gameNight = await tallyApi.put('api/gamenights/' + gameNightId, player)
+    console.log(gameNight.data, 'pushing to gamenights')
+    AppState.gameNights.push(gameNight.data)
+    console.log(AppState.gameNights, 'from appstate')
+  }
 }
 
 export const gameNightsService = new GameNightsService()
