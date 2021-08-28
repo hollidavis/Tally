@@ -4,6 +4,7 @@ import { tallyApi } from './AxiosService'
 class ResultsService {
   async createResult(result) {
     await tallyApi.post('api/results', result)
+    console.log('success')
   }
 
   async getResultsByProfileId(id) {
