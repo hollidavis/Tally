@@ -26,6 +26,18 @@ class HouseholdsService {
     return household
   }
 
+  /** Gets household object using provided access key
+   * @param {String} accessKey - the accesskey of the household to be retrieved
+   * @returns found household object
+  */
+  async getHouseholdByAccessKey(accessKey) {
+    const household = await dbContext.Households.findOne({ accessKey: accessKey })
+    if (!household) {
+      throw new BadRequest('Invalid Id')
+    }
+    return household
+  }
+
   /** Gets array of game objects that belong to a specific household
    * @param {String} id - id of the household who's games you're trying to find
    * @returns array of game objects
@@ -55,7 +67,7 @@ class HouseholdsService {
    * @returns array of result objects
   */
   async getResultsByHouseholdId(id) {
-    const results = await dbContext.Results.find({ householdId: id })
+    const results = await dbContext.Results.find({ householdId: id }).populate('profile', 'name picture')
     if (!results) {
       throw new BadRequest('Invalid Id')
     }

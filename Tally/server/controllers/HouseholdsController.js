@@ -10,6 +10,7 @@ export class HouseholdsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id', this.getHouseholdById)
       .get('/:id/games', this.getGamesByHouseholdId)
+      .get('/:accessKey/accesskey', this.getHouseholdByAccessKey)
       .get('/:id/gamenights', this.getGameNightByHouseholdId)
       .get('/:id/results', this.getResultsByHouseholdId)
       .get('/:id/profiles', this.getProfilesByHouseholdId)
@@ -21,6 +22,16 @@ export class HouseholdsController extends BaseController {
   async getHouseholdById(req, res, next) {
     try {
       const household = await householdsService.getHouseholdById(req.params.id)
+      res.send(household)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /** Gets household object using provided accesskey */
+  async getHouseholdByAccessKey(req, res, next) {
+    try {
+      const household = await householdsService.getHouseholdByAccessKey(req.params.accessKey)
       res.send(household)
     } catch (error) {
       next(error)
