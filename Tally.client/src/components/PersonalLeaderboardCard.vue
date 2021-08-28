@@ -21,14 +21,14 @@ import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { useRoute } from 'vue-router'
-import { gamesService } from '../services/GamesService'
+import { resultsService } from '../services/ResultsService'
 
 export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
       try {
-        await gamesService.getResultsByProfileId(route.params.id)
+        await resultsService.getResultsByProfileId(route.params.id)
       } catch (error) {
         Pop.toast(error)
       }
