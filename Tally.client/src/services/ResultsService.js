@@ -3,8 +3,7 @@ import { tallyApi } from './AxiosService'
 
 class ResultsService {
   async createResult(result) {
-    const res = await tallyApi.post('api/results', result)
-    console.log(res.data)
+    await tallyApi.post('api/results', result)
   }
 
   async getResultsByProfileId(id) {
