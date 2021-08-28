@@ -32,7 +32,7 @@
             <button class="btn btn-primary" @click="respinAccessKey">
               <p class="m-0 p-0">
                 Respin Access Code
-                <i class="fas fa-redo-alt hoverSpin text-light"></i>
+                <i id="spinner" class="fas fa-redo-alt hoverSpin text-light"></i>
               </p>
             </button>
           </div>
@@ -110,6 +110,8 @@ export default {
       async respinAccessKey() {
         try {
           await householdsService.respinAccessKey(route.params.id)
+          document.getElementById('spinner').classList.add('spinner')
+          setTimeout(() => { document.getElementById('spinner').classList.remove('spinner') }, 1000)
         } catch (error) {
           Pop.toast(error, 'error')
         }
@@ -123,9 +125,21 @@ export default {
   .rowHeight{
   min-height: 40vh;
 }
-.hoverSpin:hover {
-  cursor: default;
-    transform: rotate(360deg);
-    transition: all 0.3s ease-in-out 0s;
+.spinner{
+  animation-name: rotate;
+animation-duration: 1s;
 }
+@keyframes rotate{
+  from {
+    transform:rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+// .hoverSpin:hover {
+//   cursor: default;
+//     transform: rotate(360deg);
+//     transition: all 0.3s ease-in-out 0s;
+// }
 </style>
