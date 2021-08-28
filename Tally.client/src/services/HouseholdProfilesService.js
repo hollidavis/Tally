@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { tallyApi } from './AxiosService'
+import { householdsService } from './HouseholdsService'
 
 class HouseholdProfilesService {
   async getProfilesByHouseholdId(id) {
@@ -7,10 +8,9 @@ class HouseholdProfilesService {
     AppState.householdProfiles = res.data
   }
 
-  async joinHousehold(newHousehold, id) {
-    debugger
-    const res = await tallyApi.post('api/householdprofiles', newHousehold, id)
-    AppState.householdProfiles = res.data
+  async joinHousehold(newHouseHold) {
+    const res = await tallyApi.post('api/householdprofiles', newHouseHold)
+    return res.data
   }
 }
 

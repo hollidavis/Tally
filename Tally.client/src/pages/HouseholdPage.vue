@@ -42,8 +42,7 @@
           Upcoming Game Nights
         </h2>
         <div class="row m-0 w-100">
-          <!-- TODO make GameNightCard -->
-          <!-- <GamenightCard v-for="g in gamenights" :key="g.id" :gamenight="g" /> -->
+          <GameNightCard v-for="g in gamenights" :key="g.id" :gamenight="g" />
         </div>
       </div>
     </div>
@@ -89,21 +88,30 @@ import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
 import { useRoute } from 'vue-router'
+import { gameNightsService } from '../services/GameNightsService'
 
 export default {
   name: 'Household',
+  props: {
+    households: {
+      type: Object,
+      required: true
+    }
+  },
   setup() {
     const route = useRoute()
     onMounted(async() => {
       try {
         const id = route.params.id
         await gamesService.getGamesByHouseholdId(id)
+        await gameNightsService.getGameNightByHouseholdId(id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
     })
     return {
-      games: computed(() => AppState.games)
+      games: computed(() => AppState.games),
+      gamenights: computed(() => AppState.gameNights)
     }
   }
 }
