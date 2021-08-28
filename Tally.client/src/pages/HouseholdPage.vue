@@ -2,21 +2,12 @@
   <div class="container-fluid">
     <Navbar />
     <div class="row d-flex justify-content-around m-0 my-5 w-100">
-      <div id="dropdownGuy" class="col-md-3 p-0 my-3 d-flex justify-content-center" title="select Household">
-        <div class="dropdown">
-          <button class="btn btn-lg btn-light dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-          >
-            <b>Select Household</b>
-          </button>
-          <!-- TODO write a v-for for each household the profile is associated with -->
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-for="household in households" :key="household.householdId">
-            <ProfileHouseHoldsCard :household="household" />
-          </div>
+      <div class="dropdown">
+        <button class="btn btn-light btn-lg dropbtn">
+          Select Household
+        </button>
+        <div id="myDropdown" class="dropdown-content">
+          <ProfileHouseHoldsCard v-for="h in households" :key="h.id" :household="h" />
         </div>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
@@ -89,6 +80,7 @@ import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
 import { useRoute } from 'vue-router'
 import { gameNightsService } from '../services/GameNightsService'
+import { householdProfilesService } from '../services/HouseholdProfilesService'
 
 export default {
   name: 'Household',
@@ -108,10 +100,16 @@ export default {
       } catch (error) {
         Pop.toast(error, 'error')
       }
+      try {
+        await householdProfilesService.getHouseholdsByProfileId(AppState.account.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
     })
     return {
       games: computed(() => AppState.games),
-      gamenights: computed(() => AppState.gameNights)
+      gamenights: computed(() => AppState.gameNights),
+      households: computed(() => AppState.profileHouseholds)
     }
   }
 }
@@ -124,4 +122,38 @@ export default {
 .gameNightHeight{
   min-height: 30vh;
 }
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>

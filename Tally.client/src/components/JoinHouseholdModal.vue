@@ -52,25 +52,30 @@ import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { logger } from '../utils/Logger'
 import { householdsService } from '../services/HouseholdsService'
+import $ from 'jquery'
 
 export default {
   setup() {
+        accessKey: '',
     const state = reactive({
       newHouseHoldProfile: {
-        accessKey: '',
-        accountId: '',
-        householdId: ''
+        householdId: '',
+        accountId: ''
       }
     })
     return {
       state,
       async joinHousehold() {
         try {
-          state.newHouseHoldProfile.householdId = await householdsService.getHouseholdByAccessKey(state.newHouseHoldProfile.accessKey)
+          const household = await householdsService.getHouseholdByAccessKey(state.newHouseHoldProfile.accessKey)
+          state.newHouseHoldProfile.householdId = household.id
           state.newHouseHoldProfile.accountId = AppState.account.id
           await householdProfilesService.joinHousehold(state.newHouseHoldProfile)
+          $('#joinHouseHoldModal').modal('hide')
+          Pop.toast('You Joined A Household!', 'success')
         } catch (error) {
           Pop.toast(error)
+          $('#joinHouseHoldModal').modal('hide')
           logger.log(error)
         }
       }

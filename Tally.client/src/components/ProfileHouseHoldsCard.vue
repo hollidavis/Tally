@@ -1,6 +1,7 @@
 <template>
-  <router-link :to="{ name: 'Household', params: {id: household.id} }" class="nav-link ">
-    Household
+
+  <router-link :to="{ name: 'Household', params: {id: household.household.id} }" class="nav-link ">
+    <p>{{ household.household.name }}</p>
   </router-link>
 </template>
 
