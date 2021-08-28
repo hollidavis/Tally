@@ -6,10 +6,15 @@
     <h5 class="m-0 text-break">
       {{ member.name }}
     </h5>
+    <i class="fa fa-trash text-danger" v-if="account.id==household.ownerAccountId" @click="deleteMember(account.id)"></i>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { AppState } from '../AppState'
+import Pop from '../utils/Notifier'
+import { householdsService } from '../services/HouseholdsService'
 export default {
   props: {
     member: {
@@ -17,8 +22,17 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     return {
+      account: computed(() => AppState.account),
+      household: computed(() => AppState.activeHousehold),
+      async deleteMember(accountId) {
+        try {
+          await householdsService.deleteMember(props.member.id, accountId)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }

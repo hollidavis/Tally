@@ -22,6 +22,7 @@ class HouseholdProfilesService {
   * @returns successfully deleted message
   */
   async destroyHouseholdProfile(body, userId) {
+    // NOTE will need reformatting, change to findOneAndDelete({ownerAccountId: body.ownerAccountId, householdId: body.householdId})
     const household = await dbContext.Households.findById(body.householdId)
     if (household.ownerAccountId === userId) {
       await dbContext.HouseholdProfiles.findByIdAndDelete(body.id)
