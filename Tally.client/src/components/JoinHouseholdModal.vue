@@ -46,8 +46,6 @@
 <script>
 import Pop from '../utils/Notifier'
 import { reactive } from '@vue/reactivity'
-import { gameNightsService } from '../services/GameNightsService'
-import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { logger } from '../utils/Logger'
@@ -56,10 +54,10 @@ import $ from 'jquery'
 
 export default {
   setup() {
-        accessKey: '',
     const state = reactive({
       newHouseHoldProfile: {
         householdId: '',
+        accessKey: '',
         accountId: ''
       }
     })

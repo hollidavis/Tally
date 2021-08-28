@@ -1,13 +1,13 @@
 <template>
   <div class="container-fluid">
     <Navbar />
-    <div class="row d-flex justify-content-around m-0 my-5 w-100">
+    <div class="row d-flex justify-content-around align-items-center m-0 my-5 w-100">
       <div class="dropdown">
         <button class="btn btn-light btn-lg dropbtn">
-          Select Household
+          <b>Select Household</b>
         </button>
         <div id="myDropdown" class="dropdown-content">
-          <ProfileHouseHoldsCard v-for="h in households" :key="h.id" :household="h" />
+          <ProfileHouseHoldsCard v-for="h in profileHouseholds" :key="h.id" :household="h" />
         </div>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
@@ -23,7 +23,7 @@
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
         <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
           <i class="fas fa-plus text-secondary"></i>
-          <b> New Game Night</b>
+          <b>New Game Night</b>
         </button>
       </div>
     </div>
@@ -84,12 +84,6 @@ import { householdProfilesService } from '../services/HouseholdProfilesService'
 
 export default {
   name: 'Household',
-  props: {
-    households: {
-      type: Object,
-      required: true
-    }
-  },
   setup() {
     const route = useRoute()
     onMounted(async() => {
@@ -109,7 +103,7 @@ export default {
     return {
       games: computed(() => AppState.games),
       gamenights: computed(() => AppState.gameNights),
-      households: computed(() => AppState.profileHouseholds)
+      profileHouseholds: computed(() => AppState.profileHouseholds)
     }
   }
 }
@@ -122,13 +116,6 @@ export default {
 .gameNightHeight{
   min-height: 30vh;
 }
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
 
 .dropdown {
   position: relative;
@@ -139,7 +126,7 @@ export default {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -154,6 +141,4 @@ export default {
 .dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
