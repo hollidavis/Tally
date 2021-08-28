@@ -36,7 +36,8 @@ export class GameNightsController extends BaseController {
   /** Adds a profile id to the game nights activeProfiles array */
   async joinGameNight(req, res, next) {
     try {
-      await gameNightsService.joinGameNight(req.params.id, req.body)
+      const gameNight = await gameNightsService.joinGameNight(req.params.id, req.body)
+      res.send(gameNight)
     } catch (error) {
       next(error)
     }
