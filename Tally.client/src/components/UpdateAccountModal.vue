@@ -1,5 +1,5 @@
 <template>
-   <div class="modal fade"
+  <div class="modal fade"
        id="update-account"
        tabindex="-1"
        role="dialog"
@@ -24,7 +24,7 @@
                      id="name"
                      class="form-control"
                      placeholder="Name..."
-                     maxlength= "30"
+                     maxlength="30"
                      v-model="state.updatedAccount.name"
               >
             </div>
@@ -34,7 +34,7 @@
                      id="email"
                      class="form-control"
                      placeholder="Email..."
-                     maxlength= "50"
+                     maxlength="50"
                      v-model="state.updatedAccount.email"
               >
             </div>
@@ -44,7 +44,7 @@
                      id="picture"
                      class="form-control"
                      placeholder="Add link to profile picture..."
-                     maxlength= "200"
+                     maxlength="200"
                      v-model="state.updatedAccount.picture"
               >
             </div>
@@ -54,7 +54,7 @@
                      id="coverImg"
                      class="form-control"
                      placeholder="Add link for your cover image..."
-                     maxlength= "200"
+                     maxlength="200"
                      v-model="state.updatedAccount.coverImg"
               >
             </div>
@@ -79,7 +79,7 @@ import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
 import Pop from '../utils/Notifier'
 import $ from 'jquery'
-import {accountService} from '../services/AccountService'
+import { accountService } from '../services/AccountService'
 
 export default {
   setup() {
@@ -91,10 +91,10 @@ export default {
       state,
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
-      closeModal(){
-         state.updatedAccount = {}
+      closeModal() {
+        state.updatedAccount = {}
       },
-      async updateAccount(){
+      async updateAccount() {
         try {
           await accountService.updateAccount(state.updatedAccount, this.account.id)
           state.updatedAccount = {}
