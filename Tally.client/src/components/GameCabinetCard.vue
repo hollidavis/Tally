@@ -2,7 +2,7 @@
   <div class="col-md-12 p-0">
     <div class="row m-0 w-100 bg-dark-pink py-3">
       <div class="col-md-12 p-0 text-center ">
-        <h1>
+        <h1 class="pink-text-shadow">
           Household Game Cabinet
         </h1>
       </div>
