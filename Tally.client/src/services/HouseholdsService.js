@@ -17,7 +17,7 @@ class HouseholdsService {
   async getHouseholdByAccessKey(accessKey) {
     const res = await tallyApi.get('api/households/' + accessKey + '/accesskey')
     AppState.activeHousehold = res.data
-    return res.data.id
+    return AppState.activeHousehold
   }
 
   async respinAccessKey(id) {
