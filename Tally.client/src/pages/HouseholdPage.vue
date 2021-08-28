@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
@@ -86,7 +86,7 @@ export default {
   name: 'Household',
   setup() {
     const route = useRoute()
-    onMounted(async() => {
+    watchEffect(async() => {
       try {
         const id = route.params.id
         await gamesService.getGamesByHouseholdId(id)
