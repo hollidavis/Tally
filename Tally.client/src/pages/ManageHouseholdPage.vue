@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="col-md-10 p-0 text-center mt-2">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" @click="respinAccessKey">
               <p class="m-0 p-0">
                 Respin Access Code
                 <i class="fas fa-redo-alt hoverSpin text-light"></i>
@@ -68,7 +68,6 @@
 // TODO functional code respinner
 // TODO display HH members
 // TODO remove hh members
-// TODO edit HH name
 
 <script>
 import { computed, onMounted } from '@vue/runtime-core'
@@ -98,6 +97,11 @@ export default {
       }
       try {
         await gamesService.getGamesByHouseholdId(route.params.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
+      try {
+        await householdsService.respinAccessKey(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
