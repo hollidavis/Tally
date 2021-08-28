@@ -71,6 +71,7 @@ import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { gamesService } from '../services/GamesService'
 import Pop from '../utils/Notifier'
+import $ from 'jquery'
 export default {
   props: {
     household: {
@@ -112,8 +113,15 @@ export default {
         }
       },
       async submitResults() {
-        for (const card of cards.value) {
-          card.submitResult()
+        try {
+          for (const card of cards.value) {
+            card.submitResult()
+          }
+          $('#resultsModal').modal('hide')
+          this.reset()
+          Pop.toast('Results Submitted', 'success')
+        } catch (error) {
+          Pop.toast(error, 'error')
         }
       },
       reset() {
