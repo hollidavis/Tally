@@ -3,22 +3,22 @@
     <div class=" profile-card">
       <img class="w-100 cover-img" :src="profile.coverImg" alt="Card image cap">
     </div>
-    
-      <div class="profile-card d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <img class="profile-pic mx-3" :src="profile.picture" alt="">
-            <h5 class="text-center text-break text-wrap">
-              {{ profile.name }}
-            </h5>
-          </div>
-          <div class="d-flex align-items-end mx-3">
-            <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#update-account" title="Edit Account">
-              <i class="fas fa-edit fa"></i>
-            </button>
-          </div>
+
+    <div class="profile-card d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <img class="profile-pic mx-3" :src="profile.picture" alt="">
+        <h5 class="text-center text-break text-wrap">
+          {{ profile.name }}
+        </h5>
+      </div>
+      <div class="d-flex align-items-end mx-3">
+        <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#update-account" title="Edit Account">
+          <i class="fas fa-edit fa"></i>
+        </button>
       </div>
     </div>
-  <UpdateAccountModal/>
+  </div>
+  <UpdateAccountModal />
 </template>
 
 <script>

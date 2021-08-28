@@ -51,19 +51,24 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { logger } from '../utils/Logger'
+import { householdsService } from '../services/HouseholdsService'
 
 export default {
   setup() {
     const state = reactive({
       newHouseHoldProfile: {
-        accessKey: ''
+        accessKey: '',
+        accountId: '',
+        householdId: ''
       }
     })
     return {
       state,
       async joinHousehold() {
         try {
-          await householdProfilesService.joinHousehold(state.newHouseHoldProfile, AppState.account.id)
+          state.newHouseHoldProfile.householdId = await householdsService.getHouseholdByAccessKey(state.newHouseHoldProfile.accessKey)
+          state.newHouseHoldProfile.accountId = AppState.account.id
+          await householdProfilesService.joinHousehold(state.newHouseHoldProfile)
         } catch (error) {
           Pop.toast(error)
           logger.log(error)

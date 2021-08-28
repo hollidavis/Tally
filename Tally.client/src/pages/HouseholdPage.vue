@@ -92,6 +92,12 @@ import { gameNightsService } from '../services/GameNightsService'
 
 export default {
   name: 'Household',
+  props: {
+    households: {
+      type: Object,
+      required: true
+    }
+  },
   setup() {
     const route = useRoute()
     onMounted(async() => {
