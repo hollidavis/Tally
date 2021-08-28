@@ -7,8 +7,7 @@
           <div class="col-md-8 p-0 text-center pink-text-shadow">
             <h1>
               {{ household.name }}
-              <!-- TODO add a modal onclick to icon to rename household, @submit triggers "updateHouseholdName" function -->
-              <i class="fas fa-edit fa-xs text-primary ml-md-5" title="Rename Household"></i>
+              <i class="fas fa-edit fa-xs text-primary ml-md-5 pl-4" title="Rename Household" data-toggle="modal" data-target="#update-householdName"></i>
             </h1>
           </div>
         </div>
@@ -54,20 +53,21 @@
               </p>
             </button>
           </div>
-          <div class="col-md-12 mt-3">
+          <div class="col-md-12 mt-3 mb-5">
             <GameCabinetCard :games="games" />
           </div>
         </div>
       </div>
     </div>
     <SearchGameModal />
+    <UpdateHouseholdNameModal />
   </div>
 </template>
 
 // TODO add remove game button only visible from Management page
-// TODO add code respinner
-// TODO add a list of HH members
-// TODO add way to remove HH members
+// TODO functional code respinner
+// TODO display HH members
+// TODO remove hh members
 // TODO edit HH name
 
 <script>
