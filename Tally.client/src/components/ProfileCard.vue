@@ -11,7 +11,7 @@
           {{ profile.name }}
         </h5>
       </div>
-      <div class="d-flex align-items-end mx-3">
+      <div v-if="state.profileId === profile.id" class="d-flex align-items-end mx-3">
         <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#update-account" title="Edit Account">
           <i class="fas fa-edit fa"></i>
         </button>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { useRoute } from 'vue-router'
@@ -31,6 +31,9 @@ export default {
   name: 'ProfileCard',
   setup() {
     const route = useRoute()
+    const state = reactive({
+      profileId: route.params.id
+    })
     onMounted(async() => {
       try {
         AppState.activeProfile = await profilesService.getProfileById(route.params.id)
@@ -39,6 +42,7 @@ export default {
       }
     })
     return {
+      state,
       profile: computed(() => AppState.activeProfile)
     }
   }
