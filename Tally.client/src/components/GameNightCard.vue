@@ -3,7 +3,8 @@
     <h3 class="ml-3 mr-auto m-0">
       {{ gamenight.name }}
     </h3>
-    <button type="button" class="btn btn-primary" @click="joinGameNight()">
+    <p>On: {{ gamenight.startDate }}</p>
+    <button type="button" class="btn btn-primary" @click="joinGameNight">
       Join
     </button>
   </div>
@@ -14,6 +15,7 @@ import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { gameNightsService } from '../services/GameNightsService'
 import Pop from '../utils/Notifier'
+import { router } from '../router'
 export default {
   props: {
     gamenight: {
@@ -26,7 +28,8 @@ export default {
       account: computed(() => AppState.account),
       async joinGameNight() {
         try {
-          await gameNightsService.joinGameNight(props.gamenight.id, AppState.account)
+          await gameNightsService.joinGameNight(props.gamenight.householdId, props.gamenight.id, AppState.account)
+          router.push({ name: 'GameNight', params: { id: props.gamenight.id } })
         } catch (error) {
           Pop.toast(error)
         }
