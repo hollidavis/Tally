@@ -7,23 +7,32 @@
     </div>
   </div>
   <div class="row m-0 w-100 bg-white rowHeight mb-3">
-    <div v-for="game in games" :key="game.gameApiId">
-      <HouseholdMemberItem />
+    <div v-for="m in members" :key="m.id">
+      <HouseholdMemberItem :m="members" />
     </div>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { AppState } from '../AppState'
 export default {
   name: 'HouseholdMembersCard',
-  setup() {
-    return {}
+  props: {
+    members: {
+      type: Object,
+      required: true
+    }
   },
   components: {
+  },
+  setup() {
+    return {
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>

@@ -36,15 +36,15 @@ class GameNightsService {
       throw new BadRequest('Invalid Id')
     }
     // Finds all household profiles that include the profileId of the person trying to join the game night
-    const playerHouseholdProfiles = await householdProfilesService.getHouseholdsByProfileId(body.id)
+    const playerHouseholdProfiles = await householdProfilesService.getHouseholdsByProfileId(body._id)
     // Further filters the household profiles to find one that also has the householdId that is the same as the household Id on the game night
-    const found = playerHouseholdProfiles.find(householdProfile => householdProfile.householdId === gameNight.householdId)
+    const found = await playerHouseholdProfiles.find(householdProfile => householdProfile.householdId.toString() === gameNight.householdId.toString())
     // If no household profile is found then functions throws error
     if (!found) {
       throw new Forbidden('You are not a member of this household')
     }
     // If all tests pass then the profile id of the player trying to join is added to the game night. Updated game night is returned to the controller
-    gameNight.activeProfiles.push(body.id)
+    await gameNight.activeProfiles.push(body._id)
     const updatedGameNight = await dbContext.GameNights.findByIdAndUpdate(id, gameNight, { new: true })
     return updatedGameNight
   }
