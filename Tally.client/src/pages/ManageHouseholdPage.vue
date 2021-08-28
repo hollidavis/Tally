@@ -7,7 +7,7 @@
           <div class="col-md-8 p-0 text-center pink-text-shadow">
             <h1>
               {{ household.name }}
-              <i class="fas fa-edit fa-xs text-primary ml-md-5 pl-4" title="Rename Household" data-toggle="modal" data-target="#update-householdName"></i>
+              <i class="fas fa-edit fa-xs text-primary ml-2" title="Rename Household" data-toggle="modal" data-target="#update-householdName"></i>
             </h1>
           </div>
         </div>
@@ -32,14 +32,14 @@
             <button class="btn btn-primary" @click="respinAccessKey">
               <p class="m-0 p-0">
                 Respin Access Code
-                <i class="fas fa-redo-alt hoverSpin text-light"></i>
+                <i id="spinner" class="fas fa-redo-alt hoverSpin text-light"></i>
               </p>
             </button>
           </div>
         </div>
         <div class="row m-0 p-0">
           <div class="col-md-12 m-0 p-0">
-            <HouseholdMembersCard :m="members" />
+            <HouseholdMembersCard />
           </div>
         </div>
       </div>
@@ -65,8 +65,6 @@
 </template>
 
 // TODO add remove game button only visible from Management page
-// TODO functional code respinner
-// TODO display HH members
 // TODO remove hh members
 
 <script>
@@ -100,18 +98,22 @@ export default {
       } catch (error) {
         Pop.toast(error, 'error')
       }
-      try {
-        await householdsService.respinAccessKey(route.params.id)
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
     })
     return {
       account: computed(() => AppState.account),
       household: computed(() => AppState.activeHousehold),
       profile: computed(() => AppState.activeProfile),
       games: computed(() => AppState.games),
-      members: computed(() => AppState.householdProfiles)
+      members: computed(() => AppState.householdProfiles),
+      async respinAccessKey() {
+        try {
+          await householdsService.respinAccessKey(route.params.id)
+          document.getElementById('spinner').classList.add('spinner')
+          setTimeout(() => { document.getElementById('spinner').classList.remove('spinner') }, 1000)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }
@@ -121,9 +123,21 @@ export default {
   .rowHeight{
   min-height: 40vh;
 }
-.hoverSpin:hover {
-  cursor: default;
-    transform: rotate(360deg);
-    transition: all 0.3s ease-in-out 0s;
+.spinner{
+  animation-name: rotate;
+animation-duration: 1s;
 }
+@keyframes rotate{
+  from {
+    transform:rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+// .hoverSpin:hover {
+//   cursor: default;
+//     transform: rotate(360deg);
+//     transition: all 0.3s ease-in-out 0s;
+// }
 </style>

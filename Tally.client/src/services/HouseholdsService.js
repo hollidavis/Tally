@@ -25,6 +25,15 @@ class HouseholdsService {
     AppState.activeHousehold.accessKey = res.data
     return res.data.accessKey
   }
-}
 
+  async updateHouseholdName(body, id) {
+    const res = await tallyApi.put('api/households/' + id, body)
+    AppState.activeHousehold = res.data
+    console.log('don worry BOUT IT')
+  }
+
+  async deleteMember(body, accountId) {
+    const res = await tallyApi.delete('api/')
+  }
+}
 export const householdsService = new HouseholdsService()

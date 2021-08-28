@@ -50,6 +50,7 @@ export default {
       async addGame() {
         try {
           await gamesService.addGame(state.newGame)
+          Pop.toast('Game Added!', 'success')
         } catch (error) {
           Pop.toast(error)
         }
