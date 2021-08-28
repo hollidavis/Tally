@@ -51,21 +51,34 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { logger } from '../utils/Logger'
+import { householdsService } from '../services/HouseholdsService'
+import $ from 'jquery'
 
 export default {
   setup() {
     const state = reactive({
       newHouseHoldProfile: {
-        accessKey: ''
+        accessKey: '',
+        householdId: '',
+        accountId: ''
       }
     })
     return {
       state,
       async joinHousehold() {
         try {
-          await householdProfilesService.joinHousehold(state.newHouseHoldProfile, AppState.account.id)
+          const household = await householdsService.getHouseholdByAccessKey(state.newHouseHoldProfile.accessKey)
+          state.newHouseHoldProfile.householdId = household.id
+          logger.log(state.newHouseHoldProfile.accessKey)
+          logger.log(state.newHouseHoldProfile.householdId)
+          state.newHouseHoldProfile.accountId = AppState.account.id
+          logger.log(state.newHouseHoldProfile.accountId)
+          await householdProfilesService.joinHousehold(state.newHouseHoldProfile)
+          $('#joinHouseHoldModal').modal('hide')
+          Pop.toast('You Joined A Household!', 'success')
         } catch (error) {
           Pop.toast(error)
+          $('#joinHouseHoldModal').modal('hide')
           logger.log(error)
         }
       }

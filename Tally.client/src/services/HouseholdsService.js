@@ -13,6 +13,12 @@ class HouseholdsService {
     const res = await tallyApi.get('api/households/' + id)
     AppState.activeHousehold = res.data
   }
+
+  async getHouseholdByAccessKey(accessKey) {
+    const res = await tallyApi.get('api/households/' + accessKey + '/accessKey')
+    AppState.activeHousehold = res.data
+    return AppState.activeHousehold
+  }
 }
 
 export const householdsService = new HouseholdsService()
