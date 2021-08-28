@@ -15,6 +15,7 @@ export class HouseholdsController extends BaseController {
       .get('/:id/results', this.getResultsByHouseholdId)
       .get('/:id/profiles', this.getProfilesByHouseholdId)
       .put('/:id', this.editHousehold)
+      .put('/:id/accessKey', this.respinAccessKey)
       // .post('', this.createHousehold)
   }
 
@@ -84,6 +85,15 @@ export class HouseholdsController extends BaseController {
       req.body.ownerAccountId = req.userInfo.id
       const household = await householdsService.editHousehold(req.params.id, req.body)
       res.send(household)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async respinAccessKey(req, res, next) {
+    try {
+      const accessKey = await householdsService.createAccessKey()
+      res.send(accessKey)
     } catch (error) {
       next(error)
     }

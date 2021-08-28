@@ -84,6 +84,12 @@ import { householdProfilesService } from '../services/HouseholdProfilesService'
 
 export default {
   name: 'Household',
+  props: {
+    households: {
+      type: Object,
+      required: true
+    }
+  },
   setup() {
     const route = useRoute()
     onMounted(async() => {

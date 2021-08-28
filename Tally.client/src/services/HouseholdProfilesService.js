@@ -1,6 +1,7 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { tallyApi } from './AxiosService'
+import { householdsService } from './HouseholdsService'
 
 class HouseholdProfilesService {
   async getProfilesByHouseholdId(id) {
@@ -16,8 +17,8 @@ class HouseholdProfilesService {
   async joinHousehold(newHousehold) {
     const res = await tallyApi.post('api/householdprofiles', newHousehold)
     AppState.householdProfiles = res.data
-    logger.log(res.data)
     return AppState.householdProfiles
+
   }
 }
 

@@ -56,9 +56,9 @@ import $ from 'jquery'
 
 export default {
   setup() {
+        accessKey: '',
     const state = reactive({
       newHouseHoldProfile: {
-        accessKey: '',
         householdId: '',
         accountId: ''
       }
@@ -69,10 +69,7 @@ export default {
         try {
           const household = await householdsService.getHouseholdByAccessKey(state.newHouseHoldProfile.accessKey)
           state.newHouseHoldProfile.householdId = household.id
-          logger.log(state.newHouseHoldProfile.accessKey)
-          logger.log(state.newHouseHoldProfile.householdId)
           state.newHouseHoldProfile.accountId = AppState.account.id
-          logger.log(state.newHouseHoldProfile.accountId)
           await householdProfilesService.joinHousehold(state.newHouseHoldProfile)
           $('#joinHouseHoldModal').modal('hide')
           Pop.toast('You Joined A Household!', 'success')

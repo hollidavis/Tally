@@ -2,14 +2,13 @@
   <div class="col-md-12 p-0">
     <div class="row m-0 w-100 bg-dark-pink py-3">
       <div class="col-md-12 p-0 text-center ">
-        <h1>
+        <h1 class="pink-text-shadow">
           Household Game Cabinet
         </h1>
       </div>
     </div>
     <div class="row m-0 w-100 bg-white rowHeight">
       <div v-for="game in games" :key="game.gameApiId" class="col-md-12 p-0">
-        <!-- TODO style game cabinet item? Of we want it to be more than a name. Find out who is doing this -->
         <GameCabinetItem :game="game" />
       </div>
     </div>

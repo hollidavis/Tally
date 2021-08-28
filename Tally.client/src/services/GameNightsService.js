@@ -5,6 +5,7 @@ class GameNightsService {
   async createGameNight(newGameNight) {
     const res = await tallyApi.post('api/gamenights', newGameNight)
     AppState.gameNights.push(res.data)
+    console.log(res.data)
   }
 
   async endGameNight(gamenight) {
@@ -31,11 +32,9 @@ class GameNightsService {
     AppState.activeGameNightProfiles.push(res.data)
   }
 
-  async joinGameNight(gameNightId, player) {
-    const gameNight = await tallyApi.put('api/gamenights/' + gameNightId, player)
-    console.log(gameNight.data, 'pushing to gamenights')
-    AppState.gameNights.push(gameNight.data)
-    console.log(AppState.gameNights, 'from appstate')
+  async joinGameNight(householdId, gameNightId, player) {
+    await tallyApi.put('api/gamenights/' + gameNightId, player)
+    await this.getGameNightByHouseholdId(householdId)
   }
 }
 
