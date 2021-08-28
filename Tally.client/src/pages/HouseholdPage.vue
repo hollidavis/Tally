@@ -92,6 +92,12 @@ import { useRoute } from 'vue-router'
 
 export default {
   name: 'Household',
+  props: {
+    households: {
+      type: Object,
+      required: true
+    }
+  },
   setup() {
     const route = useRoute()
     onMounted(async() => {
