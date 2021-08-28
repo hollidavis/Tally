@@ -63,7 +63,7 @@ class AccountService {
   async getProfileById(id) {
     const profile = await dbContext.Account.findById(id)
     if (!profile) {
-      throw new BadRequest('Not a profile id')
+      throw new BadRequest('Invalid Id')
     }
     return profile
   }

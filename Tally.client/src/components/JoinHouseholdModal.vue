@@ -46,31 +46,34 @@
 <script>
 import Pop from '../utils/Notifier'
 import { reactive } from '@vue/reactivity'
-import { gameNightsService } from '../services/GameNightsService'
-import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { logger } from '../utils/Logger'
 import { householdsService } from '../services/HouseholdsService'
+import $ from 'jquery'
 
 export default {
   setup() {
     const state = reactive({
       newHouseHoldProfile: {
+        householdId: '',
         accessKey: '',
-        accountId: '',
-        householdId: ''
+        accountId: ''
       }
     })
     return {
       state,
       async joinHousehold() {
         try {
-          state.newHouseHoldProfile.householdId = await householdsService.getHouseholdByAccessKey(state.newHouseHoldProfile.accessKey)
+          const household = await householdsService.getHouseholdByAccessKey(state.newHouseHoldProfile.accessKey)
+          state.newHouseHoldProfile.householdId = household.id
           state.newHouseHoldProfile.accountId = AppState.account.id
           await householdProfilesService.joinHousehold(state.newHouseHoldProfile)
+          $('#joinHouseHoldModal').modal('hide')
+          Pop.toast('You Joined A Household!', 'success')
         } catch (error) {
           Pop.toast(error)
+          $('#joinHouseHoldModal').modal('hide')
           logger.log(error)
         }
       }

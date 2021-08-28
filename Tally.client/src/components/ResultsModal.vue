@@ -12,14 +12,14 @@
           <h4 class="modal-title">
             Score Your Game!
           </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="reset">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body text-center">
-          <form @submit.prevent="createResult">
+          <form @submit.prevent="addPlayer">
             <h5>What Game Did You Play?</h5>
-            <select v-model="state.result.gameApiId" class="w-100">
+            <select v-model="state.player.gameApiId" class="w-100 mb-2" required>
               <option value="">
                 --Select Game--
               </option>
@@ -28,7 +28,7 @@
               </option>
             </select>
             <h5>Who Played?</h5>
-            <select v-model="state.result.profileId" class="w-100">
+            <select v-model="state.player.profileId" class="w-100" required>
               <option value="">
                 --Select Player--
               </option>
@@ -36,20 +36,28 @@
                 {{ p.profile.name }}
               </option>
             </select>
-            <h5>Who Won?</h5>
-            <div class="row m-0">
-              <!-- NOTE This is going to be where we do a v-for over the players in the Household. We just need the data before we can do it.  -->
-              <!-- <PlayerCard v-for="p in players" :key="p.id" :player="p" /> -->
-            </div>
+            <button type="submit" class="btn btn-block btn-primary my-2">
+              <b>Add Player</b>
+            </button>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">
-            Close
-          </button>
-          <button type="submit" class="btn btn-success">
-            Submit
-          </button>
+          <h5>Who Won?</h5>
+          <div v-if="state.results">
+            <div v-for="(r, i) in state.results" :key="r.profileId">
+              <PlayerResultsCard :player="r" :ref="el => {cards[i] = el}" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                    @click="reset"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-success" @click="submitResults">
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -57,13 +65,13 @@
 </template>
 
 <script>
-import { reactive } from '@vue/reactivity'
-import { computed, watchEffect } from '@vue/runtime-core'
+import { reactive, ref } from '@vue/reactivity'
+import { computed, onBeforeUpdate, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { resultsService } from '../services/ResultsService'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { gamesService } from '../services/GamesService'
 import Pop from '../utils/Notifier'
+import $ from 'jquery'
 export default {
   props: {
     household: {
@@ -72,11 +80,12 @@ export default {
     }
   },
   setup(props) {
+    const cards = ref([])
     const state = reactive({
-      result: {
-        householdId: props.household,
-        players: []
-      }
+      player: {
+        householdId: props.household
+      },
+      results: []
     })
     watchEffect(async() => {
       try {
@@ -88,13 +97,39 @@ export default {
         Pop.toast(error, 'error')
       }
     })
+    onBeforeUpdate(() => {
+      cards.value = []
+    })
     return {
       state,
+      cards,
       games: computed(() => AppState.games),
       householdProfiles: computed(() => AppState.householdProfiles),
-      async createResult() {
-        await resultsService.createResult(state.result)
-        state.result = { householdId: props.householdId }
+      async addPlayer() {
+        state.results.push(state.player)
+        state.player = {
+          householdId: props.household,
+          win: false
+        }
+      },
+      async submitResults() {
+        try {
+          for (const card of cards.value) {
+            card.submitResult()
+          }
+          $('#resultsModal').modal('hide')
+          this.reset()
+          Pop.toast('Results Submitted', 'success')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      reset() {
+        state.player = {
+          householdId: props.household,
+          win: false
+        }
+        state.results = []
       }
     }
   }

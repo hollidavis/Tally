@@ -3,14 +3,13 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 class HouseholdProfilesService {
   /** creates new household profile object when a user joins a household
    * @param {Object} body - need the id of the household to be joined and the id of the profile of trying to join.
-   * @param {String} accessKey - the access key to join the household
    * @returns new household profile object
   */
-  async createHouseholdProfile(body, accessKey) {
-    const household = await dbContext.Households.find(body.householdId)
-    if (household.accessKey === accessKey) {
+  async createHouseholdProfile(body) {
+    const household = await dbContext.Households.findById(body.householdId)
+    if (household.accessKey === body.accessKey) {
       const householdProfile = await dbContext.HouseholdProfiles.create(body)
-      return await dbContext.HouseholdProfiles.find(householdProfile.id).populate('profile', 'name picture').populate('household', 'name')
+      return await dbContext.HouseholdProfiles.findById(householdProfile.id).populate('profile', 'name picture').populate('household', 'name')
     }
     throw new BadRequest('Failed to join household')
   }
@@ -22,6 +21,7 @@ class HouseholdProfilesService {
   * @returns successfully deleted message
   */
   async destroyHouseholdProfile(body, userId) {
+    // NOTE will need reformatting, change to findOneAndDelete({ownerAccountId: body.ownerAccountId, householdId: body.householdId})
     const household = await dbContext.Households.findById(body.householdId)
     if (household.ownerAccountId === userId) {
       await dbContext.HouseholdProfiles.findByIdAndDelete(body.id)

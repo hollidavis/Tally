@@ -1,13 +1,13 @@
 <template>
   <div class="col-12 rounded-top bg-dark-pink mt-3 shadow">
-    <h1 class="m-0 py-3 text-center">Personal Leaderboard</h1>
+    <h1 class="m-0 py-3 text-center pink-text-shadow">Personal Leaderboard</h1>
   </div>
-  <div class="col-12 bg-light shadow p-4 leaderboard overflow-scroll">
+  <div class="col-12 bg-white shadow p-4 leaderboard overflow-scroll">
       <div v-if="Object.entries(gameScores).length !== 0" class="d-flex justify-content-between ">
         <h3>Game</h3>
         <h3>Wins</h3>
       </div>
-    <div class="ml-0" v-for="g in gameScores">
+    <div v-if="Object.entries(gameScores).length !==0" class="ml-0" v-for="g in gameScores">
       <div class="d-flex justify-content-between ">
         <h5>{{g.name}}</h5>
         <h5>{{g.score}}</h5>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { useRoute } from 'vue-router'
@@ -26,6 +26,9 @@ import { resultsService } from '../services/ResultsService'
 export default {
   setup() {
     const route = useRoute()
+    watch(()=> route.params.id,async()=>{
+      await resultsService.getResultsByProfileId(route.params.id)
+    })
     onMounted(async() => {
       try {
         await resultsService.getResultsByProfileId(route.params.id)

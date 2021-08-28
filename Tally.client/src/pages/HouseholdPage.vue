@@ -1,22 +1,13 @@
 <template>
   <div class="container-fluid">
     <Navbar />
-    <div class="row d-flex justify-content-around m-0 my-5 w-100">
-      <div id="dropdownGuy" class="col-md-3 p-0 my-3 d-flex justify-content-center" title="select Household">
-        <div class="dropdown">
-          <button class="btn btn-lg btn-light dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-          >
-            <b>Select Household</b>
-          </button>
-          <!-- TODO write a v-for for each household the profile is associated with -->
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-for="household in households" :key="household.householdId">
-            <ProfileHouseHoldsCard :household="household" />
-          </div>
+    <div class="row d-flex justify-content-around align-items-center m-0 my-5 w-100">
+      <div class="dropdown">
+        <button class="btn btn-light btn-lg dropbtn">
+          <b>Select Household</b>
+        </button>
+        <div id="myDropdown" class="dropdown-content">
+          <ProfileHouseHoldsCard v-for="h in profileHouseholds" :key="h.id" :household="h" />
         </div>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
@@ -32,7 +23,7 @@
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
         <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
           <i class="fas fa-plus text-secondary"></i>
-          <b> New Game Night</b>
+          <b>New Game Night</b>
         </button>
       </div>
     </div>
@@ -89,15 +80,10 @@ import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
 import { useRoute } from 'vue-router'
 import { gameNightsService } from '../services/GameNightsService'
+import { householdProfilesService } from '../services/HouseholdProfilesService'
 
 export default {
   name: 'Household',
-  props: {
-    households: {
-      type: Object,
-      required: true
-    }
-  },
   setup() {
     const route = useRoute()
     onMounted(async() => {
@@ -108,10 +94,16 @@ export default {
       } catch (error) {
         Pop.toast(error, 'error')
       }
+      try {
+        await householdProfilesService.getHouseholdsByProfileId(AppState.account.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
     })
     return {
       games: computed(() => AppState.games),
-      gamenights: computed(() => AppState.gameNights)
+      gamenights: computed(() => AppState.gameNights),
+      profileHouseholds: computed(() => AppState.profileHouseholds)
     }
   }
 }
@@ -124,4 +116,29 @@ export default {
 .gameNightHeight{
   min-height: 30vh;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
 </style>

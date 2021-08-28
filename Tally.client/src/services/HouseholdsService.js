@@ -17,7 +17,7 @@ class HouseholdsService {
   async getHouseholdByAccessKey(accessKey) {
     const res = await tallyApi.get('api/households/' + accessKey + '/accesskey')
     AppState.activeHousehold = res.data
-    return res.data.id
+    return AppState.activeHousehold
   }
 
   async respinAccessKey(id) {
@@ -25,6 +25,15 @@ class HouseholdsService {
     AppState.activeHousehold.accessKey = res.data
     return res.data.accessKey
   }
-}
 
+  async updateHouseholdName(body, id) {
+    const res = await tallyApi.put('api/households/' + id, body)
+    AppState.activeHousehold = res.data
+    console.log('don worry BOUT IT')
+  }
+
+  async deleteMember(body, accountId) {
+    const res = await tallyApi.delete('api/')
+  }
+}
 export const householdsService = new HouseholdsService()

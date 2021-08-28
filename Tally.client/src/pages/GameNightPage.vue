@@ -14,7 +14,7 @@
           <div class="row justify-content-around">
             <div class="col-md-5 m-2">
               <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#resultsModal">
-                <b><p class="m-0"><span class="far fa-star"></span> Score Game <span class="far fa-star"></span></p></b>
+                <b><p class="m-0">Input Score</p></b>
               </button>
             </div>
             <div class="col-md-5 m-2">

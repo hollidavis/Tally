@@ -71,13 +71,13 @@
           <li class="list-group-item d-flex p-2">
             <!-- Photo -->
             <div>
-              <img class="rounded profile-img" src="../assets/img/teamphotos/Holli.jpg" alt="Veronica Blake Picture">
+              <img class="rounded profile-img" src="../assets/img/teamphotos/Holli.jpg" alt="Holli Davis Picture">
             </div>
             <!-- About -->
             <div class="ml-3">
               <!-- Name -->
               <h3>
-                Veronica Blake
+                Holli Davis
               </h3>
               <!-- Links-->
               <a class="pointer text-dark" href="https://github.com/hollidavis"><p>
