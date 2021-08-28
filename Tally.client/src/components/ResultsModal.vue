@@ -42,8 +42,8 @@
           </form>
           <h5>Who Won?</h5>
           <div v-if="state.results">
-            <div v-for="r in state.results" :key="r.profileId">
-              <PlayerResultsCard :player="r" />
+            <div v-for="(r, i) in state.results" :key="r.profileId">
+              <PlayerResultsCard :player="r" :ref="el => {cards[i] = el}" />
             </div>
           </div>
           <div class="modal-footer">
@@ -54,7 +54,7 @@
             >
               Close
             </button>
-            <button type="submit" class="btn btn-success">
+            <button type="button" class="btn btn-success" @click="submitResults">
               Submit
             </button>
           </div>
@@ -65,12 +65,13 @@
 </template>
 
 <script>
-import { reactive } from '@vue/reactivity'
-import { computed, watchEffect } from '@vue/runtime-core'
+import { reactive, ref } from '@vue/reactivity'
+import { computed, onBeforeUpdate, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import { gamesService } from '../services/GamesService'
 import Pop from '../utils/Notifier'
+import $ from 'jquery'
 export default {
   props: {
     household: {
@@ -79,6 +80,7 @@ export default {
     }
   },
   setup(props) {
+    const cards = ref([])
     const state = reactive({
       player: {
         householdId: props.household
@@ -95,16 +97,31 @@ export default {
         Pop.toast(error, 'error')
       }
     })
+    onBeforeUpdate(() => {
+      cards.value = []
+    })
     return {
       state,
+      cards,
       games: computed(() => AppState.games),
       householdProfiles: computed(() => AppState.householdProfiles),
       async addPlayer() {
         state.results.push(state.player)
-        console.log(state.results)
         state.player = {
           householdId: props.household,
           win: false
+        }
+      },
+      async submitResults() {
+        try {
+          for (const card of cards.value) {
+            card.submitResult()
+          }
+          $('#resultsModal').modal('hide')
+          this.reset()
+          Pop.toast('Results Submitted', 'success')
+        } catch (error) {
+          Pop.toast(error, 'error')
         }
       },
       reset() {

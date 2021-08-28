@@ -1,5 +1,5 @@
 <template>
-  <div :ref="state.profile.id" class="d-flex align-items-center bg-white rounded shadow mt-2 py-3">
+  <div class="d-flex align-items-center bg-white rounded shadow mt-2 py-3">
     <div class="p-0 d-flex mx-2">
       <img class="profile-img" :src="state.profile.picture" :alt="state.profile.name">
     </div>
