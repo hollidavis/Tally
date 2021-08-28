@@ -1,35 +1,31 @@
 <template>
-  <div class="col-md-8 col-10 p-0 my-2 bg-light CardShadowing grow">
-    <div class="row m-0">
-      <div class="col-md-12 p-0">
-        <div class="row m-0 w-100 p-2">
-          <div class="col-2 p-0 d-flex justify-content-center">
-            <img class="rounded-circle w-100" src="https://images.unsplash.com/photo-1601247387431-7966d811f30b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=751&q=80" alt="">
-          </div>
-          <div class="col-8 p-0 d-flex align-items-center">
-            <h5 class="m-0 p-1">
-              RaccyCoon
-            </h5>
-          </div>
-          <div class="col-2 p-0 d-flex align-items-center">
-            <div class="row m-0 w-100">
-              <div class="col-12 p-0 text-break text-center">
-                <p class="m-0">
-                  Winner
-                </p>
-              </div>
-              <div class="col-12 text-center p-0">
-                <input class="hidden cbx" for="cbx" id="cbx" type="checkbox" hidden /><label class="cbx m-0" for="cbx"></label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div :ref="state.profile.id" class="d-flex align-items-center bg-white rounded shadow mt-2 py-3">
+    <div class="p-0 d-flex mx-2">
+      <img class="profile-img" :src="state.profile.picture" :alt="state.profile.name">
     </div>
+    <h5 class="m-0 text-break mr-auto">
+      {{ state.profile.name }}
+    </h5>
+    <form class="mx-3" @submit.prevent="submitResult">
+      <input v-model="state.win"
+             class="hidden cbxs"
+             for="cbx"
+             id="cbx"
+             type="checkbox"
+             hidden
+      /><label class="cbx" for="cbx"></label>
+      <button type="submit" class="btn btn-primary">
+        SUBMIT
+      </button>
+    </form>
   </div>
 </template>
 
 <script>
+import { reactive } from '@vue/reactivity'
+import { profilesService } from '../services/ProfilesService'
+import { watchEffect } from '@vue/runtime-core'
+import { resultsService } from '../services/ResultsService'
 export default {
   props: {
     player: {
@@ -37,12 +33,42 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    const state = reactive({
+      profile: {},
+      result: {
+        householdId: props.player.householdId,
+        profileId: props.player.profileId,
+        gameApiId: props.player.gameApiId
+      }
+    })
+    watchEffect(async() => {
+      if (props.player) {
+        state.profile = await profilesService.getProfileById(props.player.profileId)
+        console.log(state.profile)
+      }
+    })
+    return {
+      state,
+      async submitResult() {
+        if (state.win === true) {
+          console.log(state.result)
+          // await resultsService.createResult(state.result)
+        }
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.profile-img{
+  border-radius: 50%;
+  height: 13vh;
+  width: 13vh;
+  object-fit: cover;
+  object-position: center;
+}
 // NOTE jelly checkbox
 .cbx {
   position: relative;
