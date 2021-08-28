@@ -1,9 +1,9 @@
 <template>
-  <div class="col-12 rounded-top bg-primary mt-3 shadow">
-    <h1>Personal Leaderboard</h1>
+  <div class="col-12 rounded-top bg-dark-pink mt-3 shadow">
+    <h1 class="m-0 py-3 text-center">Personal Leaderboard</h1>
   </div>
-  <div class="col-12 bg-light shadow p-4">
-      <div class="d-flex justify-content-between ">
+  <div class="col-12 bg-light shadow p-4 leaderboard overflow-scroll">
+      <div v-if="Object.entries(gameScores).length !== 0" class="d-flex justify-content-between ">
         <h3>Game</h3>
         <h3>Wins</h3>
       </div>
@@ -43,5 +43,8 @@ export default {
 <style>
   .card-img-top {
     height: 20vw;
+  }
+  .leaderboard{
+    height: 35vh;
   }
 </style>
