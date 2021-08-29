@@ -52,7 +52,7 @@
           Login
         </button>
 
-        <div class="dropdown" v-else>
+        <div class="dropdown pointer" v-else>
           <div
             class="dropdown-toggle"
             @click="state.dropOpen = !state.dropOpen"

@@ -7,7 +7,7 @@
     <h3 class="ml-3 mr-auto m-0">
       {{ searchGame.name }}
     </h3>
-    <button type="button" class="btn btn-primary" @click="addGame()">
+    <button v-if="!games.find(g => g.gameApiId === searchGame.gameApiId)" type="button" class="btn btn-primary" @click="addGame()">
       Add
     </button>
   </div>
@@ -16,8 +16,9 @@
 <script>
 import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
-import { reactive } from '@vue/reactivity'
+import { reactive, onMounted, computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
+import { AppState } from '../AppState'
 
 export default {
   props: {
@@ -42,11 +43,18 @@ export default {
         websiteLink: props.searchGame.websiteLink,
         gameApiId: props.searchGame.gameApiId,
         householdId: route.params.id
-
+      }
+      })
+      onMounted(async() => {
+      try {
+        await gamesService.getGamesByHouseholdId(route.params.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
       }
     })
     return {
       state,
+      games: computed(()=>AppState.games),
       async addGame() {
         try {
           await gamesService.addGame(state.newGame)
@@ -55,6 +63,7 @@ export default {
           Pop.toast(error)
         }
       }
+
     }
   }
 }

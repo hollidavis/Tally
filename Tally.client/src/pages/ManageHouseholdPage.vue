@@ -7,7 +7,7 @@
           <div class="col-md-8 p-0 text-center pink-text-shadow">
             <h1>
               {{ household.name }}
-              <i class="fas fa-edit fa-xs text-primary ml-2" title="Rename Household" data-toggle="modal" data-target="#update-householdName"></i>
+              <i class="fas fa-edit fa-xs text-primary ml-2 pointer" title="Rename Household" data-toggle="modal" data-target="#update-householdName"></i>
             </h1>
           </div>
         </div>

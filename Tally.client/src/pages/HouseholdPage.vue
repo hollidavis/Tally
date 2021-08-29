@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button type="button"
+        <button v-if="householdId !== account.householdId" type="button"
                 class="btn btn-light btn-lg"
                 data-toggle="modal"
                 title="joinHouseHold"
@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
+        <button v-if="householdId === account.householdId" type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
           <i class="fas fa-plus text-secondary"></i>
           <b>New Game Night</b>
         </button>
@@ -108,6 +108,7 @@ export default {
         const id = route.params.id
         await gamesService.getGamesByHouseholdId(id)
         await gameNightsService.getGameNightByHouseholdId(id)
+        AppState.householdId = id
       } catch (error) {
         Pop.toast(error, 'error')
       }
@@ -120,6 +121,8 @@ export default {
     return {
       state,
       route,
+      householdId: computed(()=>AppState.householdId),
+      account: computed(() => AppState.account),
       games: computed(() => AppState.games),
       gamenights: computed(() => AppState.gameNights),
       profileHouseholds: computed(() => AppState.profileHouseholds),
