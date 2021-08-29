@@ -41,7 +41,6 @@ class ResultsService {
     for (const result in scores) {
       sortScores.push([scores[result].name, scores[result].score])
     }
-    sortScores.push(['another', 5])
     const gameRes = sortScores.sort((a, b) => {
       return b[1] - a[1]
     })

@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-12 col-12 d-flex align-items-center bg-white rounded shadow my-2 p-0 py-3">
     <div class="row m-0 w-100">
-      <div class="col-md-10 col-10 p-0">
+      <div class="col-md-10 col-10 p-0 px-3">
         <h3 class=" m-0">
           {{ gamenight.name }}
         </h3>

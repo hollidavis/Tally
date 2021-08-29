@@ -7,8 +7,8 @@
         </h1>
       </div>
     </div>
-    <div class="row m-0 w-100 bg-white rowHeight">
-      <div v-for="game in games" :key="game.gameApiId" class="col-md-12 p-0">
+    <div class="row m-0 w-100 bg-white rowHeight px-2">
+      <div v-for="game in games" :key="game.gameApiId" class="col-md-12 p-0 border-bottom border-grey">
         <GameCabinetItem :game="game" />
       </div>
     </div>
