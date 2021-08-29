@@ -9,7 +9,7 @@
        aria-hidden="true"
   >
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
+      <div class="modal-content modal-height">
         <div class="modal-header">
           <h3 class="modal-title">
             {{ game.name }}
@@ -18,13 +18,20 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body modal-overflow">
           <div class="p-3 bg-light rounded shadow my-3 d-flex align-items-center">
-            <img class="w-100"
+            <img class="w-100 modalImg"
                  :src="game.largeImg"
                  :alt="game.name"
             >
-            <div :id="'description' + game.id">
+            <div class="px-3 ">
+              <p><i class="fas fa-users pr-1"></i> {{game.minPlayers}} - {{game.maxPlayers}}</p>
+              <p v-if="minPlayTime !== maxPlayTime"><i class="far fa-clock pr-1"></i> {{game.minPlayTime}} to {{game.maxPlayTime}} minutes</p>
+              <p v-else><i class="far fa-clock pr-1"></i> {{game.maxPlayTime}} minutes</p>
+              <p>Age: {{game.playerAge}} years+</p>
+              <p><a :href="game.websiteLink">More Info</a></p>
+              <div class="" :id="'description' + game.id">
+              </div>
             </div>
           </div>
         </div>
@@ -58,7 +65,12 @@ export default {
 
 <style lang="scss" scoped>
 .modalImg{
-  max-height: 300px;
-  max-width: 300px;
+  max-width: 10vw;
+}
+.modal-overflow{
+  overflow: auto;
+}
+.modal-height{
+    max-height: 95vh;
 }
 </style>

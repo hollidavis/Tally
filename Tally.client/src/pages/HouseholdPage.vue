@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button type="button"
+        <button v-if="householdId !== account.householdId" type="button"
                 class="btn btn-light btn-lg"
                 data-toggle="modal"
                 title="joinHouseHold"
@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
+        <button v-if="householdId === account.householdId" type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
           <i class="fas fa-plus text-secondary"></i>
           <b>New Game Night</b>
         </button>
@@ -29,10 +29,10 @@
     </div>
     <div id="gamenights" class="row m-0 my-3  w-100 d-flex justify-content-center">
       <div class="col-md-9 p-0 text-left bg-white gameNightHeight">
-        <h2 class="text-center">
+        <h2 class="text-center py-3">
           Upcoming Game Nights
         </h2>
-        <div class="row m-0 w-100">
+        <div class="row m-0 w-100 px-3">
           <GameNightCard v-for="g in gamenights" :key="g.id" :gamenight="g" />
         </div>
       </div>
@@ -43,8 +43,8 @@
           <div class="col-md-12 p-0 text-center ">
             <h1>Leaderboard</h1>
           </div>
-          <div class="col-md-12 p-0 d-flex align-items-center justify-content-center flex-column">
-            <select name="" id="">
+          <div class="col-md-12 p-0 d-flex align-items-center justify-content-center">
+            <select name="" id="" v-model="state.selectGame.id">
               <option value="">
                 Select Game
               </option>
@@ -52,12 +52,24 @@
                 {{ g.name }}
               </option>
             </select>
-            <button class="btn btn-light">
+            <button @click="getResults()" class="ml-2 py-0 px-1 btn btn-light" :disabled="state.selectGame.id?false:true">
               Find
             </button>
           </div>
         </div>
-        <div class="row m-0 w-100 bg-white rowHeight">
+        <div class="row m-0 w-100 bg-white rowHeight d-flex flex-column px-3 py-2">
+          <div v-if="results.length">
+            <div class="d-flex justify-content-between">
+              <h5>Player</h5>
+              <h5>Wins</h5>
+            </div>
+          </div>
+          <div class="" v-for="r in results">
+            <div class="d-flex justify-content-between">
+              <h5>{{r[0]}}</h5>
+              <h5>{{r[1]}}</h5>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -74,23 +86,29 @@
 </template>
 
 <script>
-import { computed, watchEffect } from 'vue'
+import { computed, watchEffect, reactive } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { gamesService } from '../services/GamesService'
 import { useRoute } from 'vue-router'
 import { gameNightsService } from '../services/GameNightsService'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
+import { resultsService } from '../services/ResultsService'
 
 export default {
   name: 'Household',
   setup() {
     const route = useRoute()
+    const state = reactive({
+      selectGame: {
+      }
+    })
     watchEffect(async() => {
       try {
         const id = route.params.id
         await gamesService.getGamesByHouseholdId(id)
         await gameNightsService.getGameNightByHouseholdId(id)
+        AppState.householdId = id
       } catch (error) {
         Pop.toast(error, 'error')
       }
@@ -101,9 +119,21 @@ export default {
       }
     })
     return {
+      state,
+      route,
+      householdId: computed(()=>AppState.householdId),
+      account: computed(() => AppState.account),
       games: computed(() => AppState.games),
       gamenights: computed(() => AppState.gameNights),
-      profileHouseholds: computed(() => AppState.profileHouseholds)
+      profileHouseholds: computed(() => AppState.profileHouseholds),
+      results: computed(() => AppState.gameResults),
+      async getResults(){
+        try {
+          await resultsService.getResultsByHouseholdId(route.params.id, state.selectGame.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }
