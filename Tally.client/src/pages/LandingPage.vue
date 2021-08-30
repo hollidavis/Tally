@@ -48,7 +48,7 @@ export default {
       async login() {
         await AuthService.loginWithPopup()
         await accountService.getAccount()
-        if (this.account) {
+        if (this.account.id) {
           router.push({ name: 'Profile', params: { id: this.account.id } })
         }
       },
