@@ -11,7 +11,8 @@
         </div>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button v-if="householdId !== account.householdId" type="button"
+        <button v-if="householdId !== account.householdId"
+                type="button"
                 class="btn btn-light btn-lg"
                 data-toggle="modal"
                 title="joinHouseHold"
@@ -21,8 +22,14 @@
         </button>
       </div>
       <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button v-if="householdId === account.householdId" type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#createGameNightModal" title="createGameNight">
-          <i class="fas fa-plus text-secondary"></i>
+        <button v-if="householdId === account.householdId"
+                type="button"
+                class="btn btn-light btn-lg"
+                data-toggle="modal"
+                data-target="#createGameNightModal"
+                title="createGameNight"
+        >
+          <i class="fas fa-plus text-secondary mr-2"></i>
           <b>New Game Night</b>
         </button>
       </div>
@@ -60,15 +67,20 @@
         <div class="row m-0 w-100 bg-white rowHeight d-flex flex-column px-3 py-2">
           <div v-if="results.length">
             <div class="d-flex justify-content-between">
-              <h5>Player</h5>
-              <h5>Wins</h5>
+              <h4>Player</h4>
+              <h4>Wins</h4>
             </div>
           </div>
-          <div class="" v-for="r in results">
+          <div class="" v-for="r in results" :key="r.id">
             <div class="d-flex justify-content-between">
-              <h5>{{r[0]}}</h5>
-              <h5>{{r[1]}}</h5>
+              <h5 class="text-break mr-5">
+                {{ r[0] }}
+              </h5>
+              <h5>{{ r[1] }}</h5>
             </div>
+          </div>
+          <div class="text-center" v-if="!results.length">
+            <h4>No Results Yet!</h4>
           </div>
         </div>
       </div>
@@ -100,8 +112,7 @@ export default {
   setup() {
     const route = useRoute()
     const state = reactive({
-      selectGame: {
-      }
+      selectGame: {}
     })
     watchEffect(async() => {
       try {
@@ -121,13 +132,13 @@ export default {
     return {
       state,
       route,
-      householdId: computed(()=>AppState.householdId),
+      householdId: computed(() => AppState.householdId),
       account: computed(() => AppState.account),
       games: computed(() => AppState.games),
       gamenights: computed(() => AppState.gameNights),
       profileHouseholds: computed(() => AppState.profileHouseholds),
       results: computed(() => AppState.gameResults),
-      async getResults(){
+      async getResults() {
         try {
           await resultsService.getResultsByHouseholdId(route.params.id, state.selectGame.id)
         } catch (error) {
