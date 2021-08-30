@@ -4,7 +4,7 @@
       Personal Leaderboard
     </h1>
   </div>
-  <div class="col-12 bg-white shadow p-4 leaderboard overflow-scroll">
+  <div class="col-12 bg-white h-75 shadow p-4 leaderboard overflow-scroll">
     <div v-if="Object.entries(gameScores).length !== 0" class="d-flex justify-content-between ">
       <h3>Game</h3>
       <h3>Wins</h3>
