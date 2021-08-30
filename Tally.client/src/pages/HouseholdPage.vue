@@ -10,32 +10,32 @@
           <ProfileHouseHoldsCard v-for="h in profileHouseholds" :key="h.id" :household="h" />
         </div>
       </div>
-      <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button v-if="householdId !== account.householdId"
-                type="button"
-                class="btn btn-light btn-lg"
-                data-toggle="modal"
-                title="joinHouseHold"
-                data-target="#joinHouseHoldModal"
-        >
-          <i class="fas fa-plus text-secondary"></i> <b>Join Household</b>
-        </button>
-      </div>
-      <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button v-if="householdId === account.householdId"
-                type="button"
-                class="btn btn-light btn-lg"
-                data-toggle="modal"
-                data-target="#createGameNightModal"
-                title="createGameNight"
+      <div class="my-3 p-0 d-flex justify-content-center" v-if="householdId === account.householdId">
+        <button
+          type="button"
+          class="btn btn-light btn-lg"
+          data-toggle="modal"
+          data-target="#createGameNightModal"
+          title="createGameNight"
         >
           <i class="fas fa-plus text-secondary mr-2"></i>
           <b>New Game Night</b>
         </button>
       </div>
+      <div class="my-3 p-0 d-flex justify-content-center">
+        <button
+          type="button"
+          class="btn btn-light btn-lg"
+          data-toggle="modal"
+          title="joinHouseHold"
+          data-target="#joinHouseHoldModal"
+        >
+          <i class="fas fa-plus text-secondary"></i> <b>Join Household</b>
+        </button>
+      </div>
     </div>
     <div id="gamenights" class="row m-0 my-3  w-100 d-flex justify-content-center">
-      <div class="col-md-9 p-0 text-left bg-white gameNightHeight">
+      <div class="col-md-9 p-0 text-left bg-white rounded shadow gameNightHeight pb-2">
         <h2 class="text-center py-3">
           Upcoming Game Nights
         </h2>
@@ -46,9 +46,11 @@
     </div>
     <div class="row m-0 my-3 w-100 d-flex justify-content-around mt-4">
       <div class="col-md-5 p-0 my-5">
-        <div class="row m-0 w-100 bg-dark-pink py-3 d-flex justify-content-around">
-          <div class="col-md-12 p-0 text-center ">
-            <h1>Leaderboard</h1>
+        <div class="row m-0 w-100 bg-dark-pink rounded-top shadow py-3 d-flex justify-content-around">
+          <div class="col-md-12 p-0 text-center pink-text-shadow">
+            <h1 class="m-0">
+              Leaderboard
+            </h1>
           </div>
           <div class="col-md-12 p-0 d-flex align-items-center justify-content-center">
             <select name="" id="" v-model="state.selectGame.id">
@@ -64,7 +66,7 @@
             </button>
           </div>
         </div>
-        <div class="row m-0 w-100 bg-white rowHeight d-flex flex-column px-3 py-2">
+        <div class="row m-0 w-100 bg-white rounded-bottom shadow h-75 d-flex flex-column px-3 py-2">
           <div v-if="results.length">
             <div class="d-flex justify-content-between">
               <h4>Player</h4>
@@ -116,15 +118,13 @@ export default {
     })
     watchEffect(async() => {
       try {
-        const id = route.params.id
-        await gamesService.getGamesByHouseholdId(id)
-        await gameNightsService.getGameNightByHouseholdId(id)
-        AppState.householdId = id
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-      try {
-        await householdProfilesService.getHouseholdsByProfileId(AppState.account.id)
+        if (route.params.id) {
+          const id = route.params.id
+          await gamesService.getGamesByHouseholdId(id)
+          await gameNightsService.getGameNightByHouseholdId(id)
+          AppState.householdId = id
+          await householdProfilesService.getHouseholdsByProfileId(AppState.account.id)
+        }
       } catch (error) {
         Pop.toast(error, 'error')
       }

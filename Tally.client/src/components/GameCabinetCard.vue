@@ -1,13 +1,13 @@
 <template>
   <div class="col-md-12 p-0">
-    <div class="row m-0 w-100 bg-dark-pink py-3">
+    <div class="row m-0 w-100 bg-dark-pink rounded-top shadow py-3">
       <div class="col-md-12 p-0 text-center ">
         <h1 class="pink-text-shadow">
           Household Game Cabinet
         </h1>
       </div>
     </div>
-    <div class="row m-0 w-100 bg-white rowHeight px-2">
+    <div class="row m-0 w-100 bg-white rounded-bottom shadow rowHeight px-2">
       <div v-for="game in games" :key="game.gameApiId" class="col-md-12 p-0 border-bottom border-grey">
         <GameCabinetItem :game="game" />
       </div>
@@ -16,12 +16,9 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive } from 'vue'
+import { computed } from 'vue'
 import { AppState } from '../AppState'
-import Pop from '../utils/Notifier'
-import { gamesService } from '../services/GamesService'
 import GameCabinetItem from '../components/GameCabinetItem.vue'
-import { useRoute } from 'vue-router'
 
 export default {
   name: 'GameCabinetCard',
@@ -31,37 +28,20 @@ export default {
       required: true
     }
   },
-  components: {
-    GameCabinetItem
-  },
   setup() {
-    const route = useRoute()
-
-    // onMounted(async() => {
-    //   try {
-    //     await gamesService.getGamesByHouseholdId(route.params.id)
-    //   } catch (error) {
-    //     Pop.toast(error, 'error')
-    //   }
-    // })
-
     return {
-      // async getGamesById() {
-      //   await gamesService.getGamesByHouseholdId(route.params.id)
-      // },
       profile: computed(() => AppState.activeProfile)
     }
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
   .card-img-top {
     height: 20vw;
   }
   .rowHeight{
-  min-height: 40vh;
-  max-height: 40vh;
-  overflow-y: auto;
+  height: 40vh;
+  overflow: auto;
 }
 h1 {
   font-size: 32px;

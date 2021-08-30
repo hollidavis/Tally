@@ -1,13 +1,13 @@
 <template>
-  <div class="row m-0 w-100 bg-dark-pink d-flex justify-content-center py-3">
-    <div class="col-md-10 p-0 text-center pink-text-shadow">
+  <div class="row w-100 bg-dark-pink rounded-top shadow d-flex justify-content-center py-3">
+    <div class="text-center pink-text-shadow">
       <h2>
         Members
       </h2>
     </div>
   </div>
-  <div class="row m-0 w-100 bg-white rowHeight mb-3">
-    <div v-for="m in members" :key="m.id">
+  <div class="row w-100 bg-white rounded-bottom shadow memberHeight mb-3 d-flex align-items-center">
+    <div class="col-md-12" v-for="m in members" :key="m.id">
       <HouseholdMemberItem :member="m" />
     </div>
   </div>
@@ -20,12 +20,6 @@ import HouseholdMemberItem from '../components/HouseholdMemberItem.vue'
 import { AppState } from '../AppState'
 export default {
   name: 'HouseholdMembersCard',
-  // props: {
-  //   members: {
-  //     type: Object,
-  //     required: true
-  //   }
-  // },
   components: {
     HouseholdMemberItem
   },
@@ -37,6 +31,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.memberHeight{
+height: 40vh;
+overflow: auto;
+}
 </style>

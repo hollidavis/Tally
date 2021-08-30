@@ -1,12 +1,13 @@
 <template>
   <!-- Modal -->
-  <div class="modal fade"
-       :id="'gameDetails'
-         +game.id"
-       tabindex="-1"
-       role="dialog"
-       aria-labelledby="modelTitleId"
-       aria-hidden="true"
+  <div
+    class="modal fade"
+    :id="'gameDetails'
+      +game.id"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modelTitleId"
+    aria-hidden="true"
   >
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content modal-height">
@@ -26,9 +27,9 @@
                    :alt="game.name"
               >
             </div>
-            <div class="col-md-9 col-12 px-3 ">
+            <div class="col-md-9 col-12 px-3">
               <p><i class="fas fa-users pr-1"></i> {{ game.minPlayers }} - {{ game.maxPlayers }}</p>
-              <p v-if="minPlayTime !== maxPlayTime">
+              <p v-if="game.minPlayTime !== game.maxPlayTime">
                 <i class="far fa-clock pr-1"></i> {{ game.minPlayTime }} to {{ game.maxPlayTime }} minutes
               </p>
               <p v-else>

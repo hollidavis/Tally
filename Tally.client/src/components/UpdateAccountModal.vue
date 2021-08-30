@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
 import Pop from '../utils/Notifier'
