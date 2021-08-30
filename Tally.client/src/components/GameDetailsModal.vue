@@ -32,7 +32,7 @@
                 <i class="far fa-clock pr-1"></i> {{ game.minPlayTime }} to {{ game.maxPlayTime }} minutes
               </p>
               <p v-else>
-                <i class="far fa-clock pr-1"></i> {{ game.maxPlayTime }} minutes
+                <i class="far fa-clock pr-1"></i> {{ game.minPlayTime }} minutes
               </p>
               <p>Age: {{ game.playerAge }} years+</p>
               <p><a :href="game.websiteLink">More Info</a></p>
