@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center bg-white rounded shadow my-2 py-3">
+  <div class="d-flex align-items-center bg-white rounded shadow my-2 py-2">
     <div class="p-0 d-flex px-3">
       <img class="profile-img" :src="member.profile.picture" :alt="member.name">
     </div>
