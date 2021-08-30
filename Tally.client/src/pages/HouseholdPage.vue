@@ -10,27 +10,27 @@
           <ProfileHouseHoldsCard v-for="h in profileHouseholds" :key="h.id" :household="h" />
         </div>
       </div>
-      <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button v-if="householdId !== account.householdId"
-                type="button"
-                class="btn btn-light btn-lg"
-                data-toggle="modal"
-                title="joinHouseHold"
-                data-target="#joinHouseHoldModal"
-        >
-          <i class="fas fa-plus text-secondary"></i> <b>Join Household</b>
-        </button>
-      </div>
-      <div class="col-md-3 my-3 p-0 d-flex justify-content-center">
-        <button v-if="householdId === account.householdId"
-                type="button"
-                class="btn btn-light btn-lg"
-                data-toggle="modal"
-                data-target="#createGameNightModal"
-                title="createGameNight"
+      <div class="my-3 p-0 d-flex justify-content-center" v-if="householdId === account.householdId">
+        <button
+          type="button"
+          class="btn btn-light btn-lg"
+          data-toggle="modal"
+          data-target="#createGameNightModal"
+          title="createGameNight"
         >
           <i class="fas fa-plus text-secondary mr-2"></i>
           <b>New Game Night</b>
+        </button>
+      </div>
+      <div class="my-3 p-0 d-flex justify-content-center">
+        <button
+          type="button"
+          class="btn btn-light btn-lg"
+          data-toggle="modal"
+          title="joinHouseHold"
+          data-target="#joinHouseHoldModal"
+        >
+          <i class="fas fa-plus text-secondary"></i> <b>Join Household</b>
         </button>
       </div>
     </div>

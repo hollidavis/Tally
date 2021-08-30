@@ -36,7 +36,7 @@
                 {{ p.profile.name }}
               </option>
             </select>
-            <button type="submit" class="btn btn-block btn-primary my-2">
+            <button type="submit" class="btn btn-block btn-primary my-2" :disabled="state.player.profileId||state.player.gameApiId?false:true">
               <b>Add Player</b>
             </button>
           </form>
