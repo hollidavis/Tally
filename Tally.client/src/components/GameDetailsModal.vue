@@ -27,9 +27,9 @@
                    :alt="game.name"
               >
             </div>
-            <div class="col-md-9 col-12 px-3 ">
+            <div class="col-md-9 col-12 px-3">
               <p><i class="fas fa-users pr-1"></i> {{ game.minPlayers }} - {{ game.maxPlayers }}</p>
-              <p v-if="minPlayTime !== maxPlayTime">
+              <p v-if="game.minPlayTime !== game.maxPlayTime">
                 <i class="far fa-clock pr-1"></i> {{ game.minPlayTime }} to {{ game.maxPlayTime }} minutes
               </p>
               <p v-else>
