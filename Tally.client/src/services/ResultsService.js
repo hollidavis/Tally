@@ -20,7 +20,15 @@ class ResultsService {
         scores[r.gameApiId].score++
       }
     })
-    AppState.scores = scores
+    const sortScores = []
+    for (const result in scores) {
+      sortScores.push([scores[result].name, scores[result].score])
+    }
+    const gameRes = sortScores.sort((a, b) => {
+      return b[1] - a[1]
+    })
+    AppState.gameResults = gameRes
+    console.log(gameRes)
   }
 
   async getResultsByHouseholdId(householdId, gameId) {
