@@ -118,15 +118,13 @@ export default {
     })
     watchEffect(async() => {
       try {
-        const id = route.params.id
-        await gamesService.getGamesByHouseholdId(id)
-        await gameNightsService.getGameNightByHouseholdId(id)
-        AppState.householdId = id
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-      try {
-        await householdProfilesService.getHouseholdsByProfileId(AppState.account.id)
+        if (route.params.id) {
+          const id = route.params.id
+          await gamesService.getGamesByHouseholdId(id)
+          await gameNightsService.getGameNightByHouseholdId(id)
+          AppState.householdId = id
+          await householdProfilesService.getHouseholdsByProfileId(AppState.account.id)
+        }
       } catch (error) {
         Pop.toast(error, 'error')
       }

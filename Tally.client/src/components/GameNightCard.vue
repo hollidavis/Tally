@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-12 col-12 d-flex align-items-center bg-dark-pink pink-text-shadow rounded shadow my-2 p-0 py-3">
+  <div class="col-md-12 col-12 d-flex align-items-center bg-white rounded shadow my-2 p-0 py-3">
     <div class="row m-0 w-100">
       <div class="col-md-9 col-12 p-0 px-3 d-flex align-items-center">
         <router-link class="text-dark" v-if="gamenight.activeProfiles.find(p => p === account.id)" :to="{ name: 'GameNight', params: {id: gamenight.id} }">
