@@ -15,8 +15,7 @@
         <p class="m-0 mr-3">
           On:   {{ new Intl.DateTimeFormat('en-US').format(new Date(gamenight.startDate)) }}
         </p>
-
-        <button v-if="!gamenight.activeProfiles.find(p => p === account.id)" type="button" class="btn btn-primary mr-2" @click="joinGameNight">
+        <button v-if="!gamenight.activeProfiles.find(p => p === account.id) && householdUsers.find(u => u.accountId === account.id)" type="button" class="btn btn-primary mr-2" @click="joinGameNight">
           Join
         </button>
       </div>
@@ -28,9 +27,11 @@
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { gameNightsService } from '../services/GameNightsService'
+import { householdProfilesService } from '../services/HouseholdProfilesService'
 import Pop from '../utils/Notifier'
 import { router } from '../router'
 import { useRoute } from 'vue-router'
+import { watchEffect } from '@vue/runtime-core'
 export default {
   props: {
     gamenight: {
@@ -40,9 +41,17 @@ export default {
   },
   setup(props) {
     const route = useRoute()
+    watchEffect(async() => {
+      try {
+        await householdProfilesService.getProfilesByHouseholdId(route.params.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }  
+    })
     return {
       route,
       householdId: route.params.id,
+      householdUsers: computed(()=> AppState.householdProfiles),
       account: computed(() => AppState.account),
       async joinGameNight() {
         try {
