@@ -4,7 +4,7 @@
       <img class="profile-img" :src="member.profile.picture" :alt="member.name">
     </div>
     <h5 class="m-0 text-break">
-      {{member.profile.name}}
+      {{ member.profile.name }}
     </h5>
     <i class="fa fa-trash text-danger" v-if="account.id==household.ownerAccountId" @click="deleteMember(account.id)"></i>
   </div>

@@ -9,19 +9,16 @@
     </div>
     <div class="row m-0 w-100 bg-white rowHeight px-2">
       <div v-for="game in games" :key="game.gameApiId" class="col-md-12 p-0 border-bottom border-grey">
-        <GameCabinetItem :game="game" />
+        <GameCabinetItem :game="game" v-if="game" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted, reactive } from 'vue'
+import { computed } from 'vue'
 import { AppState } from '../AppState'
-import Pop from '../utils/Notifier'
-import { gamesService } from '../services/GamesService'
 import GameCabinetItem from '../components/GameCabinetItem.vue'
-import { useRoute } from 'vue-router'
 
 export default {
   name: 'GameCabinetCard',
@@ -35,20 +32,7 @@ export default {
     GameCabinetItem
   },
   setup() {
-    const route = useRoute()
-
-    // onMounted(async() => {
-    //   try {
-    //     await gamesService.getGamesByHouseholdId(route.params.id)
-    //   } catch (error) {
-    //     Pop.toast(error, 'error')
-    //   }
-    // })
-
     return {
-      // async getGamesById() {
-      //   await gamesService.getGamesByHouseholdId(route.params.id)
-      // },
       profile: computed(() => AppState.activeProfile)
     }
   }

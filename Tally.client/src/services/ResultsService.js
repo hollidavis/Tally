@@ -28,7 +28,6 @@ class ResultsService {
       return b[1] - a[1]
     })
     AppState.gameResults = gameRes
-    console.log(gameRes)
   }
 
   async getResultsByHouseholdId(householdId, gameId) {

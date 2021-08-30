@@ -20,12 +20,6 @@ import HouseholdMemberItem from '../components/HouseholdMemberItem.vue'
 import { AppState } from '../AppState'
 export default {
   name: 'HouseholdMembersCard',
-  // props: {
-  //   members: {
-  //     type: Object,
-  //     required: true
-  //   }
-  // },
   components: {
     HouseholdMemberItem
   },

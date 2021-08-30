@@ -22,24 +22,19 @@
 </template>
 
 <script>
-import Pop from '../utils/Notifier'
-import { computed, onMounted, reactive, watchEffect, watch } from '@vue/runtime-core'
+import { computed, watchEffect, watch } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { householdsService } from '../services/HouseholdsService'
-import { resultsService } from '../services/ResultsService'
-import{profilesService} from '../services/ProfilesService'
+import { profilesService } from '../services/ProfilesService'
 import { gamesService } from '../services/GamesService'
 import { useRoute } from 'vue-router'
-import $ from 'jquery'
-import { AuthService } from '../services/AuthService'
 
 export default {
   name: 'Profile',
   setup() {
     const route = useRoute()
-    watch(()=> route.params.id,async()=>{
+    watch(() => route.params.id, async() => {
       await householdsService.getMyHouseholdById(route.params.id)
-        // await resultsService.getResultsByProfileId(id)
       AppState.activeProfile = await profilesService.getProfileById(route.params.id)
       await gamesService.getGamesByHouseholdId(AppState.account.householdId)
     })
@@ -47,7 +42,6 @@ export default {
       try {
         const id = route.params.id
         await householdsService.getMyHouseholdById(id)
-        // await resultsService.getResultsByProfileId(id)
         AppState.activeProfile = await profilesService.getProfileById(route.params.id)
         await gamesService.getGamesByHouseholdId(AppState.account.householdId)
       } catch (error) {
@@ -57,7 +51,7 @@ export default {
     return {
       account: computed(() => AppState.account),
       myHousehold: computed(() => AppState.myHousehold),
-      games: computed(()=> AppState.games),
+      games: computed(() => AppState.games),
       profile: computed(() => AppState.activeProfile)
     }
   }

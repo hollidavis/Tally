@@ -44,8 +44,8 @@ export default {
         gameApiId: props.searchGame.gameApiId,
         householdId: route.params.id
       }
-      })
-      onMounted(async() => {
+    })
+    onMounted(async() => {
       try {
         await gamesService.getGamesByHouseholdId(route.params.id)
       } catch (error) {
@@ -54,7 +54,7 @@ export default {
     })
     return {
       state,
-      games: computed(()=>AppState.games),
+      games: computed(() => AppState.games),
       async addGame() {
         try {
           await gamesService.addGame(state.newGame)
