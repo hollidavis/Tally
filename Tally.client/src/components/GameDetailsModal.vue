@@ -19,16 +19,22 @@
           </button>
         </div>
         <div class="modal-body modal-overflow">
-          <div class="p-3 bg-light rounded shadow my-3 d-flex align-items-center">
-            <img class="w-100 modalImg"
-                 :src="game.largeImg"
-                 :alt="game.name"
-            >
-            <div class="px-3 ">
-              <p><i class="fas fa-users pr-1"></i> {{game.minPlayers}} - {{game.maxPlayers}}</p>
-              <p v-if="minPlayTime !== maxPlayTime"><i class="far fa-clock pr-1"></i> {{game.minPlayTime}} to {{game.maxPlayTime}} minutes</p>
-              <p v-else><i class="far fa-clock pr-1"></i> {{game.maxPlayTime}} minutes</p>
-              <p>Age: {{game.playerAge}} years+</p>
+          <div class="row p-3 my-3 d-flex align-items-center">
+            <div class="col-md-3 col-12 mb-3">
+              <img class="modalImg"
+                   :src="game.largeImg"
+                   :alt="game.name"
+              >
+            </div>
+            <div class="col-md-9 col-12 px-3 ">
+              <p><i class="fas fa-users pr-1"></i> {{ game.minPlayers }} - {{ game.maxPlayers }}</p>
+              <p v-if="minPlayTime !== maxPlayTime">
+                <i class="far fa-clock pr-1"></i> {{ game.minPlayTime }} to {{ game.maxPlayTime }} minutes
+              </p>
+              <p v-else>
+                <i class="far fa-clock pr-1"></i> {{ game.maxPlayTime }} minutes
+              </p>
+              <p>Age: {{ game.playerAge }} years+</p>
               <p><a :href="game.websiteLink">More Info</a></p>
               <div class="" :id="'description' + game.id">
               </div>
@@ -65,7 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 .modalImg{
-  max-width: 10vw;
+  max-width: 100%;
 }
 .modal-overflow{
   overflow: auto;
