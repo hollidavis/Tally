@@ -6,7 +6,7 @@
       </h2>
     </div>
   </div>
-  <div class="row w-100 bg-white rounded-bottom shadow memberHeight mb-3 d-flex align-items-center">
+  <div class="row w-100 bg-white rounded-bottom shadow members mb-3 d-flex align-items-center">
     <div class="col-md-12" v-for="m in members" :key="m.id">
       <HouseholdMemberItem :member="m" />
     </div>
@@ -15,14 +15,10 @@
 
 <script>
 import { computed } from 'vue'
-import HouseholdMemberItem from '../components/HouseholdMemberItem.vue'
 
 import { AppState } from '../AppState'
 export default {
   name: 'HouseholdMembersCard',
-  components: {
-    HouseholdMemberItem
-  },
   setup() {
     return {
       members: computed(() => AppState.householdProfiles)
@@ -32,8 +28,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.memberHeight{
-height: 40vh;
-overflow: auto;
+.members{
+  height: 35vh;
+  overflow: auto;
 }
 </style>
