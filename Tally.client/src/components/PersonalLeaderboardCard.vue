@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { computed, onMounted, watch } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { useRoute } from 'vue-router'
@@ -30,9 +30,6 @@ import { resultsService } from '../services/ResultsService'
 export default {
   setup() {
     const route = useRoute()
-    watch(() => route.params.id, async() => {
-      await resultsService.getResultsByProfileId(route.params.id)
-    })
     onMounted(async() => {
       try {
         await resultsService.getResultsByProfileId(route.params.id)

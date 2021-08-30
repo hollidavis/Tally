@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { computed, watchEffect, watch } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { householdsService } from '../services/HouseholdsService'
 import { profilesService } from '../services/ProfilesService'
@@ -33,12 +33,12 @@ export default {
   name: 'Profile',
   setup() {
     const route = useRoute()
-    watch(() => route.params.id, async() => {
+    onMounted(async() => {
       await householdsService.getMyHouseholdById(route.params.id)
       AppState.activeProfile = await profilesService.getProfileById(route.params.id)
       await gamesService.getGamesByHouseholdId(AppState.account.householdId)
     })
-    watchEffect(async() => {
+    onMounted(async() => {
       try {
         const id = route.params.id
         await householdsService.getMyHouseholdById(id)
