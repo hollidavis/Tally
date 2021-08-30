@@ -1,19 +1,17 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid overflow">
     <Navbar />
-    <div id="houseHold-name" class="row my-3 d-flex justify-content-center">
-      <div class="col-md-10 p-0">
-        <div class="row m-0 w-100 bg-dark-pink d-flex rounded justify-content-center py-3">
-          <div class="col-md-8 p-0 text-center pink-text-shadow">
-            <h1>
-              {{ household.name }}
-              <i class="fas fa-edit fa-xs text-primary ml-2 pointer" title="Rename Household" data-toggle="modal" data-target="#update-householdName"></i>
-            </h1>
-          </div>
+    <div id="houseHold-name" class="row d-flex justify-content-center">
+      <div class="col-md-11 d-flex justify-content-center">
+        <div class="w-100 py-2 my-2 bg-dark-pink rounded shadow">
+          <h1 class="m-0 text-center pink-text-shadow">
+            {{ household.name }}
+            <span class="fas fa-edit fa-xs text-primary ml-2 pointer" title="Rename Household" data-toggle="modal" data-target="#update-householdName"></span>
+          </h1>
         </div>
       </div>
     </div>
-    <div id="members and access code" class="row m-0 d-flex justify-content-between">
+    <div id="members and access code" class="row d-flex">
       <div class="col-md-6">
         <div class="row m-0 w-100 bg-dark-pink rounded d-flex justify-content-center mb-3 py-3">
           <div class="col-md-12 d-flex justify-content-center pink-text-shadow">
@@ -37,26 +35,20 @@
             </button>
           </div>
         </div>
-        <div class="row m-0 p-0">
-          <div class="col-md-12 m-0 p-0">
-            <HouseholdMembersCard />
-          </div>
+        <div class="col-md-12 p-0 d-flex flex-column align-items-center">
+          <HouseholdMembersCard />
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="row m-0 w-100">
-          <div class="col-md-12">
-            <button class="btn btn-light btn-lg btn-block" data-toggle="modal" data-target="#searchGameModal" title="Add Game to Cabinet">
-              <p class="m-0 p-0">
-                <i class="fas fa-plus fa-md text-primary"></i>
-                Add Game
-              </p>
-            </button>
-          </div>
-          <div class="col-md-12 mt-3 mb-5">
-            <GameCabinetCard :games="games" />
-          </div>
+      <div class="col-md-6 d-flex flex-column align-items-center">
+        <div class="w-100">
+          <button class="btn btn-light btn-lg btn-block mb-3" data-toggle="modal" data-target="#searchGameModal" title="Add Game to Cabinet">
+            <p class="m-0 p-0">
+              <span class="fas fa-plus fa-md text-primary"></span>
+              Add Game
+            </p>
+          </button>
         </div>
+        <GameCabinetCard :games="games" />
       </div>
     </div>
     <SearchGameModal />
@@ -120,8 +112,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .rowHeight{
-  min-height: 40vh;
+.overflow{
+  overflow: hidden;
 }
 .spinner{
   animation-name: rotate;
@@ -135,9 +127,4 @@ animation-duration: 1s;
     transform: rotate(360deg);
   }
 }
-// .hoverSpin:hover {
-//   cursor: default;
-//     transform: rotate(360deg);
-//     transition: all 0.3s ease-in-out 0s;
-// }
 </style>

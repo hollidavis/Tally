@@ -28,9 +28,6 @@ export default {
       required: true
     }
   },
-  components: {
-    GameCabinetItem
-  },
   setup() {
     return {
       profile: computed(() => AppState.activeProfile)
@@ -38,14 +35,13 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
   .card-img-top {
     height: 20vw;
   }
   .rowHeight{
-  min-height: 40vh;
-  max-height: 40vh;
-  overflow-y: auto;
+  height: 40vh;
+  overflow: auto;
 }
 h1 {
   font-size: 32px;

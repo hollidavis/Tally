@@ -1,12 +1,12 @@
 <template>
-  <div class="col-md-11 col-12 d-flex align-items-center bg-white rounded shadow mt-2 py-3">
-    <div class="p-0 d-flex mr-3">
+  <div class="d-flex align-items-center bg-white rounded shadow my-2 py-3">
+    <div class="p-0 d-flex px-3">
       <img class="profile-img" :src="member.profile.picture" :alt="member.name">
     </div>
-    <h5 class="m-0 text-break">
+    <h5 class="m-0 w-50 mr-auto text-break">
       {{ member.profile.name }}
     </h5>
-    <i class="fa fa-trash text-danger" v-if="account.id==household.ownerAccountId" @click="deleteMember(account.id)"></i>
+    <span class="fa fa-trash text-danger px-3" v-if="account.id==household.ownerAccountId" @click="deleteMember(account.id)"></span>
   </div>
 </template>
 
