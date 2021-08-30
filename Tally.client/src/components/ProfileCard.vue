@@ -1,7 +1,7 @@
 <template>
-  <div class="col-11 p-0 bg-white">
-    <div class=" profile-card">
-      <img class="w-100 cover-img" :src="profile.coverImg" alt="Card image cap">
+  <div class="col-11 p-0 bg-white rounded shadow">
+    <div class="profile-card">
+      <img class="w-100 cover-img rounded-top" :src="profile.coverImg" alt="Card image cap">
     </div>
 
     <div class="profile-card d-flex align-items-center justify-content-between">
