@@ -19,24 +19,25 @@
         </div>
         <div class="modal-body">
           <form @submit.prevent="joinHousehold" class=" ">
-            <div class="form-group w-75 mr-auto m-0 my-4">
+            <div class="form-group w-100 m-0 my-3">
               <input type="text"
                      name="accessKey"
                      v-model="state.newHouseHoldProfile.accessKey"
                      class="form-control"
-                     placeholder="Put in your access code..."
+                     placeholder="Enter access key..."
                      aria-describedby="joinHouseholdhelpId"
               >
+              <small id="joinHouseholdhelpId" class="text-muted">Input Access Key to Join Household</small>
             </div>
-            <button type="submit" class="btn btn-primary">
-              Create
-            </button>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success">
+                Join
+              </button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+            </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
         </div>
       </div>
     </div>
