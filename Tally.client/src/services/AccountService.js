@@ -1,7 +1,6 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { tallyApi } from './AxiosService'
-import { profilesService } from './ProfilesService'
 
 class AccountService {
   async getAccount() {
