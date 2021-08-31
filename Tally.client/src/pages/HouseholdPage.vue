@@ -24,7 +24,6 @@
       </div>
       <div class="my-3 p-0 d-flex justify-content-center">
         <button
-          v-if="!profileHouseholds.find(p => p.householdId === route.params.id)" 
           type="button"
           class="btn btn-light btn-lg"
           data-toggle="modal"

@@ -30,9 +30,5 @@ class HouseholdsService {
     const res = await tallyApi.put('api/households/' + id, body)
     AppState.activeHousehold = res.data
   }
-
-  async deleteMember(body, accountId) {
-    const res = await tallyApi.delete('api/')
-  }
 }
 export const householdsService = new HouseholdsService()
