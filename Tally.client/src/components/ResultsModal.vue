@@ -106,6 +106,7 @@ export default {
       games: computed(() => AppState.games),
       householdProfiles: computed(() => AppState.householdProfiles),
       async addPlayer() {
+        state.player.householdId = props.household
         state.results.push(state.player)
         state.player = {
           householdId: props.household,
