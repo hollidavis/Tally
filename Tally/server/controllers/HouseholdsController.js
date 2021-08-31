@@ -93,6 +93,7 @@ export class HouseholdsController extends BaseController {
   async respinAccessKey(req, res, next) {
     try {
       const accessKey = await householdsService.createAccessKey()
+      await householdsService.editHousehold(req.params.id, { accessKey: accessKey, ownerAccountId: req.userInfo.id })
       res.send(accessKey)
     } catch (error) {
       next(error)
