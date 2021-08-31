@@ -71,7 +71,7 @@
           <li class="list-group-item d-flex p-2">
             <!-- Photo -->
             <div>
-              <img class="rounded profile-img" src="../assets/img/teamphotos/Holli.jpg" alt="Holli Davis Picture">
+              <img class="rounded profile-img" src="../assets/img/teamphotos/Holli.png" alt="Holli Davis Picture">
             </div>
             <!-- About -->
             <div class="ml-3">
