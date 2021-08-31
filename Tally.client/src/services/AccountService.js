@@ -15,7 +15,6 @@ class AccountService {
   async updateAccount(obj, id) {
     const res = await tallyApi.put('/account/' + id, obj)
     AppState.account = res.data
-    console.log(AppState.account, 'updated account')
   }
 }
 

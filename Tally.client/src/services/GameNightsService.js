@@ -5,7 +5,6 @@ class GameNightsService {
   async createGameNight(newGameNight) {
     const res = await tallyApi.post('api/gamenights', newGameNight)
     AppState.gameNights.push(res.data)
-    console.log(res.data)
   }
 
   async endGameNight(gamenight) {

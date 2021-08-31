@@ -29,7 +29,6 @@ class HouseholdsService {
   async updateHouseholdName(body, id) {
     const res = await tallyApi.put('api/households/' + id, body)
     AppState.activeHousehold = res.data
-    console.log('don worry BOUT IT')
   }
 
   async deleteMember(body, accountId) {
