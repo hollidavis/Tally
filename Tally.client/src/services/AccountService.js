@@ -1,6 +1,7 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { tallyApi } from './AxiosService'
+import { profilesService } from './ProfilesService'
 
 class AccountService {
   async getAccount() {
@@ -15,6 +16,7 @@ class AccountService {
   async updateAccount(obj, id) {
     const res = await tallyApi.put('/account/' + id, obj)
     AppState.account = res.data
+    AppState.activeProfile = res.data
   }
 }
 

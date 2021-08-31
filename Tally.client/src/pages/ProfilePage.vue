@@ -22,30 +22,25 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { householdsService } from '../services/HouseholdsService'
 import { profilesService } from '../services/ProfilesService'
 import { gamesService } from '../services/GamesService'
 import { useRoute } from 'vue-router'
+import Pop from '../utils/Notifier'
 
 export default {
   name: 'Profile',
   setup() {
     const route = useRoute()
-    onMounted(async() => {
-      await householdsService.getMyHouseholdById(route.params.id)
-      AppState.activeProfile = await profilesService.getProfileById(route.params.id)
-      await gamesService.getGamesByHouseholdId(AppState.account.householdId)
-    })
-    onMounted(async() => {
+    watchEffect(async() => {
       try {
-        const id = route.params.id
-        await householdsService.getMyHouseholdById(id)
+        await householdsService.getMyHouseholdById(route.params.id)
         AppState.activeProfile = await profilesService.getProfileById(route.params.id)
         await gamesService.getGamesByHouseholdId(AppState.account.householdId)
       } catch (error) {
-
+        Pop.toast(error, 'error')
       }
     })
     return {
