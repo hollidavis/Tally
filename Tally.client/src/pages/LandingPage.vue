@@ -32,7 +32,6 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
-import { router } from '../router'
 import { accountService } from '../services/AccountService'
 
 export default {
@@ -44,13 +43,9 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
-      account: computed(() => AppState.account),
       async login() {
         await AuthService.loginWithPopup()
         await accountService.getAccount()
-        if (this.account.id) {
-          router.push({ name: 'Profile', params: { id: this.account.id } })
-        }
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
