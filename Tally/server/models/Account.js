@@ -7,7 +7,7 @@ export const AccountSchema = new Schema(
     email: { type: String, lowercase: true, unique: true },
     name: { type: String, required: true },
     picture: { type: String },
-    coverImg: { type: String, default: 'https://images.unsplash.com/photo-1619863182792-ff9b20a5f886?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' },
+    coverImg: { type: String, default: 'https://2.bp.blogspot.com/-D3FAIkeC_O4/UwjPKN06kqI/AAAAAAAACDg/FaVCCTvE8t8/s1600/Color-+VIOLET+02.jpg' },
     householdId: { type: String }
     // NOTE If you wish to add additional public properties for Accounts do so here
   },
