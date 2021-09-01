@@ -2,7 +2,7 @@
   "name": "tally",
   "version": "1.0.0",
   "scripts": {
-    "build": "npm run setup:server",
+    "build": "npm run setup:app",
     "setup:app": "npm run setup:server && npm run setup:client",
     "setup:client": "cd Tally.client && npm i",
     "setup:server": "cd Tally && npm i",
