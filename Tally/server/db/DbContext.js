@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import { AccountSchema } from '../models/Account'
 import { GameSchema } from '../models/Game'
 import { GameNightSchema } from '../models/GameNight'
-import { HouseholdSchema } from '../models/HouseHold'
+import { HouseholdSchema } from '../models/Household'
 import { HouseholdProfileSchema } from '../models/HouseholdProfile'
 import { ResultSchema } from '../models/Result'
 
