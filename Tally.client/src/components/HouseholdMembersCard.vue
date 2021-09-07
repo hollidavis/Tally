@@ -6,7 +6,7 @@
       </h2>
     </div>
   </div>
-  <div class="row w-100 bg-white rounded-bottom shadow members mb-3 d-flex align-items-center">
+  <div class="row w-100 bg-white rounded-bottom shadow members mb-3 d-flex">
     <div class="col-md-12" v-for="m in members" :key="m.id">
       <HouseholdMemberItem :member="m" />
     </div>
