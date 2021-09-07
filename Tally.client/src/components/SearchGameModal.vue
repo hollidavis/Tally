@@ -7,7 +7,7 @@
        aria-labelledby="modelTitleId"
        aria-hidden="true"
   >
-    <div class="modal-dialog bg-warning modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
@@ -64,6 +64,7 @@ export default {
       activeSearchGames: computed(() => AppState.activeSearchGames),
       async searchGame() {
         try {
+          AppState.activeSearchGames = []
           await gamesService.searchGame(state.search)
           state.search = ''
         } catch (error) {

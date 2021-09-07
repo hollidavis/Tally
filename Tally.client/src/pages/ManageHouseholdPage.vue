@@ -66,7 +66,6 @@ import { householdsService } from '../services/HouseholdsService'
 import { gamesService } from '../services/GamesService'
 import Pop from '../utils/Notifier'
 import { useRoute } from 'vue-router'
-// import { profilesService } from '../services/ProfilesService'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 export default {
   name: 'ManageHouseholdPage',
@@ -77,16 +76,7 @@ export default {
       try {
         await householdsService.getHouseholdById(id)
         await householdProfilesService.getProfilesByHouseholdId(id)
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-      try {
-        await householdProfilesService.getProfilesByHouseholdId(id)
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-      try {
-        await gamesService.getGamesByHouseholdId(route.params.id)
+        await gamesService.getGamesByHouseholdId(id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
