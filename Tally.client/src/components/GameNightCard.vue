@@ -24,14 +24,14 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { gameNightsService } from '../services/GameNightsService'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
 import Pop from '../utils/Notifier'
 import { router } from '../router'
 import { useRoute } from 'vue-router'
-import { watchEffect } from '@vue/runtime-core'
+
 export default {
   props: {
     gamenight: {
@@ -46,12 +46,12 @@ export default {
         await householdProfilesService.getProfilesByHouseholdId(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
-      }  
+      }
     })
     return {
       route,
       householdId: route.params.id,
-      householdUsers: computed(()=> AppState.householdProfiles),
+      householdUsers: computed(() => AppState.householdProfiles),
       account: computed(() => AppState.account),
       async joinGameNight() {
         try {
