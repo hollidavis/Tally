@@ -23,6 +23,11 @@
         </button>
       </div>
       <div class="my-3 p-0 d-flex justify-content-center">
+        <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#resultsModal">
+          <b>Input Score</b>
+        </button>
+      </div>
+      <div class="my-3 p-0 d-flex justify-content-center">
         <button
           type="button"
           class="btn btn-light btn-lg"
@@ -97,6 +102,7 @@
   <SearchGameModal />
   <CreateGameNightModal />
   <JoinHouseholdModal />
+  <ResultsModal :household="householdId" />
 </template>
 
 <script>
