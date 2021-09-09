@@ -18,7 +18,6 @@ class HouseholdProfilesService {
     const res = await tallyApi.post('api/householdprofiles', newHousehold)
     AppState.householdProfiles = res.data
     return AppState.householdProfiles
-
   }
 }
 
