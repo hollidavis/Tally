@@ -15,7 +15,7 @@
         <p class="m-0 mr-3">
           On:   {{ new Intl.DateTimeFormat('en-US').format(new Date(gamenight.startDate)) }}
         </p>
-        <button v-if="!gamenight.activeProfiles.find(p => p === account.id) && householdUsers.find(u => u.accountId === account.id)" type="button" class="btn btn-primary mr-2" @click="joinGameNight">
+        <button v-if="!gamenight.activeProfiles.find(p => p === account.id)" type="button" class="btn btn-primary mr-2" @click="joinGameNight">
           Join
         </button>
       </div>
@@ -51,7 +51,6 @@ export default {
     return {
       route,
       householdId: route.params.id,
-      householdUsers: computed(() => AppState.householdProfiles),
       account: computed(() => AppState.account),
       async joinGameNight() {
         try {
