@@ -49,9 +49,9 @@ import Pop from '../utils/Notifier'
 import { reactive } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { householdProfilesService } from '../services/HouseholdProfilesService'
-import { logger } from '../utils/Logger'
 import { householdsService } from '../services/HouseholdsService'
 import $ from 'jquery'
+import { router } from '../router'
 
 export default {
   setup() {
@@ -71,11 +71,10 @@ export default {
           state.newHouseHoldProfile.accountId = AppState.account.id
           await householdProfilesService.joinHousehold(state.newHouseHoldProfile)
           $('#joinHouseHoldModal').modal('hide')
+          router.push({ name: 'Household', params: { id: household.id } })
           Pop.toast('You Joined A Household!', 'success')
         } catch (error) {
           Pop.toast(error)
-          $('#joinHouseHoldModal').modal('hide')
-          logger.log(error)
         }
       }
     }
