@@ -13,7 +13,6 @@
 <script>
 
 export default {
-  name: 'GameCabinetItem',
   props: {
     game: {
       type: Object,

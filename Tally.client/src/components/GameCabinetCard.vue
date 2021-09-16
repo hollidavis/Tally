@@ -9,7 +9,7 @@
     </div>
     <div class="row m-0 w-100 bg-white rounded-bottom shadow rowHeight px-2">
       <div v-for="game in games" :key="game.gameApiId" class="col-md-12 p-0 border-bottom border-grey">
-        <GameCabinetItem :game="game" />
+        <GameCabinetItem :game="game" v-if="games.length" />
       </div>
     </div>
   </div>
@@ -18,10 +18,8 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from '../AppState'
-import GameCabinetItem from '../components/GameCabinetItem.vue'
 
 export default {
-  name: 'GameCabinetCard',
   props: {
     games: {
       type: Object,
