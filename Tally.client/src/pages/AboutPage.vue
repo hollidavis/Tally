@@ -22,7 +22,7 @@
         </h1>
         <div class="bg-white rounded-bottom shadow p-3">
           <video width="100%" height="" controls>
-            <source src="../assets/img/tally.mp4" type="video/mp4">
+            <source src="../assets/img/Tally.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
