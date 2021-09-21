@@ -17,15 +17,6 @@
         <p class="blockquote bg-white rounded-bottom m-0 p-3 mb-3 shadow">
           Tally was born at Boise CodeWorks, a software development bootcamp. Every day at lunch we would play board games together and compete for the high score. When it came time to begin working on a large project for our portfolios we all wanted to take our lunchtime leaderboard and grow it into a full stack application.
         </p>
-        <h1 class="text-center bg-dark-pink rounded-top m-0 shadow">
-          Demo:
-        </h1>
-        <div class="bg-white rounded-bottom shadow p-3">
-          <video width="100%" height="" controls>
-            <source src="../assets/img/tally.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
       </div>
       <!-- The Team -->
       <div class="col-md-6 mb-3">
